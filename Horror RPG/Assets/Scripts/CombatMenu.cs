@@ -9,7 +9,6 @@ public class CombatMenu : MonoBehaviour
     public List<GameObject> AttackActions;
     Vector3 knifeoffset = new Vector3(175,0,0);
     GameObject Highlight;
-    GameObject ButtonHighlig;
     public List<GameObject> CurrentMenu;
     int pos = 0;
 
