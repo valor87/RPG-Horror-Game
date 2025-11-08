@@ -5,61 +5,125 @@ using UnityEngine.UI;
 public class CombatMenu : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public List<GameObject> EnemiesInScene;
     public List<GameObject> CombatActions;
     public List<GameObject> AttackActions;
-    Vector3 knifeoffset = new Vector3(175,0,0);
-    GameObject Highlight;
     public List<GameObject> CurrentMenu;
-    int pos = 0;
-
+    GameObject Highlight;
+    GameObject KnifeInGameScene;
+    Vector3 knifeoffset = new Vector3(175,0,0); // offset for the knife
+    public int posinlist = 0;
+    bool PickTargets;
     void Start()
     {
-        CurrentMenu = CombatActions;
+        KnifeInGameScene = GameObject.Find("GameObjectKnife");
         Highlight = GameObject.Find("SlectionKnife");
+        KnifeInGameScene.SetActive(false);
+        CurrentMenu = CombatActions;
     }
 
     // Update is called once per frame
     void Update()
     {
-        SelectActions(CurrentMenu);
-    }
+        SelectActions();
+        SelectionMovement();
 
-    void SelectActions(List<GameObject> CurrentMenu)
+        if (!PickTargets)
+        {
+            SelectButton();
+        }
+        else
+        {
+            SelectTarget();
+            Highlight.GetComponent<Animator>().speed = 0;
+        }
+
+    }
+    void SelectionMovement()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            pos = CurrentMenu.Count-1;
+            posinlist = CurrentMenu.Count - 1;
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            pos--;
+            posinlist--;
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            pos++;
+            posinlist++;
         }
-        if (pos <= 0)
+    }
+    void SelectActions()
+    {
+        
+        if (posinlist < 0)
         {
-            pos = CurrentMenu.Count;
+            posinlist  = CurrentMenu.Count;
         }
-        if (pos >= CurrentMenu.Count)
+        if (posinlist >= CurrentMenu.Count)
         {
-            pos = 0;
+            posinlist = 0;
         }
 
+
+    }
+    void SelectButton()
+    {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            CurrentMenu[pos].GetComponent<Button>().onClick.Invoke();
+            CurrentMenu[posinlist].GetComponent<Button>().onClick.Invoke();
+        }
+        if (posinlist >= 0 || posinlist <= CurrentMenu.Count) {
+            Highlight.transform.position = CurrentMenu[posinlist].transform.position - knifeoffset;
+        }
+    }
+    void SelectTarget()
+    {
+        CurrentMenu = EnemiesInScene;
+        if (!KnifeInGameScene.activeInHierarchy)
+        {
+            KnifeInGameScene.SetActive(true);
         }
 
-        Highlight.transform.position = CurrentMenu[pos].transform.position - knifeoffset;
+        KnifeInGameScene.transform.position = EnemiesInScene[posinlist].transform.position + new Vector3 (-1.5f, 0, 0);
     }
     public void ToAttackMenu()
     {
+        posinlist = 0;
+
+        foreach (GameObject f in CurrentMenu)
+        {
+            f.SetActive(false);
+        }
+
         CurrentMenu = AttackActions;
+
+        foreach (GameObject f in CurrentMenu)
+        {
+            f.SetActive(true);
+        }
     }
     public void BackToMainCombat()
     {
+        posinlist = 0;
+
+        foreach (GameObject f in CurrentMenu)
+        {
+            f.SetActive(false);
+        }
+
         CurrentMenu = CombatActions;
+
+        foreach (GameObject f in CurrentMenu)
+        {
+            f.SetActive(true);
+        }
+    }
+
+    public void GunAttack()
+    {
+        posinlist = 0;
+        PickTargets = true;
     }
 }
