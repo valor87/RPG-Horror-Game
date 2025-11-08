@@ -7,6 +7,7 @@ public class CombatMenu : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public List<GameObject> CombatActions;
     public List<GameObject> AttackActions;
+    Vector3 knifeoffset = new Vector3(175,0,0);
     GameObject Highlight;
     GameObject ButtonHighlig;
     public List<GameObject> CurrentMenu;
@@ -15,7 +16,7 @@ public class CombatMenu : MonoBehaviour
     void Start()
     {
         CurrentMenu = CombatActions;
-        Highlight = GameObject.Find("ButtonGlow");
+        Highlight = GameObject.Find("SlectionKnife");
     }
 
     // Update is called once per frame
@@ -52,7 +53,7 @@ public class CombatMenu : MonoBehaviour
             CurrentMenu[pos].GetComponent<Button>().onClick.Invoke();
         }
 
-        Highlight.transform.position = CurrentMenu[pos].transform.position;
+        Highlight.transform.position = CurrentMenu[pos].transform.position - knifeoffset;
     }
     public void ToAttackMenu()
     {
