@@ -27,17 +27,16 @@ public class CombatMenu : MonoBehaviour
     {
         SelectActions();
         SelectionMovement();
-
+        print(posinlist);
         if (!PickTargets)
         {
             SelectButton();
         }
         else
         {
-            SelectTarget();
             Highlight.GetComponent<Animator>().speed = 0;
+            SelectTarget();
         }
-
     }
     void SelectionMovement()
     {
@@ -65,8 +64,6 @@ public class CombatMenu : MonoBehaviour
         {
             posinlist = 0;
         }
-
-
     }
     void SelectButton()
     {
@@ -83,10 +80,16 @@ public class CombatMenu : MonoBehaviour
         CurrentMenu = EnemiesInScene;
         if (!KnifeInGameScene.activeInHierarchy)
         {
+            posinlist = 0;
             KnifeInGameScene.SetActive(true);
         }
-
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ResetMenue();
+            //CalculateDamage();
+        }
         KnifeInGameScene.transform.position = EnemiesInScene[posinlist].transform.position + new Vector3 (-1.5f, 0, 0);
+
     }
     public void ToAttackMenu()
     {
@@ -123,7 +126,20 @@ public class CombatMenu : MonoBehaviour
 
     public void GunAttack()
     {
-        posinlist = 0;
         PickTargets = true;
+    }
+
+    public void CalculateDamage(GameObject Target, GameObject Attacker)
+    {
+
+    }
+    void ResetMenue()
+    {
+        Highlight.GetComponent<Animator>().speed = 1;
+        PickTargets = false;
+        KnifeInGameScene.SetActive(false);
+        CurrentMenu = AttackActions;
+        BackToMainCombat();
+        posinlist = 0;
     }
 }
