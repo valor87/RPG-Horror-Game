@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class CombatMenu : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public List<List<GameObject>> MenuOptions = new List<List<GameObject>>();
     public List<GameObject> EnemiesInScene;
     public List<GameObject> CombatActions;
     public List<GameObject> AttackActions;
@@ -16,6 +16,9 @@ public class CombatMenu : MonoBehaviour
     bool PickTargets;
     void Start()
     {
+        MenuOptions.Add(CombatActions);
+        MenuOptions.Add(AttackActions);
+        MenuOptions.Add(EnemiesInScene);
         KnifeInGameScene = GameObject.Find("GameObjectKnife");
         Highlight = GameObject.Find("SlectionKnife");
         KnifeInGameScene.SetActive(false);
@@ -91,32 +94,21 @@ public class CombatMenu : MonoBehaviour
         KnifeInGameScene.transform.position = EnemiesInScene[posinlist].transform.position + new Vector3 (-1.5f, 0, 0);
 
     }
-    public void ToAttackMenu()
-    {
+ 
+    public void ChangeMenu(int menuNum)
+    { 
         posinlist = 0;
+        if (menuNum < 0 || menuNum > MenuOptions.Count)
+        {
+            return;
+        }
 
         foreach (GameObject f in CurrentMenu)
         {
             f.SetActive(false);
         }
 
-        CurrentMenu = AttackActions;
-
-        foreach (GameObject f in CurrentMenu)
-        {
-            f.SetActive(true);
-        }
-    }
-    public void BackToMainCombat()
-    {
-        posinlist = 0;
-
-        foreach (GameObject f in CurrentMenu)
-        {
-            f.SetActive(false);
-        }
-
-        CurrentMenu = CombatActions;
+        CurrentMenu = MenuOptions[menuNum];
 
         foreach (GameObject f in CurrentMenu)
         {
@@ -139,7 +131,7 @@ public class CombatMenu : MonoBehaviour
         PickTargets = false;
         KnifeInGameScene.SetActive(false);
         CurrentMenu = AttackActions;
-        BackToMainCombat();
+        //BackToMainCombat();
         posinlist = 0;
     }
 }
