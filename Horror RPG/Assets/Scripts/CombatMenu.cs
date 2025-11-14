@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 public class CombatMenu : MonoBehaviour
 {
+    List<CombatMenu> functionList = new List<CombatMenu>();
     public List<GameObject> EnemiesInScene;
     public List<GameObject> CombatActions;
     public List<GameObject> AttackActions;
@@ -13,7 +14,7 @@ public class CombatMenu : MonoBehaviour
     public List<GameObject> EnemyStatsUi;
     GameObject Highlight;
     GameObject KnifeInGameScene;
-    Vector3 knifeoffset = new Vector3(175,0,0); // offset for the knife in UI
+    Vector3 knifeoffset = new Vector3(175, 0, 0); // offset for the knife in UI
     // for menu navagation
     public int posinlist = 0;
     bool PickTargets;
@@ -24,6 +25,7 @@ public class CombatMenu : MonoBehaviour
         MenuOptions.Add(CombatActions);
         MenuOptions.Add(AttackActions);
         MenuOptions.Add(EnemiesInScene);
+
         KnifeInGameScene = GameObject.Find("GameObjectKnife");
         Highlight = GameObject.Find("SlectionKnife");
         KnifeInGameScene.SetActive(false);
@@ -39,14 +41,18 @@ public class CombatMenu : MonoBehaviour
             EnemiesInScene[i].GetComponent<EnemyStats>().HpSlider = Hpslider.GetComponent<Slider>();
         }
     }
-    
+
     // Update is called once per frame
     void Update()
     {
-        if (CanSelectActions) {
-            SelectActions();
-            SelectionMovement();
+        if (!CanSelectActions)
+        {
+            return;
         }
+
+        SelectActions();
+        SelectionMovement();
+
         if (!PickTargets)
         {
             SelectButton();
@@ -74,10 +80,10 @@ public class CombatMenu : MonoBehaviour
     }
     void SelectActions()
     {
-        
+
         if (posinlist < 0)
         {
-            posinlist  = CurrentMenu.Count;
+            posinlist = CurrentMenu.Count;
         }
         if (posinlist >= CurrentMenu.Count)
         {
@@ -90,7 +96,8 @@ public class CombatMenu : MonoBehaviour
         {
             CurrentMenu[posinlist].GetComponent<Button>().onClick.Invoke();
         }
-        if (posinlist >= 0 || posinlist <= CurrentMenu.Count) {
+        if (posinlist >= 0 || posinlist <= CurrentMenu.Count)
+        {
             Highlight.transform.position = CurrentMenu[posinlist].transform.position - knifeoffset;
         }
     }
@@ -107,18 +114,19 @@ public class CombatMenu : MonoBehaviour
             CalculateDamage(CurrentMenu[posinlist], null);
             ResetMenue();
         }
-        KnifeInGameScene.transform.position = EnemiesInScene[posinlist].transform.position + new Vector3 (-1.5f, 0, 0);
+        KnifeInGameScene.transform.position = EnemiesInScene[posinlist].transform.position + new Vector3(-1.5f, 0, 0);
     }
- 
+
     public void ChangeMenu(int menuNum)
-    { 
+    {
         posinlist = 0;
-      
+
         if (menuNum < 0 || menuNum > MenuOptions.Count)
         {
             return;
         }
-        if (!PickTargets) {
+        if (!PickTargets)
+        {
             foreach (GameObject f in CurrentMenu)
             {
                 f.SetActive(false);
@@ -151,13 +159,28 @@ public class CombatMenu : MonoBehaviour
         PickTargets = true;
         ChangeMenu(2);
     }
+    private void inichative(List<GameObject> players, List<GameObject> Enemies)
+    {
+        List<GameObject> inichative = new List<GameObject>();
+        foreach (GameObject f in Enemies)
+        {
+            int currspeed = f.GetComponent<EnemyStats>().speedStat;
+            if (inichative.Count == 0)
+            {
+                inichative.Add(f);
+            }
 
+            if (inichative[inichative.Count-1].GetComponent<EnemyStats>().speedStat<currspeed)
+            {
+                inichative.Add(f);
+            }
+        }
+    }
     public void CalculateDamage(GameObject Target, GameObject Attacker)
     {
         StartCoroutine(DealDamageSlowly(Target, 2.5f));
-        
     }
-  
+
     bool CheckIfEnemiesAreDead(List<GameObject> Enemies)
     {
         if (Enemies.Count != 0)
@@ -167,7 +190,7 @@ public class CombatMenu : MonoBehaviour
         return true;
     }
 
-    IEnumerator DealDamageSlowly(GameObject RecevingDamage,float damage)
+    IEnumerator DealDamageSlowly(GameObject RecevingDamage, float damage)
     {
         CanSelectActions = false;
         float decreaseHealth = 0.1f;
@@ -182,6 +205,7 @@ public class CombatMenu : MonoBehaviour
 
         if (EnemyHp <= 0)
         {
+            yield return new WaitForSeconds(1);
             GameObject UiStat = EnemyStatsUi[EnemiesInScene.IndexOf(RecevingDamage)];
             EnemyStatsUi.Remove(UiStat);
             EnemiesInScene.Remove(RecevingDamage);
