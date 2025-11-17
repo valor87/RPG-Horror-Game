@@ -5,18 +5,22 @@ using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 public class CombatMenu : MonoBehaviour
 {
-    List<CombatMenu> functionList = new List<CombatMenu>();
+    [Header("Lists of Objects in the combat scene")]
     public List<GameObject> EnemiesInScene;
     public List<GameObject> CombatActions;
     public List<GameObject> AttackActions;
-    public List<List<GameObject>> MenuOptions = new List<List<GameObject>>();
+    List<List<GameObject>> MenuOptions = new List<List<GameObject>>();
+    [Header("For Debuging")]
     public List<GameObject> CurrentMenu;
     public List<GameObject> EnemyStatsUi;
-    GameObject Highlight;
-    GameObject KnifeInGameScene;
+    public List<GameObject> inichative = new List<GameObject>();
+    public int posinlist = 0;
+    [Space(5)]
+    [Header("For selecting menu options")]
+    public GameObject UiSelectionKnife;
+    public GameObject KnifeInGameScene;
     Vector3 knifeoffset = new Vector3(175, 0, 0); // offset for the knife in UI
     // for menu navagation
-    public int posinlist = 0;
     bool PickTargets;
     bool CanSelectActions = true;
     void Start()
@@ -26,10 +30,11 @@ public class CombatMenu : MonoBehaviour
         MenuOptions.Add(AttackActions);
         MenuOptions.Add(EnemiesInScene);
 
-        KnifeInGameScene = GameObject.Find("GameObjectKnife");
-        Highlight = GameObject.Find("SlectionKnife");
         KnifeInGameScene.SetActive(false);
         CurrentMenu = CombatActions;
+
+        Inichative(null, EnemiesInScene);
+
     }
     private void Awake()
     {
@@ -49,7 +54,6 @@ public class CombatMenu : MonoBehaviour
         {
             return;
         }
-
         SelectActions();
         SelectionMovement();
 
@@ -59,7 +63,7 @@ public class CombatMenu : MonoBehaviour
         }
         else
         {
-            Highlight.GetComponent<Animator>().speed = 0;
+            UiSelectionKnife.GetComponent<Animator>().speed = 0;
             SelectTarget();
         }
     }
@@ -98,7 +102,7 @@ public class CombatMenu : MonoBehaviour
         }
         if (posinlist >= 0 || posinlist <= CurrentMenu.Count)
         {
-            Highlight.transform.position = CurrentMenu[posinlist].transform.position - knifeoffset;
+            UiSelectionKnife.transform.position = CurrentMenu[posinlist].transform.position - knifeoffset;
         }
     }
     void SelectTarget()
@@ -147,7 +151,7 @@ public class CombatMenu : MonoBehaviour
             print("you win");
         }
 
-        Highlight.GetComponent<Animator>().speed = 1;
+        UiSelectionKnife.GetComponent<Animator>().speed = 1;
         KnifeInGameScene.SetActive(false);
         PickTargets = false;
         posinlist = 0;
@@ -159,20 +163,31 @@ public class CombatMenu : MonoBehaviour
         PickTargets = true;
         ChangeMenu(2);
     }
-    private void inichative(List<GameObject> players, List<GameObject> Enemies)
+    private void Inichative(List<GameObject> players, List<GameObject> Enemies)
     {
-        List<GameObject> inichative = new List<GameObject>();
+
         foreach (GameObject f in Enemies)
         {
-            int currspeed = f.GetComponent<EnemyStats>().speedStat;
-            if (inichative.Count == 0)
-            {
-                inichative.Add(f);
-            }
 
-            if (inichative[inichative.Count-1].GetComponent<EnemyStats>().speedStat<currspeed)
+            int currspeed = f.GetComponent<EnemyStats>().speedStat;
+            
+
+            for (int i = 0; i <= inichative.Count; i++)
             {
-                inichative.Add(f);
+                print($"Loop has run {i} times with {f} with a {inichative.Count} total in inichative");
+
+                if (Enemies[i].GetComponent<EnemyStats>().speedStat >= currspeed)
+                {
+                    inichative.Insert(i, f);
+                    break;
+                }
+                if (i == inichative.Count)
+                {
+                    inichative.Add(f);
+                    continue;
+                }
+                continue;
+
             }
         }
     }

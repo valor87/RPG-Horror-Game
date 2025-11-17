@@ -1830,7 +1830,10 @@ MonoBehaviour:
   - {fileID: 392138062}
   CurrentMenu: []
   EnemyStatsUi: []
+  inichative: []
   posinlist: 0
+  UiSelectionKnife: {fileID: 955979552}
+  KnifeInGameScene: {fileID: 1078287445}
 --- !u!1 &813357398
 GameObject:
   m_ObjectHideFlags: 0
@@ -3022,6 +3025,7 @@ MonoBehaviour:
   Hp: 5
   Attack: 2
   Defense: 2
+  speedStat: 6
   HpSlider: {fileID: 0}
 --- !u!1 &1598218376
 GameObject:
@@ -3470,6 +3474,7 @@ MonoBehaviour:
   Hp: 5
   Attack: 2
   Defense: 2
+  speedStat: 5
   HpSlider: {fileID: 0}
 --- !u!1 &2009412970
 GameObject:
@@ -3574,6 +3579,7 @@ MonoBehaviour:
   Hp: 5
   Attack: 2
   Defense: 2
+  speedStat: 5
   HpSlider: {fileID: 0}
 --- !u!1 &2058159192
 GameObject:
