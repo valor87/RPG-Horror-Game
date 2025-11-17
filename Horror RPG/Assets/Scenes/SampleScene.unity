@@ -824,6 +824,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 217966348}
   m_CullTransparentMesh: 1
+--- !u!1 &268803808
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 268803809}
+  m_Layer: 0
+  m_Name: Enemies
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &268803809
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268803808}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1561477294}
+  - {fileID: 2004805429}
+  - {fileID: 2009412972}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &312000407
 GameObject:
   m_ObjectHideFlags: 0
@@ -1263,7 +1297,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 415371191}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 619.367, y: 289.47754, z: 3.7067287}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1815,19 +1849,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4a86a5b27c1e04bbfa8b2f0fd9042b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemiesInScene:
-  - {fileID: 1561477292}
-  - {fileID: 2004805427}
-  - {fileID: 2009412970}
-  CombatActions:
-  - {fileID: 209039614}
-  - {fileID: 56165356}
-  - {fileID: 1967136629}
-  AttackActions:
-  - {fileID: 338606072}
-  - {fileID: 1286126555}
-  - {fileID: 160876016}
-  - {fileID: 392138062}
+  EnemyParent: {fileID: 268803808}
+  EnemiesInScene: []
+  CombatActionsParent: {fileID: 2058159192}
+  CombatActions: []
+  AttackActionsParent: {fileID: 1696807581}
+  AttackActions: []
   CurrentMenu: []
   EnemyStatsUi: []
   inichative: []
@@ -3003,12 +3030,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1561477292}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.77, y: 3.99, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.7700195, y: 3.9899902, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 268803809}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1561477295
 MonoBehaviour:
@@ -3452,12 +3479,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2004805427}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.77, y: 2.17, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.7700195, y: 2.169983, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 268803809}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2004805430
 MonoBehaviour:
@@ -3557,12 +3584,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2009412970}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.77, y: 0.4, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.7700195, y: 0.4000244, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 268803809}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2009412973
 MonoBehaviour:
@@ -3610,8 +3637,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 209039615}
-  - {fileID: 1967136630}
   - {fileID: 56165357}
+  - {fileID: 1967136630}
   m_Father: {fileID: 794943106}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -3789,11 +3816,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 619394802}
-  - {fileID: 794943106}
-  - {fileID: 1199710206}
-  - {fileID: 415371193}
-  - {fileID: 1561477294}
-  - {fileID: 2004805429}
-  - {fileID: 2009412972}
   - {fileID: 1078287448}
+  - {fileID: 794943106}
+  - {fileID: 268803809}
+  - {fileID: 415371193}
+  - {fileID: 1199710206}
+  - {fileID: 619394802}

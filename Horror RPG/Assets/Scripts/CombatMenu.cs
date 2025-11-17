@@ -6,38 +6,45 @@ using static UnityEngine.GraphicsBuffer;
 public class CombatMenu : MonoBehaviour
 {
     [Header("Lists of Objects in the combat scene")]
-    public List<GameObject> EnemiesInScene;
-    public List<GameObject> CombatActions;
-    public List<GameObject> AttackActions;
+    [Tooltip("Parent that holds children of all enimies in the scene")]
+    public GameObject EnemyParent;
+    [Tooltip("Parent that holds all combat actions in the scene")]
+    public GameObject CombatActionsParent;
+    [Tooltip("Parent that holds Attack options in the scene || include a back option")]
+    public GameObject AttackActionsParent;
+
+    List<GameObject> EnemiesInScene = new List<GameObject>();
+    List<GameObject> CombatActions = new List<GameObject>();
+    List<GameObject> AttackActions = new List<GameObject>();
     List<List<GameObject>> MenuOptions = new List<List<GameObject>>();
+
     [Header("For Debuging")]
     public List<GameObject> CurrentMenu;
     public List<GameObject> EnemyStatsUi;
     public List<GameObject> inichative = new List<GameObject>();
     public int posinlist = 0;
+
     [Space(5)]
     [Header("For selecting menu options")]
     public GameObject UiSelectionKnife;
     public GameObject KnifeInGameScene;
     Vector3 knifeoffset = new Vector3(175, 0, 0); // offset for the knife in UI
+
     // for menu navagation
     bool PickTargets;
     bool CanSelectActions = true;
-    void Start()
+    // Setup
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private void Awake()
     {
+        SetupLists(EnemyParent, EnemiesInScene);
+        SetupLists(CombatActionsParent, CombatActions);
+        SetupLists(AttackActionsParent, AttackActions);
         // adding all lists to a main list
         MenuOptions.Add(CombatActions);
         MenuOptions.Add(AttackActions);
         MenuOptions.Add(EnemiesInScene);
-
-        KnifeInGameScene.SetActive(false);
-        CurrentMenu = CombatActions;
-
-        Inichative(null, EnemiesInScene);
-
-    }
-    private void Awake()
-    {
         for (int i = 0; i < EnemiesInScene.Count; i++)
         {
             GameObject ParentSlider = GameObject.Find("Enemy " + (i + 1));
@@ -47,7 +54,24 @@ public class CombatMenu : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+        KnifeInGameScene.SetActive(false);
+        CurrentMenu = CombatActions;
+
+        Inichative(null, EnemiesInScene);
+
+    }
+
+    void SetupLists(GameObject _ParentofListElements, List<GameObject> _ChildInList)
+    {
+        foreach (Transform child in _ParentofListElements.transform)
+        {
+            _ChildInList.Add(child.gameObject);
+        }
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     void Update()
     {
         if (!CanSelectActions)
@@ -174,8 +198,6 @@ public class CombatMenu : MonoBehaviour
 
             for (int i = 0; i <= inichative.Count; i++)
             {
-                print($"Loop has run {i} times with {f} with a {inichative.Count} total in inichative");
-
                 if (Enemies[i].GetComponent<EnemyStats>().speedStat >= currspeed)
                 {
                     inichative.Insert(i, f);
