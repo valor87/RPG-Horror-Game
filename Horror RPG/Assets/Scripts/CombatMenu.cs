@@ -8,12 +8,15 @@ public class CombatMenu : MonoBehaviour
     [Header("Lists of Objects in the combat scene")]
     [Tooltip("Parent that holds children of all enimies in the scene")]
     public GameObject EnemyParent;
+    [Tooltip("Parent that holds children of all heros characters in the scene")]
+    public GameObject HerosCharactersParent;
     [Tooltip("Parent that holds all combat actions in the scene")]
     public GameObject CombatActionsParent;
     [Tooltip("Parent that holds Attack options in the scene || include a back option")]
     public GameObject AttackActionsParent;
 
     List<GameObject> EnemiesInScene = new List<GameObject>();
+    List<GameObject> HerosInScene = new List<GameObject>();
     List<GameObject> CombatActions = new List<GameObject>();
     List<GameObject> AttackActions = new List<GameObject>();
     List<List<GameObject>> MenuOptions = new List<List<GameObject>>();
@@ -39,8 +42,10 @@ public class CombatMenu : MonoBehaviour
     private void Awake()
     {
         SetupLists(EnemyParent, EnemiesInScene);
+        SetupLists(HerosCharactersParent, HerosInScene);
         SetupLists(CombatActionsParent, CombatActions);
         SetupLists(AttackActionsParent, AttackActions);
+
         // adding all lists to a main list
         MenuOptions.Add(CombatActions);
         MenuOptions.Add(AttackActions);
@@ -60,7 +65,7 @@ public class CombatMenu : MonoBehaviour
         CurrentMenu = CombatActions;
 
         Inichative(null, EnemiesInScene);
-
+        GetAllHeroActions(HerosInScene);
     }
 
     void SetupLists(GameObject _ParentofListElements, List<GameObject> _ChildInList)
@@ -70,6 +75,7 @@ public class CombatMenu : MonoBehaviour
             _ChildInList.Add(child.gameObject);
         }
     }
+    // end of setup
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     void Update()
@@ -144,7 +150,13 @@ public class CombatMenu : MonoBehaviour
         }
         KnifeInGameScene.transform.position = EnemiesInScene[posinlist].transform.position + new Vector3(-1.5f, 0, 0);
     }
-
+    void GetAllHeroActions(List<GameObject> CurrentHeros)
+    {
+        foreach(GameObject t in CurrentHeros)
+        {
+            PlayerPickOptions(t);
+        }
+    }
     public void ChangeMenu(int menuNum)
     {
         posinlist = 0;
@@ -250,5 +262,11 @@ public class CombatMenu : MonoBehaviour
             Destroy(RecevingDamage);
         }
         CanSelectActions = true;
+    }
+
+    IEnumerator PlayerPickOptions(GameObject currentHero)
+    {
+
+        yield return null;
     }
 }
