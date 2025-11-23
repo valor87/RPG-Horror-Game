@@ -1,8 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.GraphicsBuffer;
 public class CombatMenu : MonoBehaviour
 {
     [Header("Lists of Objects in the combat scene")]
@@ -36,6 +36,7 @@ public class CombatMenu : MonoBehaviour
     // for menu navagation
     bool PickTargets;
     bool CanSelectActions = true;
+    bool playerselectingActions;
     // Setup
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -80,22 +81,6 @@ public class CombatMenu : MonoBehaviour
     
     void Update()
     {
-        if (!CanSelectActions)
-        {
-            return;
-        }
-        SelectActions();
-        SelectionMovement();
-
-        if (!PickTargets)
-        {
-            SelectButton();
-        }
-        else
-        {
-            UiSelectionKnife.GetComponent<Animator>().speed = 0;
-            SelectTarget();
-        }
     }
     void SelectionMovement()
     {
@@ -145,17 +130,19 @@ public class CombatMenu : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            playerselectingActions = false;
             CalculateDamage(CurrentMenu[posinlist], null);
             ResetMenue();
         }
         KnifeInGameScene.transform.position = EnemiesInScene[posinlist].transform.position + new Vector3(-1.5f, 0, 0);
     }
+    private void CreateAttackActions(GameObject _CurrentHero)
+    {
+
+    }
     void GetAllHeroActions(List<GameObject> CurrentHeros)
     {
-        foreach(GameObject t in CurrentHeros)
-        {
-            PlayerPickOptions(t);
-        }
+            StartCoroutine(PlayerPickOptions(CurrentHeros));
     }
     public void ChangeMenu(int menuNum)
     {
@@ -194,11 +181,14 @@ public class CombatMenu : MonoBehaviour
         CurrentMenu = MenuOptions[1];
         ChangeMenu(0);
     }
-    public void GunAttack()
+    public void GunAttack(String _AttackName)
     {
         PickTargets = true;
         ChangeMenu(2);
     }
+    //private void StoreActions(GameObject Attacker, GameObject Target, ) { 
+
+    //}
     private void Inichative(List<GameObject> players, List<GameObject> Enemies)
     {
 
@@ -264,9 +254,34 @@ public class CombatMenu : MonoBehaviour
         CanSelectActions = true;
     }
 
-    IEnumerator PlayerPickOptions(GameObject currentHero)
+    IEnumerator PlayerPickOptions(List<GameObject> currentHeros)
     {
+        foreach (GameObject t in currentHeros)
+        {
+            playerselectingActions = true;
+            t.transform.position += Vector3.right * 2;
+            while (playerselectingActions)
+            {
+                print($"Running actions for {t.name}");
+                if (!CanSelectActions)
+                {
+                    playerselectingActions = false;
+                }
+                SelectActions();
+                SelectionMovement();
 
-        yield return null;
+                if (!PickTargets)
+                {
+                    SelectButton();
+                }
+                else
+                {
+                    UiSelectionKnife.GetComponent<Animator>().speed = 0;
+                    SelectTarget();
+                }
+                yield return null;
+            }
+            t.transform.position += Vector3.left * 2;
+        }
     }
 }
