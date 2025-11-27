@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 public class CombatMenu : MonoBehaviour
@@ -33,6 +34,8 @@ public class CombatMenu : MonoBehaviour
     public GameObject KnifeInGameScene;
     Vector3 knifeoffset = new Vector3(175, 0, 0); // offset for the knife in UI
 
+    // Selecting Enemy
+    GameObject Target;
     // for menu navagation
     bool PickTargets;
     bool CanSelectActions = true;
@@ -64,8 +67,7 @@ public class CombatMenu : MonoBehaviour
     {
         KnifeInGameScene.SetActive(false);
         CurrentMenu = CombatActions;
-
-        Inichative(null, EnemiesInScene);
+        Inichative(HerosInScene, EnemiesInScene);
         GetAllHeroActions(HerosInScene);
     }
 
@@ -122,6 +124,8 @@ public class CombatMenu : MonoBehaviour
     }
     void SelectTarget()
     {
+        
+
         CurrentMenu = EnemiesInScene;
         if (!KnifeInGameScene.activeInHierarchy)
         {
@@ -130,7 +134,7 @@ public class CombatMenu : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            playerselectingActions = false;
+            Target = CurrentMenu[posinlist];
             CalculateDamage(CurrentMenu[posinlist], null);
             ResetMenue();
         }
@@ -142,7 +146,7 @@ public class CombatMenu : MonoBehaviour
     }
     void GetAllHeroActions(List<GameObject> CurrentHeros)
     {
-            StartCoroutine(PlayerPickOptions(CurrentHeros));
+        StartCoroutine(PlayerPickOptions(CurrentHeros));
     }
     public void ChangeMenu(int menuNum)
     {
@@ -186,30 +190,53 @@ public class CombatMenu : MonoBehaviour
         PickTargets = true;
         ChangeMenu(2);
     }
-    //private void StoreActions(GameObject Attacker, GameObject Target, ) { 
+    private void StoreActions(GameObject Attacker, GameObject Target)
+    {
+        Attacker.GetComponent<HeroManager>().TargetEnemy = Target;
 
-    //}
+    }
     private void Inichative(List<GameObject> players, List<GameObject> Enemies)
     {
-
         foreach (GameObject f in Enemies)
         {
-
             int currspeed = f.GetComponent<EnemyStats>().speedStat;
             
-
             for (int i = 0; i <= inichative.Count; i++)
             {
-                if (Enemies[i].GetComponent<EnemyStats>().speedStat >= currspeed)
+                if (i == inichative.Count)
+                {
+                    inichative.Add(f);
+                    break;
+                }
+                print(i);
+                if (inichative[i].GetComponent<EnemyStats>().speedStat >= currspeed)
                 {
                     inichative.Insert(i, f);
                     break;
                 }
+               
+                continue;
+
+            }
+        }
+        foreach (GameObject f in players)
+        {
+
+            int currspeed = f.GetComponent<EnemyStats>().speedStat;
+
+            for (int i = 0; i <= inichative.Count; i++)
+            {
                 if (i == inichative.Count)
                 {
                     inichative.Add(f);
-                    continue;
+                    break;
                 }
+                if (inichative[i].GetComponent<EnemyStats>().speedStat >= currspeed)
+                {
+                    inichative.Insert(i, f);
+                    break;
+                }
+                
                 continue;
 
             }
@@ -235,7 +262,6 @@ public class CombatMenu : MonoBehaviour
         float decreaseHealth = 0.1f;
         while (0 <= damage)
         {
-            print(damage);
             damage -= decreaseHealth;
             RecevingDamage.GetComponent<EnemyStats>().Hp -= decreaseHealth;
             yield return new WaitForSeconds(.01f);
@@ -252,20 +278,22 @@ public class CombatMenu : MonoBehaviour
             Destroy(RecevingDamage);
         }
         CanSelectActions = true;
+        playerselectingActions = false;
+
     }
 
-    IEnumerator PlayerPickOptions(List<GameObject> currentHeros)
+    IEnumerator PlayerPickOptions(List<GameObject> currentHero)
     {
-        foreach (GameObject t in currentHeros)
+
+        foreach (GameObject Hero in currentHero)
         {
+            Hero.transform.position += Vector3.right * 2;
             playerselectingActions = true;
-            t.transform.position += Vector3.right * 2;
+
             while (playerselectingActions)
             {
-                print($"Running actions for {t.name}");
                 if (!CanSelectActions)
                 {
-                    playerselectingActions = false;
                 }
                 SelectActions();
                 SelectionMovement();
@@ -278,10 +306,13 @@ public class CombatMenu : MonoBehaviour
                 {
                     UiSelectionKnife.GetComponent<Animator>().speed = 0;
                     SelectTarget();
+                    GameObject TargetToHit = Target;
+                    StoreActions(Hero, TargetToHit);
                 }
                 yield return null;
             }
-            t.transform.position += Vector3.left * 2;
+            
+            Hero.transform.position += Vector3.left * 2;
         }
     }
 }
