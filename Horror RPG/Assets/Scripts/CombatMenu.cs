@@ -36,6 +36,7 @@ public class CombatMenu : MonoBehaviour
 
     // Selecting Enemy
     GameObject Target;
+    bool PlayerSelectingActions;
     // for menu navagation
     bool PickTargets;
     bool CanSelectActions = true;
@@ -122,7 +123,7 @@ public class CombatMenu : MonoBehaviour
             UiSelectionKnife.transform.position = CurrentMenu[posinlist].transform.position - knifeoffset;
         }
     }
-    void SelectTarget()
+    void SelectTarget(GameObject Attacker)
     {
         
 
@@ -135,7 +136,7 @@ public class CombatMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Target = CurrentMenu[posinlist];
-            CalculateDamage(CurrentMenu[posinlist], null);
+            CalculateDamage(CurrentMenu[posinlist], Attacker);
             ResetMenue();
         }
         KnifeInGameScene.transform.position = EnemiesInScene[posinlist].transform.position + new Vector3(-1.5f, 0, 0);
@@ -192,7 +193,7 @@ public class CombatMenu : MonoBehaviour
     }
     private void StoreActions(GameObject Attacker, GameObject Target)
     {
-        Attacker.GetComponent<HeroManager>().TargetEnemy = Target;
+        Attacker.GetComponent<EnemyStats>().TargetEnemy = Target;
 
     }
     private void Inichative(List<GameObject> players, List<GameObject> Enemies)
@@ -244,7 +245,8 @@ public class CombatMenu : MonoBehaviour
     }
     public void CalculateDamage(GameObject Target, GameObject Attacker)
     {
-        StartCoroutine(DealDamageSlowly(Target, 2.5f));
+        float playerDamage = Attacker.GetComponent<EnemyStats>().Attack;
+        StartCoroutine(DealDamageSlowly(Target, playerDamage));
     }
 
     bool CheckIfEnemiesAreDead(List<GameObject> Enemies)
@@ -284,17 +286,17 @@ public class CombatMenu : MonoBehaviour
 
     IEnumerator PlayerPickOptions(List<GameObject> currentHero)
     {
-
+        PlayerSelectingActions = true;
         foreach (GameObject Hero in currentHero)
         {
+            //
+            // Add in custom buttons for each player
+            //
             Hero.transform.position += Vector3.right * 2;
             playerselectingActions = true;
 
             while (playerselectingActions)
             {
-                if (!CanSelectActions)
-                {
-                }
                 SelectActions();
                 SelectionMovement();
 
@@ -305,7 +307,7 @@ public class CombatMenu : MonoBehaviour
                 else
                 {
                     UiSelectionKnife.GetComponent<Animator>().speed = 0;
-                    SelectTarget();
+                    SelectTarget(Hero);
                     GameObject TargetToHit = Target;
                     StoreActions(Hero, TargetToHit);
                 }
@@ -314,5 +316,6 @@ public class CombatMenu : MonoBehaviour
             
             Hero.transform.position += Vector3.left * 2;
         }
+        PlayerSelectingActions = false;
     }
 }

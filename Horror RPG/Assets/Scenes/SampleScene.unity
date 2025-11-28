@@ -577,7 +577,6 @@ GameObject:
   - component: {fileID: 173489773}
   - component: {fileID: 173489774}
   - component: {fileID: 173489775}
-  - component: {fileID: 173489776}
   m_Layer: 0
   m_Name: Player-Stellar (1)
   m_TagString: Untagged
@@ -672,23 +671,15 @@ MonoBehaviour:
   Defense: 2
   speedStat: 8
   HpSlider: {fileID: 173797257}
---- !u!114 &173489776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 173489772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e144816985f94e429cc6f6600ddaeca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   TargetEnemy: {fileID: 0}
-  Hp: 5
-  Attack: 2
-  Defense: 2
-  speedStat: 2
+  Isplayer: 1
+  PlayerAttack:
+  - Name: Punch
+    DamageValue: 0
+  - Name: 
+    DamageValue: 0
+  - Name: 
+    DamageValue: 0
 --- !u!1 &173797255
 GameObject:
   m_ObjectHideFlags: 0
@@ -790,7 +781,6 @@ GameObject:
   - component: {fileID: 197912272}
   - component: {fileID: 197912273}
   - component: {fileID: 197912274}
-  - component: {fileID: 197912275}
   m_Layer: 0
   m_Name: Player-Stellar (2)
   m_TagString: Untagged
@@ -885,23 +875,9 @@ MonoBehaviour:
   Defense: 2
   speedStat: 2
   HpSlider: {fileID: 1725349499}
---- !u!114 &197912275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 197912271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e144816985f94e429cc6f6600ddaeca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   TargetEnemy: {fileID: 0}
-  Hp: 5
-  Attack: 2
-  Defense: 2
-  speedStat: 2
+  Isplayer: 1
+  PlayerAttack: []
 --- !u!1 &201438279
 GameObject:
   m_ObjectHideFlags: 0
@@ -4014,6 +3990,9 @@ MonoBehaviour:
   Defense: 2
   speedStat: 6
   HpSlider: {fileID: 0}
+  TargetEnemy: {fileID: 0}
+  Isplayer: 0
+  PlayerAttack: []
 --- !u!1 &1598218376
 GameObject:
   m_ObjectHideFlags: 0
@@ -4704,7 +4683,6 @@ GameObject:
   - component: {fileID: 1977561975}
   - component: {fileID: 1977561976}
   - component: {fileID: 1977561977}
-  - component: {fileID: 1977561978}
   m_Layer: 0
   m_Name: Player-Stellar
   m_TagString: Untagged
@@ -4799,23 +4777,9 @@ MonoBehaviour:
   Defense: 2
   speedStat: 11
   HpSlider: {fileID: 1881334013}
---- !u!114 &1977561978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1977561974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e144816985f94e429cc6f6600ddaeca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   TargetEnemy: {fileID: 0}
-  Hp: 5
-  Attack: 2
-  Defense: 2
-  speedStat: 2
+  Isplayer: 1
+  PlayerAttack: []
 --- !u!1 &2004805427
 GameObject:
   m_ObjectHideFlags: 0
@@ -4921,6 +4885,9 @@ MonoBehaviour:
   Defense: 2
   speedStat: 9
   HpSlider: {fileID: 0}
+  TargetEnemy: {fileID: 0}
+  Isplayer: 0
+  PlayerAttack: []
 --- !u!1 &2009412970
 GameObject:
   m_ObjectHideFlags: 0
@@ -5026,6 +4993,9 @@ MonoBehaviour:
   Defense: 2
   speedStat: 5
   HpSlider: {fileID: 0}
+  TargetEnemy: {fileID: 0}
+  Isplayer: 0
+  PlayerAttack: []
 --- !u!1 &2058159192
 GameObject:
   m_ObjectHideFlags: 0
