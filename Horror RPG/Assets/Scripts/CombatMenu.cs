@@ -17,7 +17,7 @@ public class CombatMenu : MonoBehaviour
     public GameObject AttackActionsParent;
 
     List<GameObject> EnemiesInScene = new List<GameObject>();
-    List<GameObject> HerosInScene = new List<GameObject>();
+    public List<GameObject> HerosInScene = new List<GameObject>();
     List<GameObject> CombatActions = new List<GameObject>();
     List<GameObject> AttackActions = new List<GameObject>();
     List<List<GameObject>> MenuOptions = new List<List<GameObject>>();
@@ -37,6 +37,7 @@ public class CombatMenu : MonoBehaviour
     // Selecting Enemy
     GameObject Target;
     bool PlayerSelectingActions;
+    float DamageFromHero;
     // for menu navagation
     bool PickTargets;
     bool CanSelectActions = true;
@@ -47,9 +48,9 @@ public class CombatMenu : MonoBehaviour
     private void Awake()
     {
         SetupLists(EnemyParent, EnemiesInScene);
-        SetupLists(HerosCharactersParent, HerosInScene);
         SetupLists(CombatActionsParent, CombatActions);
         SetupLists(AttackActionsParent, AttackActions);
+        SetupLists(HerosCharactersParent, HerosInScene);
 
         // adding all lists to a main list
         MenuOptions.Add(CombatActions);
@@ -74,10 +75,19 @@ public class CombatMenu : MonoBehaviour
 
     void SetupLists(GameObject _ParentofListElements, List<GameObject> _ChildInList)
     {
+        
         foreach (Transform child in _ParentofListElements.transform)
         {
             _ChildInList.Add(child.gameObject);
+
+            if (_ParentofListElements == HerosCharactersParent)
+            {
+                print($"Running for {child.name}");
+                child.gameObject.GetComponent<EnemyStats>().AttackButtons = AttackActions;
+                //child.gameObject.GetComponent<EnemyStats>().AttackButtons.RemoveAt(3);
+            }
         }
+        
     }
     // end of setup
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -136,7 +146,7 @@ public class CombatMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Target = CurrentMenu[posinlist];
-            CalculateDamage(CurrentMenu[posinlist], Attacker);
+            CalculateDamage(CurrentMenu[posinlist], DamageFromHero);
             ResetMenue();
         }
         KnifeInGameScene.transform.position = EnemiesInScene[posinlist].transform.position + new Vector3(-1.5f, 0, 0);
@@ -186,8 +196,11 @@ public class CombatMenu : MonoBehaviour
         CurrentMenu = MenuOptions[1];
         ChangeMenu(0);
     }
-    public void GunAttack(String _AttackName)
+    public void GunAttack(float _AttackDamage)
     {
+        _AttackDamage = DamageFromHero;
+        print(DamageFromHero);
+
         PickTargets = true;
         ChangeMenu(2);
     }
@@ -209,7 +222,6 @@ public class CombatMenu : MonoBehaviour
                     inichative.Add(f);
                     break;
                 }
-                print(i);
                 if (inichative[i].GetComponent<EnemyStats>().speedStat >= currspeed)
                 {
                     inichative.Insert(i, f);
@@ -243,9 +255,9 @@ public class CombatMenu : MonoBehaviour
             }
         }
     }
-    public void CalculateDamage(GameObject Target, GameObject Attacker)
+    public void CalculateDamage(GameObject Target, float AttackerDamage)
     {
-        float playerDamage = Attacker.GetComponent<EnemyStats>().Attack;
+        float playerDamage = AttackerDamage;
         StartCoroutine(DealDamageSlowly(Target, playerDamage));
     }
 
@@ -261,9 +273,10 @@ public class CombatMenu : MonoBehaviour
     IEnumerator DealDamageSlowly(GameObject RecevingDamage, float damage)
     {
         CanSelectActions = false;
-        float decreaseHealth = 0.1f;
-        while (0 <= damage)
+        while (0 < damage)
         {
+            float decreaseHealth = 0.1f;
+
             damage -= decreaseHealth;
             RecevingDamage.GetComponent<EnemyStats>().Hp -= decreaseHealth;
             yield return new WaitForSeconds(.01f);
@@ -291,6 +304,9 @@ public class CombatMenu : MonoBehaviour
         {
             //
             // Add in custom buttons for each player
+            print(AttackActions.Count);
+            Hero.GetComponent<EnemyStats>().SetButtonActions(AttackActions);
+
             //
             Hero.transform.position += Vector3.right * 2;
             playerselectingActions = true;

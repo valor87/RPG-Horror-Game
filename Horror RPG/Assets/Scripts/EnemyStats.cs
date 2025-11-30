@@ -1,4 +1,5 @@
-using Unity.VisualScripting;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ public class EnemyStats : MonoBehaviour
 
     [Space(10)]
     [Header("For Player Characters")]
+    public List<GameObject> AttackButtons;
     public GameObject TargetEnemy;
     public bool Isplayer;
 
@@ -25,21 +27,27 @@ public class EnemyStats : MonoBehaviour
     }
     public MyData[] PlayerAttack;
 
+    public List<GameObject> SetButtonActions(List<GameObject> HerosAttacks)
+    {
+
+        for (int i = 0; i < 3; i++)
+        {
+            HerosAttacks[i].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = PlayerAttack[i].Name;
+
+            HerosAttacks[i].GetComponent<Button>().name = PlayerAttack[i].DamageValue.ToString();
+        }
+        return HerosAttacks;
+    }
+   
     void Start()
     {
         Hp = Mathf.Clamp(Hp, 0, Hp);
         HpSlider.maxValue = Hp;
     }
-
-    public void Update()
+    private void Update()
     {
         HpSlider.value = Hp;
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            PlayerAttack[0].DamageValue = 4;
-        }
     }
-
     public void AttackPlayers()
     {
 

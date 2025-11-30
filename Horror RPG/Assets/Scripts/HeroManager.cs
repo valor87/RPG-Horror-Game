@@ -9,6 +9,8 @@ public class HeroManager : MonoBehaviour
     [SerializeField] float Defense = 2;
     public int speedStat = 2;
     float SliderHp;
+
+    
     void Start()
     {
 
