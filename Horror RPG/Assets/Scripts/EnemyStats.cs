@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class EnemyStats : MonoBehaviour
 {
     [Header("Setting Stats")]
@@ -10,31 +9,29 @@ public class EnemyStats : MonoBehaviour
     public float Attack = 2;
     [SerializeField] float Defense = 2;
     public int speedStat = 2;
+    [HideInInspector]
     public Slider HpSlider;
 
     [Space(10)]
     [Header("For Player Characters")]
+    [HideInInspector]
     public List<GameObject> AttackButtons;
-    public GameObject TargetEnemy;
+    [Tooltip("Is the script on a playable chracter // runs player actions")]
     public bool Isplayer;
 
-    [System.Serializable]
+    [Space(10)]
+    [Header("for debuging")]
+    public GameObject TargetEnemy;
+    public List<CombatAttackActions> CAA;
+    public string AttackAction;
 
-    public struct MyData
+    public List<GameObject> SetButtonActions(List<GameObject> HerosAttacks, List<string> ActionNames)
     {
-        public string Name;
-        public float DamageValue;
-    }
-    public MyData[] PlayerAttack;
-
-    public List<GameObject> SetButtonActions(List<GameObject> HerosAttacks)
-    {
-
         for (int i = 0; i < 3; i++)
         {
-            HerosAttacks[i].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = PlayerAttack[i].Name;
-
-            HerosAttacks[i].GetComponent<Button>().name = PlayerAttack[i].DamageValue.ToString();
+            HerosAttacks[i].GetComponent<Button>().name = CAA[i].ActionName;
+            HerosAttacks[i].transform.GetChild(0).name = CAA[i].ActionName;
+            ActionNames.Add(CAA[i].ActionName);
         }
         return HerosAttacks;
     }
