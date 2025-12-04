@@ -56,7 +56,7 @@ public class CombatMenu : MonoBehaviour
         SetupLists(CombatActionsParent, CombatActions);
         SetupLists(AttackActionsParent, AttackActions);
         SetupLists(HerosCharactersParent, HerosInScene);
-        
+
         // adding all lists to a main list
         MenuOptions.Add(CombatActions);
         MenuOptions.Add(AttackActions);
@@ -94,9 +94,7 @@ public class CombatMenu : MonoBehaviour
 
             if (_ParentofListElements == HerosCharactersParent)
             {
-                print($"Running for {child.name}");
                 child.gameObject.GetComponent<EnemyStats>().AttackButtons = AttackActions;
-                //child.gameObject.GetComponent<EnemyStats>().AttackButtons.RemoveAt(3);
             }
         }
 
@@ -104,9 +102,6 @@ public class CombatMenu : MonoBehaviour
     // end of setup
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    void Update()
-    {
-    }
     void SelectionMovement()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -122,28 +117,18 @@ public class CombatMenu : MonoBehaviour
             posinlist++;
         }
     }
-    void SelectActions()
-    {
-
-        if (posinlist < 0)
-        {
-            posinlist = CurrentMenu.Count;
-        }
-        if (posinlist >= CurrentMenu.Count)
-        {
-            posinlist = 0;
-        }
-    }
     void SelectButton()
     {
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             CurrentMenu[posinlist].GetComponent<Button>().onClick.Invoke();
         }
-        if (posinlist >= 0 || posinlist <= CurrentMenu.Count)
-        {
-            UiSelectionKnife.transform.position = CurrentMenu[posinlist].transform.position - knifeoffset;
-        }
+
+        try
+        { UiSelectionKnife.transform.position = CurrentMenu[posinlist].transform.position - knifeoffset; }
+        catch (ArgumentOutOfRangeException ex) { posinlist = 0; }
+        
     }
     void SelectTarget(GameObject Attacker)
     {
@@ -160,7 +145,10 @@ public class CombatMenu : MonoBehaviour
             playerselectingActions = false;
             ResetMenue();
         }
-        KnifeInGameScene.transform.position = EnemiesInScene[posinlist].transform.position + new Vector3(-1.5f, 0, 0);
+        try { KnifeInGameScene.transform.position = EnemiesInScene[posinlist].transform.position + new Vector3(-1.5f, 0, 0); }
+        catch (ArgumentOutOfRangeException ex)
+        { posinlist = 0; }
+
     }
     private void RunAttackSequence(List<GameObject> Inichative)
     {
@@ -284,18 +272,18 @@ public class CombatMenu : MonoBehaviour
     {
         for (int i = 0; i < _Inichative.Count; i++)
         {
+            if (_Inichative[i].GetComponent<EnemyStats>().TargetEnemy == null)
+            {
+                print("its dead");
+                continue;
+            }
             float damage = incomingdamage;
             GameObject Attacker = _Inichative[i];
             GameObject RecevingDamage = _Inichative[i].GetComponent<EnemyStats>().TargetEnemy;
+            
             CanSelectActions = false;
             Vector3 AttackingPlacement = Vector3.zero;
-            print($"Attacking with {Attacker} hitting {RecevingDamage}");
 
-            // make the attacker walk forward
-            if (RecevingDamage == null)
-            {
-                continue;
-            }
             if (Attacker.tag == "Hero")
             {
                 AttackingPlacement += Vector3.right * 2;
@@ -305,8 +293,13 @@ public class CombatMenu : MonoBehaviour
                 AttackingPlacement += Vector3.left * 2;
             }
             Attacker.transform.position += AttackingPlacement;
+
             while (0 < damage)
             {
+                if (RecevingDamage == null)
+                {
+                    break;
+                }
                 float decreaseHealth = 0.1f;
 
                 damage -= decreaseHealth;
@@ -314,33 +307,36 @@ public class CombatMenu : MonoBehaviour
                 yield return new WaitForSeconds(.01f);
             }
 
-            float EnemyHp = RecevingDamage.GetComponent<EnemyStats>().Hp;
-
-            if (EnemyHp <= 0 && RecevingDamage != null)
+             float EnemyHp = RecevingDamage.GetComponent<EnemyStats>().Hp;
+           
+            if (RecevingDamage != null)
             {
-                yield return new WaitForSeconds(1);
-                if (Attacker.tag == "Enemy")
+                if (EnemyHp <= 0)
                 {
-                    GameObject UiStat = HeroStatsUi[HerosInScene.IndexOf(RecevingDamage)];
-                    HeroStatsUi.Remove(UiStat);
-                    HerosInScene.Remove(RecevingDamage);
+                    yield return new WaitForSeconds(1);
+                    if (Attacker.tag == "Enemy")
+                    {
+                        GameObject UiStat = HeroStatsUi[HerosInScene.IndexOf(RecevingDamage)];
+                        HeroStatsUi.Remove(UiStat);
+                        HerosInScene.Remove(RecevingDamage);
 
-                    inichative.Remove(RecevingDamage);
-                    Destroy(UiStat);
-                    Destroy(RecevingDamage);
-                }
-                else
-                {
-                    GameObject UiStat = EnemyStatsUi[EnemiesInScene.IndexOf(RecevingDamage)];
-                    EnemyStatsUi.Remove(UiStat);
-                    EnemiesInScene.Remove(RecevingDamage);
-                    HerosInScene.Remove(RecevingDamage);
+                        inichative.Remove(RecevingDamage);
+                        Destroy(UiStat);
+                        Destroy(RecevingDamage);
+                    }
+                    else
+                    {
+                        GameObject UiStat = EnemyStatsUi[EnemiesInScene.IndexOf(RecevingDamage)];
+                        EnemyStatsUi.Remove(UiStat);
+                        EnemiesInScene.Remove(RecevingDamage);
+                        HerosInScene.Remove(RecevingDamage);
 
-                    inichative.Remove(RecevingDamage);
-                    Destroy(UiStat);
-                    Destroy(RecevingDamage);
-                    
+                        inichative.Remove(RecevingDamage);
+                        Destroy(UiStat);
+                        Destroy(RecevingDamage);
 
+
+                    }
                 }
             }
             // send the attacker back
@@ -368,23 +364,20 @@ public class CombatMenu : MonoBehaviour
         PlayerSelectingActions = true;
         foreach (GameObject Hero in currentHero)
         {
-           
-            print(AttackActions.Count);
             string PlayerDesiredAction = "";
             List<string> PlayerActionName = new List<string>();
             Hero.GetComponent<EnemyStats>().SetButtonActions(AttackActions, PlayerActionName);
-            
+
             Hero.transform.position += Vector3.right * 2;
             playerselectingActions = true;
 
             while (playerselectingActions)
             {
-                SelectActions();
                 SelectionMovement();
-
                 if (!PickTargets)
                 {
-                    PlayerDesiredAction = AttackActions[posinlist].name;
+                    try { PlayerDesiredAction = AttackActions[posinlist].name; }
+                    catch (ArgumentOutOfRangeException ex) { posinlist = 0; }
                     SelectButton();
                 }
                 else
@@ -394,6 +387,7 @@ public class CombatMenu : MonoBehaviour
                     GameObject TargetToHit = Target;
                     StoreActions(Hero, TargetToHit, PlayerDesiredAction);
                 }
+
                 yield return null;
             }
 
