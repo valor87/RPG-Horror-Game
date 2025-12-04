@@ -9,14 +9,13 @@ public class EnemyStats : MonoBehaviour
     public float Attack = 2;
     [SerializeField] float Defense = 2;
     public int speedStat = 2;
-    [HideInInspector]
     public Slider HpSlider;
 
     [Space(10)]
     [Header("For Player Characters")]
     [HideInInspector]
     public List<GameObject> AttackButtons;
-    [Tooltip("Is the script on a playable chracter // runs player actions")]
+    [Tooltip("Is the script on a playable character // runs player actions")]
     public bool Isplayer;
 
     [Space(10)]
