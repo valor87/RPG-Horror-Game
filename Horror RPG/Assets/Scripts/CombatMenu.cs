@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
+using static Unity.Burst.Intrinsics.X86.Avx;
+using static UnityEditor.Rendering.CameraUI;
 public class CombatMenu : MonoBehaviour
 {
     [Header("Lists of Objects in the combat scene")]
@@ -52,6 +54,7 @@ public class CombatMenu : MonoBehaviour
 
     private void Awake()
     {
+        System.Environment.GetCommandLineArgs();
         SetupLists(EnemyParent, EnemiesInScene);
         SetupLists(CombatActionsParent, CombatActions);
         SetupLists(AttackActionsParent, AttackActions);
@@ -75,6 +78,7 @@ public class CombatMenu : MonoBehaviour
             GameObject Hpslider = ParentSlider.transform.GetChild(0).gameObject;
             HerosInScene[i].GetComponent<EnemyStats>().HpSlider = Hpslider.GetComponent<Slider>();
         }
+
     }
 
     void Start()
@@ -277,6 +281,7 @@ public class CombatMenu : MonoBehaviour
                 print("its dead");
                 continue;
             }
+            bool needBreak = false;
             float damage = incomingdamage;
             GameObject Attacker = _Inichative[i];
             GameObject RecevingDamage = _Inichative[i].GetComponent<EnemyStats>().TargetEnemy;
@@ -298,6 +303,7 @@ public class CombatMenu : MonoBehaviour
             {
                 if (RecevingDamage == null)
                 {
+                    needBreak = true;
                     break;
                 }
                 float decreaseHealth = 0.1f;
@@ -306,8 +312,12 @@ public class CombatMenu : MonoBehaviour
                 RecevingDamage.GetComponent<EnemyStats>().Hp -= decreaseHealth;
                 yield return new WaitForSeconds(.01f);
             }
-
-             float EnemyHp = RecevingDamage.GetComponent<EnemyStats>().Hp;
+            if (needBreak)
+            {
+                Attacker.transform.position -= AttackingPlacement;
+                continue;
+            }
+            float EnemyHp = RecevingDamage.GetComponent<EnemyStats>().Hp;
            
             if (RecevingDamage != null)
             {
@@ -353,6 +363,12 @@ public class CombatMenu : MonoBehaviour
     }
     private void EnemyPickActionOptions(List<GameObject> Enemies, List<GameObject> Targets)
     {
+        if (Targets.Count == 0)
+        {
+            this.gameObject.SetActive(false);
+            print("print the heros are dead");
+            return;
+        }
         foreach (GameObject t in Enemies)
         {
             int RandomTarget = UnityEngine.Random.Range(0, Targets.Count);
