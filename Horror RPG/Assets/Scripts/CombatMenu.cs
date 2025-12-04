@@ -289,6 +289,8 @@ public class CombatMenu : MonoBehaviour
             GameObject RecevingDamage = _Inichative[i].GetComponent<EnemyStats>().TargetEnemy;
             CanSelectActions = false;
             Vector3 AttackingPlacement = Vector3.zero;
+            print($"Attacking with {Attacker} hitting {RecevingDamage}");
+
             // make the attacker walk forward
             if (RecevingDamage == null)
             {
@@ -314,7 +316,7 @@ public class CombatMenu : MonoBehaviour
 
             float EnemyHp = RecevingDamage.GetComponent<EnemyStats>().Hp;
 
-            if (EnemyHp <= 0)
+            if (EnemyHp <= 0 && RecevingDamage != null)
             {
                 yield return new WaitForSeconds(1);
                 if (Attacker.tag == "Enemy")
