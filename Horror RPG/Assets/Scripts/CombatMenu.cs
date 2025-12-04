@@ -285,10 +285,24 @@ public class CombatMenu : MonoBehaviour
         for (int i = 0; i < _Inichative.Count; i++)
         {
             float damage = incomingdamage;
-            print($"Running for {_Inichative[i].name}");
-            CanSelectActions = false;
             GameObject Attacker = _Inichative[i];
             GameObject RecevingDamage = _Inichative[i].GetComponent<EnemyStats>().TargetEnemy;
+            CanSelectActions = false;
+            Vector3 AttackingPlacement = Vector3.zero;
+            // make the attacker walk forward
+            if (RecevingDamage == null)
+            {
+                continue;
+            }
+            if (Attacker.tag == "Hero")
+            {
+                AttackingPlacement += Vector3.right * 2;
+            }
+            else
+            {
+                AttackingPlacement += Vector3.left * 2;
+            }
+            Attacker.transform.position += AttackingPlacement;
             while (0 < damage)
             {
                 float decreaseHealth = 0.1f;
@@ -327,6 +341,8 @@ public class CombatMenu : MonoBehaviour
 
                 }
             }
+            // send the attacker back
+            Attacker.transform.position -= AttackingPlacement;
         }
         CanSelectActions = true;
         playerselectingActions = false;
@@ -350,13 +366,12 @@ public class CombatMenu : MonoBehaviour
         PlayerSelectingActions = true;
         foreach (GameObject Hero in currentHero)
         {
-            //
-            // Add in custom buttons for each player
+           
             print(AttackActions.Count);
             string PlayerDesiredAction = "";
             List<string> PlayerActionName = new List<string>();
             Hero.GetComponent<EnemyStats>().SetButtonActions(AttackActions, PlayerActionName);
-            //
+            
             Hero.transform.position += Vector3.right * 2;
             playerselectingActions = true;
 

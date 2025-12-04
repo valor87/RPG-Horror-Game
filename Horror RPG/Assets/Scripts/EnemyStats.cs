@@ -29,7 +29,7 @@ public class EnemyStats : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             HerosAttacks[i].GetComponent<Button>().name = CAA[i].ActionName;
-            HerosAttacks[i].transform.GetChild(0).name = CAA[i].ActionName;
+            HerosAttacks[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = CAA[i].ActionName;
             ActionNames.Add(CAA[i].ActionName);
         }
         return HerosAttacks;
