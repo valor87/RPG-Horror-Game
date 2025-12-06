@@ -4965,6 +4965,7 @@ GameObject:
   - component: {fileID: 1977561975}
   - component: {fileID: 1977561976}
   - component: {fileID: 1977561977}
+  - component: {fileID: 1977561978}
   m_Layer: 0
   m_Name: Player-Stellar
   m_TagString: Untagged
@@ -5067,6 +5068,28 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7363c5248c323d843bb2f18dd5846c62, type: 2}
   - {fileID: 11400000, guid: fb5a095016b07694ca53ca8ad8d9a62e, type: 2}
   AttackAction: 
+--- !u!95 &1977561978
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977561974}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88b4b3b5886b814786d08f991011118, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2004805427
 GameObject:
   m_ObjectHideFlags: 0
