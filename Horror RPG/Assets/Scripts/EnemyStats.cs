@@ -9,14 +9,13 @@ public class EnemyStats : MonoBehaviour
     public float Attack = 2;
     [SerializeField] float Defense = 2;
     public int speedStat = 2;
-    [HideInInspector]
     public Slider HpSlider;
 
     [Space(10)]
     [Header("For Player Characters")]
     [HideInInspector]
     public List<GameObject> AttackButtons;
-    [Tooltip("Is the script on a playable chracter // runs player actions")]
+    [Tooltip("Is the script on a playable character // runs player actions")]
     public bool Isplayer;
 
     [Space(10)]
@@ -30,7 +29,7 @@ public class EnemyStats : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             HerosAttacks[i].GetComponent<Button>().name = CAA[i].ActionName;
-            HerosAttacks[i].transform.GetChild(0).name = CAA[i].ActionName;
+            HerosAttacks[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = CAA[i].ActionName;
             ActionNames.Add(CAA[i].ActionName);
         }
         return HerosAttacks;
