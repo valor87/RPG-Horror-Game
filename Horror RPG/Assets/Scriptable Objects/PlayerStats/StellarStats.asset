@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92cbe3eae038207478e2c3adfc034ac7, type: 3}
-  m_Name: Attack_Shoot
+  m_Script: {fileID: 11500000, guid: 16afb89fd5603c740b6116a9043b9f8c, type: 3}
+  m_Name: StellarStats
   m_EditorClassIdentifier: 
-  ActionName: Shoot
-  Attack: 1
-  Support: 0
-  Damage: 5
-  Healing: 0
-  HealAmount: 0
+  HeroName: Stellar
+  Healthstat: 5
+  Attackstat: 5
+  Defensestat: 5
+  Speedstat: 5

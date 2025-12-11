@@ -156,8 +156,7 @@ public class CombatMenu : MonoBehaviour
     }
     private void RunAttackSequence(List<GameObject> Inichative)
     {
-        float damage = 5;
-        StartCoroutine(DealDamageSlowly(Inichative, damage));
+        StartCoroutine(DealDamageSlowly(Inichative));
     }
     void GetAllHeroActions(List<GameObject> CurrentHeros)
     {
@@ -272,7 +271,7 @@ public class CombatMenu : MonoBehaviour
         return true;
     }
 
-    IEnumerator DealDamageSlowly(List<GameObject> _Inichative, float incomingdamage)
+    IEnumerator DealDamageSlowly(List<GameObject> _Inichative)
     {
         for (int i = 0; i < _Inichative.Count; i++)
         {
@@ -281,10 +280,12 @@ public class CombatMenu : MonoBehaviour
                 print("its dead");
                 continue;
             }
-            bool needBreak = false;
-            float damage = incomingdamage;
             GameObject Attacker = _Inichative[i];
             GameObject RecevingDamage = _Inichative[i].GetComponent<EnemyStats>().TargetEnemy;
+            bool needBreak = false;
+            float incomingdamage = Attacker.GetComponent<EnemyStats>().Attack;
+            float damage = incomingdamage;
+            
             
             CanSelectActions = false;
             Vector3 AttackingPlacement = Vector3.zero;
@@ -406,7 +407,7 @@ public class CombatMenu : MonoBehaviour
 
                 yield return null;
             }
-
+            Hero.GetComponent<EnemyStats>().SetAttacksForPlayers(PlayerDesiredAction);
             Hero.transform.position += Vector3.left * 2;
         }
         PlayerSelectingActions = false;

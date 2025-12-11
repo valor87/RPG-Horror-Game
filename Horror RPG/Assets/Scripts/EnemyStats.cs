@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class EnemyStats : MonoBehaviour
 {
     [Header("Setting Stats")]
+    public GameObject PlayerStats;
     public float Hp = 5;
     public float Attack = 2;
     [SerializeField] float Defense = 2;
@@ -37,6 +38,7 @@ public class EnemyStats : MonoBehaviour
    
     void Start()
     {
+        
         Hp = Mathf.Clamp(Hp, 0, Hp);
         HpSlider.maxValue = Hp;
     }
@@ -44,8 +46,20 @@ public class EnemyStats : MonoBehaviour
     {
         HpSlider.value = Hp;
     }
-    public void AttackPlayers()
+    private void SetPlayerStats()
     {
-
+        
+    }
+    public void SetAttacksForPlayers(string WantedAttack)
+    {
+        foreach (CombatAttackActions _var in CAA)
+        {
+            if (_var.ActionName == WantedAttack)
+            {
+                print($"Setting player action looking for {WantedAttack}");
+                Attack = Attack + _var.Damage;
+                print($"Attack set to {Attack}");
+            }
+        }
     }
 }

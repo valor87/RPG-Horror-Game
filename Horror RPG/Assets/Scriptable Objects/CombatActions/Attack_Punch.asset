@@ -15,6 +15,6 @@ MonoBehaviour:
   ActionName: Punch
   Attack: 1
   Support: 0
-  Damage: 3
+  Damage: 1
   Healing: 0
   HealAmount: 0
