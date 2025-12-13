@@ -214,7 +214,7 @@ public class CombatMenu : MonoBehaviour
     {
         foreach (GameObject f in Enemies)
         {
-            int currspeed = f.GetComponent<EnemyStats>().speedStat;
+            float currspeed = f.GetComponent<EnemyStats>().speedStat;
 
             for (int i = 0; i <= inichative.Count; i++)
             {
@@ -236,7 +236,7 @@ public class CombatMenu : MonoBehaviour
         foreach (GameObject f in players)
         {
 
-            int currspeed = f.GetComponent<EnemyStats>().speedStat;
+            float currspeed = f.GetComponent<EnemyStats>().speedStat;
 
             for (int i = 0; i <= inichative.Count; i++)
             {

@@ -803,7 +803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd1840ad21906d44890d466c82d7cb07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerStats: {fileID: 0}
+  PlayerStats: {fileID: 11400000, guid: 72005a66843376d4f8fd5b8a1a5daf36, type: 2}
   Hp: 5
   Attack: 2
   Defense: 2
@@ -1007,7 +1007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd1840ad21906d44890d466c82d7cb07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerStats: {fileID: 0}
+  PlayerStats: {fileID: 11400000, guid: 0a0a5a46554c0104d84f1460b9ac5f9f, type: 2}
   Hp: 5
   Attack: 2
   Defense: 2
@@ -5061,7 +5061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd1840ad21906d44890d466c82d7cb07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerStats: {fileID: 0}
+  PlayerStats: {fileID: 11400000, guid: 7368eaa2bd6d86b4c8dc0ec35bfa523f, type: 2}
   Hp: 5
   Attack: 2
   Defense: 2

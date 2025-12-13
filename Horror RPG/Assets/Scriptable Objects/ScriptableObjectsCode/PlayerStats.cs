@@ -15,5 +15,7 @@ public class PlayerStats : ScriptableObject
     public float Defensestat = 5;
     [Tooltip("Speed Stat")]
     public float Speedstat = 5;
+    [Tooltip("Sprite")]
+    public Sprite Spriteimage;
 
 }

@@ -5,11 +5,11 @@ using UnityEngine.UI;
 public class EnemyStats : MonoBehaviour
 {
     [Header("Setting Stats")]
-    public GameObject PlayerStats;
+    public PlayerStats PlayerStats;
     public float Hp = 5;
     public float Attack = 2;
     [SerializeField] float Defense = 2;
-    public int speedStat = 2;
+    public float speedStat = 2;
     public Slider HpSlider;
 
     [Space(10)]
@@ -36,9 +36,21 @@ public class EnemyStats : MonoBehaviour
         return HerosAttacks;
     }
    
+    void SetupPlayerStats(PlayerStats PS)
+    {
+        Hp = PS.Healthstat;
+        Attack = PS.Attackstat;
+        Defense = PS.Defensestat;
+        speedStat = PS.Speedstat;
+        this.gameObject.name = PS.HeroName;
+        GetComponent<SpriteRenderer>().sprite = PS.Spriteimage;
+    }
     void Start()
     {
-        
+        if (Isplayer)
+        {
+            SetupPlayerStats(PlayerStats);
+        }
         Hp = Mathf.Clamp(Hp, 0, Hp);
         HpSlider.maxValue = Hp;
     }
@@ -46,10 +58,7 @@ public class EnemyStats : MonoBehaviour
     {
         HpSlider.value = Hp;
     }
-    private void SetPlayerStats()
-    {
-        
-    }
+  
     public void SetAttacksForPlayers(string WantedAttack)
     {
         foreach (CombatAttackActions _var in CAA)
