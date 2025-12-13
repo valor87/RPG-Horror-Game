@@ -25,7 +25,7 @@ public class EnemyStats : MonoBehaviour
     public GameObject TargetEnemy;
     public List<CombatAttackActions> CAA;
     public string AttackAction;
-   
+
     public List<GameObject> SetButtonActions(List<GameObject> HerosAttacks, List<string> ActionNames)
     {
         for (int i = 0; i < 3; i++)
@@ -36,7 +36,7 @@ public class EnemyStats : MonoBehaviour
         }
         return HerosAttacks;
     }
-   
+
     void SetupPlayerStats(PlayerStats PS)
     {
         Hp = PS.Healthstat;
@@ -47,7 +47,7 @@ public class EnemyStats : MonoBehaviour
         this.gameObject.name = PS.HeroName;
         GetComponent<SpriteRenderer>().sprite = PS.Spriteimage;
     }
-    
+
     void Start()
     {
         if (Isplayer)
@@ -64,7 +64,8 @@ public class EnemyStats : MonoBehaviour
     }
     private void Update()
     {
-      HpSlider.value = CurrentHealth;
+        HpSlider.value = CurrentHealth;
+       
     }
 
     public void SetAttacksForPlayers(string WantedAttack)
@@ -79,8 +80,10 @@ public class EnemyStats : MonoBehaviour
     }
     private void OnDisable()
     {
-        if (Isplayer) {
-            print(PlayerStats.CurrentHealth);
+
+        if (Isplayer)
+        {
+            print($"{CurrentHealth} is {this.gameObject.name} health");
             PlayerStats.CurrentHealth = CurrentHealth;
         }
     }

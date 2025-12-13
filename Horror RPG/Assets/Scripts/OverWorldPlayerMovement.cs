@@ -45,7 +45,7 @@ public class OverWorldPlayerMovement : MonoBehaviour
         transform.position += MovementAmount * Speed * Time.deltaTime;
         if (MovementAmount.x != 0)
         {
-            int RandomNum = Random.RandomRange(1, 5);
+            int RandomNum = Random.RandomRange(1, 100);
             if (RandomNum == 1)
             {
                 SceneManager.LoadScene(0);

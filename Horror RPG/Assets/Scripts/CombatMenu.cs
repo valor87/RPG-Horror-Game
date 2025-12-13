@@ -5,8 +5,6 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static Unity.Burst.Intrinsics.X86.Avx;
-using static UnityEditor.Rendering.CameraUI;
 public class CombatMenu : MonoBehaviour
 {
     [Header("Lists of Objects in the combat scene")]
@@ -133,7 +131,7 @@ public class CombatMenu : MonoBehaviour
         try
         { UiSelectionKnife.transform.position = CurrentMenu[posinlist].transform.position - knifeoffset; }
         catch (ArgumentOutOfRangeException ex) { posinlist = 0; }
-        
+
     }
     void SelectTarget(GameObject Attacker)
     {
@@ -260,7 +258,6 @@ public class CombatMenu : MonoBehaviour
     public void CalculateDamage(GameObject Target, float AttackerDamage)
     {
         float playerDamage = AttackerDamage;
-        //StartCoroutine(DealDamageSlowly(Target, playerDamage));
     }
 
     bool CheckIfEnemiesAreDead(List<GameObject> Enemies)
@@ -286,8 +283,8 @@ public class CombatMenu : MonoBehaviour
             bool needBreak = false;
             float incomingdamage = Attacker.GetComponent<EnemyStats>().Attack;
             float damage = incomingdamage;
-            
-            
+            float EnemyHp = RecevingDamage.GetComponent<EnemyStats>().CurrentHealth;
+
             CanSelectActions = false;
             Vector3 AttackingPlacement = Vector3.zero;
 
@@ -309,9 +306,13 @@ public class CombatMenu : MonoBehaviour
                     break;
                 }
                 float decreaseHealth = 0.1f;
-
+                EnemyHp = RecevingDamage.GetComponent<EnemyStats>().CurrentHealth;
                 damage -= decreaseHealth;
                 RecevingDamage.GetComponent<EnemyStats>().CurrentHealth -= decreaseHealth;
+                if (EnemyHp < 0)
+                {
+                    break;
+                }
                 yield return new WaitForSeconds(.01f);
             }
             if (needBreak)
@@ -319,35 +320,42 @@ public class CombatMenu : MonoBehaviour
                 Attacker.transform.position -= AttackingPlacement;
                 continue;
             }
-            float EnemyHp = RecevingDamage.GetComponent<EnemyStats>().CurrentHealth;
-            if (RecevingDamage != null)
+            print(RecevingDamage.name);
+
+
+            EnemyHp = RecevingDamage.GetComponent<EnemyStats>().CurrentHealth;
+
+            if (EnemyHp <= 0)
             {
-                if (EnemyHp <= 0)
+
+                yield return new WaitForSeconds(1);
+                if (RecevingDamage == null)
                 {
-                    yield return new WaitForSeconds(1);
-                    if (Attacker.tag == "Enemy")
-                    {
-                        GameObject UiStat = HeroStatsUi[HerosInScene.IndexOf(RecevingDamage)];
-                        HeroStatsUi.Remove(UiStat);
-                        HerosInScene.Remove(RecevingDamage);
+                    continue;
+                }
+                if (Attacker.tag == "Enemy")
+                {
+                    GameObject UiStat = HeroStatsUi[HerosInScene.IndexOf(RecevingDamage)];
+                    HeroStatsUi.Remove(UiStat);
+                    HerosInScene.Remove(RecevingDamage);
 
-                        inichative.Remove(RecevingDamage);
-                        Destroy(UiStat);
-                        Destroy(RecevingDamage);
-                    }
-                    else
-                    {
-                        GameObject UiStat = EnemyStatsUi[EnemiesInScene.IndexOf(RecevingDamage)];
-                        EnemyStatsUi.Remove(UiStat);
-                        EnemiesInScene.Remove(RecevingDamage);
-                        HerosInScene.Remove(RecevingDamage);
+                    inichative.Remove(RecevingDamage);
+                    Destroy(UiStat);
+                    Destroy(RecevingDamage);
+                }
+                else
+                {
+                    GameObject UiStat = EnemyStatsUi[EnemiesInScene.IndexOf(RecevingDamage)];
+                    EnemyStatsUi.Remove(UiStat);
+                    EnemiesInScene.Remove(RecevingDamage);
+                    HerosInScene.Remove(RecevingDamage);
 
-                        inichative.Remove(RecevingDamage);
-                        Destroy(UiStat);
-                        Destroy(RecevingDamage);
-                    }
+                    inichative.Remove(RecevingDamage);
+                    Destroy(UiStat);
+                    Destroy(RecevingDamage);
                 }
             }
+
             // send the attacker back
             Attacker.transform.position -= AttackingPlacement;
         }

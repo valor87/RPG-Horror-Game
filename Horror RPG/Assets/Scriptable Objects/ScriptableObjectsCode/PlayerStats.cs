@@ -21,6 +21,6 @@ public class PlayerStats : ScriptableObject
     public Sprite Spriteimage;
     private void OnEnable()
     {
-        CurrentHealth = Healthstat;
+        //CurrentHealth = Healthstat;
     }
 }
