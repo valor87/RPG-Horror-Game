@@ -330,7 +330,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a93a19e97e2807499ae9452d59fbb74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: 0
+  playerPos: {x: 0, y: 0}
+  PlayerGold: 0
+  SceneNum: 0
+  PlayerValues: {fileID: 11400000, guid: 40c01c1c225217e40b0ff5680192c852, type: 2}
+  MovementSpeed: 2
 --- !u!212 &1341890902
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class EnemyStats : MonoBehaviour
     [Header("Setting Stats")]
     public PlayerStats PlayerStats;
     public float Hp = 5;
+    public float CurrentHealth;
     public float Attack = 2;
     [SerializeField] float Defense = 2;
     public float speedStat = 2;
@@ -24,7 +25,7 @@ public class EnemyStats : MonoBehaviour
     public GameObject TargetEnemy;
     public List<CombatAttackActions> CAA;
     public string AttackAction;
-
+   
     public List<GameObject> SetButtonActions(List<GameObject> HerosAttacks, List<string> ActionNames)
     {
         for (int i = 0; i < 3; i++)
@@ -39,36 +40,48 @@ public class EnemyStats : MonoBehaviour
     void SetupPlayerStats(PlayerStats PS)
     {
         Hp = PS.Healthstat;
+        CurrentHealth = PS.CurrentHealth;
         Attack = PS.Attackstat;
         Defense = PS.Defensestat;
         speedStat = PS.Speedstat;
         this.gameObject.name = PS.HeroName;
         GetComponent<SpriteRenderer>().sprite = PS.Spriteimage;
     }
+    
     void Start()
     {
         if (Isplayer)
         {
             SetupPlayerStats(PlayerStats);
         }
+        else
+        {
+            CurrentHealth = Hp;
+        }
+
         Hp = Mathf.Clamp(Hp, 0, Hp);
         HpSlider.maxValue = Hp;
     }
     private void Update()
     {
-        HpSlider.value = Hp;
+      HpSlider.value = CurrentHealth;
     }
-  
+
     public void SetAttacksForPlayers(string WantedAttack)
     {
         foreach (CombatAttackActions _var in CAA)
         {
             if (_var.ActionName == WantedAttack)
             {
-                print($"Setting player action looking for {WantedAttack}");
                 Attack = Attack + _var.Damage;
-                print($"Attack set to {Attack}");
             }
+        }
+    }
+    private void OnDisable()
+    {
+        if (Isplayer) {
+            print(PlayerStats.CurrentHealth);
+            PlayerStats.CurrentHealth = CurrentHealth;
         }
     }
 }

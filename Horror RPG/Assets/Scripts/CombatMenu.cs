@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static Unity.Burst.Intrinsics.X86.Avx;
 using static UnityEditor.Rendering.CameraUI;
@@ -189,7 +190,7 @@ public class CombatMenu : MonoBehaviour
     {
         if (CheckIfEnemiesAreDead(EnemiesInScene))
         {
-            print("you win");
+            SceneManager.LoadScene(1);
         }
 
         UiSelectionKnife.GetComponent<Animator>().speed = 1;
@@ -310,7 +311,7 @@ public class CombatMenu : MonoBehaviour
                 float decreaseHealth = 0.1f;
 
                 damage -= decreaseHealth;
-                RecevingDamage.GetComponent<EnemyStats>().Hp -= decreaseHealth;
+                RecevingDamage.GetComponent<EnemyStats>().CurrentHealth -= decreaseHealth;
                 yield return new WaitForSeconds(.01f);
             }
             if (needBreak)
@@ -318,8 +319,7 @@ public class CombatMenu : MonoBehaviour
                 Attacker.transform.position -= AttackingPlacement;
                 continue;
             }
-            float EnemyHp = RecevingDamage.GetComponent<EnemyStats>().Hp;
-           
+            float EnemyHp = RecevingDamage.GetComponent<EnemyStats>().CurrentHealth;
             if (RecevingDamage != null)
             {
                 if (EnemyHp <= 0)
@@ -345,8 +345,6 @@ public class CombatMenu : MonoBehaviour
                         inichative.Remove(RecevingDamage);
                         Destroy(UiStat);
                         Destroy(RecevingDamage);
-
-
                     }
                 }
             }
@@ -359,7 +357,7 @@ public class CombatMenu : MonoBehaviour
 
         if (CheckIfEnemiesAreDead(EnemiesInScene))
         {
-            print("you win");
+            SceneManager.LoadScene(1);
         }
     }
     private void EnemyPickActionOptions(List<GameObject> Enemies, List<GameObject> Targets)

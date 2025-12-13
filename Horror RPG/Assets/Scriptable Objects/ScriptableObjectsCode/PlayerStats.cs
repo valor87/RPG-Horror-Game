@@ -9,6 +9,8 @@ public class PlayerStats : ScriptableObject
     public string HeroName = "";
     [Tooltip("Health Stat")]
     public float Healthstat = 5;
+    [Tooltip("Current Health Stat")]
+    public float CurrentHealth = 5;
     [Tooltip("Attack Stat")]
     public float Attackstat = 5;
     [Tooltip("Defense Stat")]
@@ -17,5 +19,8 @@ public class PlayerStats : ScriptableObject
     public float Speedstat = 5;
     [Tooltip("Sprite")]
     public Sprite Spriteimage;
-
+    private void OnEnable()
+    {
+        CurrentHealth = Healthstat;
+    }
 }
