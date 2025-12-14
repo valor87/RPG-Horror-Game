@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,10 +6,12 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 public class CombatMenu : MonoBehaviour
 {
     [Header("Lists of Objects in the combat scene")]
     [Tooltip("Parent that holds children of all enimies in the scene")]
+    
     public GameObject EnemyParent;
     [Tooltip("Parent that holds children of all heros characters in the scene")]
     public GameObject HerosCharactersParent;
@@ -28,6 +31,7 @@ public class CombatMenu : MonoBehaviour
     List<List<GameObject>> MenuOptions = new List<List<GameObject>>();
 
     [Header("For Debuging")]
+    public GameObject enemyencounterlist;
     public List<GameObject> CurrentMenu;
     public List<GameObject> EnemyStatsUi;
     public List<GameObject> HeroStatsUi;
@@ -50,7 +54,23 @@ public class CombatMenu : MonoBehaviour
     bool playerselectingActions;
     // Setup
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private void setUpEnemyFromEncounterList()
+    {
+        /* Change script to instanicate a prefab then
+         * then take that and change it to the wanted enemy
+         * by setting the importabt values with 
+         * the scriptable objects
+         */
+        enemyencounterlist = GameObject.Find("EncounterManager");
+        List<EnemyObjects> Encounters = enemyencounterlist.GetComponent<EncounterManager>().PotencialEnemy;
+        int AmountofEnemies = UnityEngine.Random.RandomRange(0, Encounters.Count);
+        for (int i = 0; i< AmountofEnemies; i++)
+        {
+            int RandomEnemy = UnityEngine.Random.RandomRange(1, Encounters.Count);
+            EnemiesInScene[i].GetComponent<EnemyStats>().SetupEnemyStats(Encounters[RandomEnemy]);
+        }
 
+    }
     private void Awake()
     {
         System.Environment.GetCommandLineArgs();
@@ -58,6 +78,8 @@ public class CombatMenu : MonoBehaviour
         SetupLists(CombatActionsParent, CombatActions);
         SetupLists(AttackActionsParent, AttackActions);
         SetupLists(HerosCharactersParent, HerosInScene);
+
+        setUpEnemyFromEncounterList();
 
         // adding all lists to a main list
         MenuOptions.Add(CombatActions);

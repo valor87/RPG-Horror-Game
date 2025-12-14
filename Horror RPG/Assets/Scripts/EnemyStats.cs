@@ -47,7 +47,15 @@ public class EnemyStats : MonoBehaviour
         this.gameObject.name = PS.HeroName;
         GetComponent<SpriteRenderer>().sprite = PS.Spriteimage;
     }
-
+    public void SetupEnemyStats(EnemyObjects EO)
+    {
+        Hp = EO.Healthstat;
+        Attack = EO.Attackstat;
+        Defense = EO.Defensestat;
+        speedStat = EO.Speedstat;
+        this.gameObject.name = EO.EnemyName;
+        GetComponent<SpriteRenderer>().sprite = EO.Spriteimage;
+    }
     void Start()
     {
         if (Isplayer)

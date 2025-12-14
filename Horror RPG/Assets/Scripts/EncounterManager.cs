@@ -1,9 +1,9 @@
 using NUnit.Framework;
 using UnityEngine;
-
+using System.Collections.Generic;
 public class EncounterManager : MonoBehaviour
 {
-    List<>
+    public List<EnemyObjects> PotencialEnemy = new List<EnemyObjects>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

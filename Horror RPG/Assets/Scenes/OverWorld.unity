@@ -163,6 +163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 793c23a6da2661d459f8e6815dbc2251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PotencialEnemy:
+  - {fileID: 11400000, guid: 0cdf675e6eea0c14e884dd83444aa0ed, type: 2}
+  - {fileID: 11400000, guid: 4d1a04f8f23be8a4c990990e484403ce, type: 2}
+  - {fileID: 11400000, guid: 64a6cdf9fecc99a4a95311e345e38de4, type: 2}
 --- !u!1 &1234526044
 GameObject:
   m_ObjectHideFlags: 0
