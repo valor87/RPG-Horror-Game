@@ -2,7 +2,7 @@ using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -23,8 +23,11 @@ public class CombatMenu : MonoBehaviour
     public GameObject UiCreatureParents;
     [Tooltip("Parent that holds children of all the Hero Ui health sliders")]
     public GameObject UiHeroParents;
+    [Header("PreFab of the enemy to be changed by script")]
+    public GameObject EnemyPreFab;
 
     List<GameObject> EnemiesInScene = new List<GameObject>();
+    [Space(10)]
     public List<GameObject> HerosInScene = new List<GameObject>();
     List<GameObject> CombatActions = new List<GameObject>();
     List<GameObject> AttackActions = new List<GameObject>();
@@ -63,23 +66,27 @@ public class CombatMenu : MonoBehaviour
          */
         enemyencounterlist = GameObject.Find("EncounterManager");
         List<EnemyObjects> Encounters = enemyencounterlist.GetComponent<EncounterManager>().PotencialEnemy;
-        int AmountofEnemies = UnityEngine.Random.RandomRange(0, Encounters.Count);
-        for (int i = 0; i< AmountofEnemies; i++)
+        int AmountofEnemies = UnityEngine.Random.RandomRange(1, Encounters.Count + 1);
+        for (int i = 0; i < AmountofEnemies; i++)
         {
-            int RandomEnemy = UnityEngine.Random.RandomRange(1, Encounters.Count);
-            EnemiesInScene[i].GetComponent<EnemyStats>().SetupEnemyStats(Encounters[RandomEnemy]);
+            Vector2 enemypos = new Vector2(7.3f, 4);
+            enemypos.y = enemypos.y - (2 * i);
+            int RandomEnemy = UnityEngine.Random.RandomRange(0, Encounters.Count);
+            GameObject CurrentEnemy = Instantiate(EnemyPreFab, enemypos, Quaternion.identity,EnemyParent.transform);
+            CurrentEnemy.GetComponent<EnemyStats>().SetupEnemyStats(Encounters[RandomEnemy]);
+            print($"wanting {AmountofEnemies} Running {i} times");
         }
 
     }
     private void Awake()
     {
-        System.Environment.GetCommandLineArgs();
+        setUpEnemyFromEncounterList();
+
         SetupLists(EnemyParent, EnemiesInScene);
         SetupLists(CombatActionsParent, CombatActions);
         SetupLists(AttackActionsParent, AttackActions);
         SetupLists(HerosCharactersParent, HerosInScene);
 
-        setUpEnemyFromEncounterList();
 
         // adding all lists to a main list
         MenuOptions.Add(CombatActions);
