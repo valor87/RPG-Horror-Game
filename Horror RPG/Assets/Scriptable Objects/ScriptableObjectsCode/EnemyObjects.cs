@@ -14,4 +14,7 @@ public class EnemyObjects : ScriptableObject
     public float Speedstat = 5;
     [Tooltip("Sprite")]
     public Sprite Spriteimage;
+    [Space(10)]
+    [Tooltip("Rewarded for killing the enemy")]
+    public int GoldToBeRewarded;
 }

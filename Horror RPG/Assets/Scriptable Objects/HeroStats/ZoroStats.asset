@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeroName: Zoro
   Healthstat: 10
+  CurrentHealth: 10
   Attackstat: 5
   Defensestat: 3
   Speedstat: 2

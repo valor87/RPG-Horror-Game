@@ -13,6 +13,7 @@ public class EnemyStats : MonoBehaviour
     public float speedStat = 2;
     public Slider HpSlider;
 
+    // for players only
     [Space(10)]
     [Header("For Player Characters")]
     [HideInInspector]
@@ -20,6 +21,9 @@ public class EnemyStats : MonoBehaviour
     [Tooltip("Is the script on a playable character // runs player actions")]
     public bool Isplayer;
 
+    //for enemys only
+    public int GoldForPlayer;
+    // for debuging
     [Space(10)]
     [Header("for debuging")]
     public GameObject TargetEnemy;
@@ -53,6 +57,7 @@ public class EnemyStats : MonoBehaviour
         Attack = EO.Attackstat;
         Defense = EO.Defensestat;
         speedStat = EO.Speedstat;
+        GoldForPlayer = EO.GoldToBeRewarded;
         this.gameObject.name = EO.EnemyName;
         GetComponent<SpriteRenderer>().sprite = EO.Spriteimage;
     }

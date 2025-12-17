@@ -18,3 +18,4 @@ MonoBehaviour:
   Defensestat: 3
   Speedstat: 4
   Spriteimage: {fileID: -6532132534115259834, guid: c1b93b9094564cd44b1b024f5ce5c77a, type: 3}
+  GoldToBeRewarded: 1

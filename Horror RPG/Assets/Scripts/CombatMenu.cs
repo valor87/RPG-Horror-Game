@@ -25,7 +25,8 @@ public class CombatMenu : MonoBehaviour
     public GameObject UiHeroParents;
     [Header("PreFab of the enemy to be changed by script")]
     public GameObject EnemyPreFab;
-
+    [Header("For changing players values and gold")]
+    public PlayerValues PV;
     List<GameObject> EnemiesInScene = new List<GameObject>();
     [Space(10)]
     public List<GameObject> HerosInScene = new List<GameObject>();
@@ -51,6 +52,7 @@ public class CombatMenu : MonoBehaviour
     GameObject Target;
     bool PlayerSelectingActions;
     float DamageFromHero;
+    int GoldForThePlayer;
     // for menu navagation
     bool PickTargets;
     bool CanSelectActions = true;
@@ -59,16 +61,12 @@ public class CombatMenu : MonoBehaviour
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private void setUpEnemyFromEncounterList()
     {
-        /* Change script to instanicate a prefab then
-         * then take that and change it to the wanted enemy
-         * by setting the importabt values with 
-         * the scriptable objects
-         */
         enemyencounterlist = GameObject.Find("EncounterManager");
         List<EnemyObjects> Encounters = enemyencounterlist.GetComponent<EncounterManager>().PotencialEnemy;
         int AmountofEnemies = UnityEngine.Random.RandomRange(1, Encounters.Count + 1);
         for (int i = 0; i < AmountofEnemies; i++)
         {
+            UiCreatureParents.transform.GetChild(i).gameObject.SetActive(true);
             Vector2 enemypos = new Vector2(7.3f, 4);
             enemypos.y = enemypos.y - (2 * i);
             int RandomEnemy = UnityEngine.Random.RandomRange(0, Encounters.Count);
@@ -82,6 +80,7 @@ public class CombatMenu : MonoBehaviour
     {
         setUpEnemyFromEncounterList();
 
+        // setting lists based on the parents
         SetupLists(EnemyParent, EnemiesInScene);
         SetupLists(CombatActionsParent, CombatActions);
         SetupLists(AttackActionsParent, AttackActions);
@@ -374,6 +373,7 @@ public class CombatMenu : MonoBehaviour
                 }
                 else
                 {
+                    GoldForThePlayer += RecevingDamage.GetComponent<EnemyStats>().GoldForPlayer;
                     GameObject UiStat = EnemyStatsUi[EnemiesInScene.IndexOf(RecevingDamage)];
                     EnemyStatsUi.Remove(UiStat);
                     EnemiesInScene.Remove(RecevingDamage);
@@ -448,5 +448,9 @@ public class CombatMenu : MonoBehaviour
         PlayerSelectingActions = false;
         EnemyPickActionOptions(EnemiesInScene, HerosInScene);
         RunAttackSequence(inichative);
+    }
+    private void OnDisable()
+    {
+        PV.Gold += GoldForThePlayer;
     }
 }

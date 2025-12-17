@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dab96b039c094149a4a7b35e24ea40b, type: 3}
   m_Name: PlayerValues
   m_EditorClassIdentifier: 
-  Gold: 10
+  Gold: 0
   PerviousSceneNum: 1
-  PerviousScenePos: {x: 1.5558255, y: -0.034621432}
+  PerviousScenePos: {x: 6.886654, y: -0.034621432}
