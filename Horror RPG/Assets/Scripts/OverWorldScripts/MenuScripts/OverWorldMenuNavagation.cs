@@ -10,7 +10,9 @@ public class OverWorldMenuNavagation : MonoBehaviour
     /// </summary>
     public OverWorldPlayerMovement InScenePlayerScript;
     [Header("Getting Parents to all interactable objects")]
+    public GameObject FirstMenuParent;
     public GameObject ButtonsParent;
+    public GameObject HeroStatsParent;
     // Buttons list
     public List<GameObject> MainButtons = new List<GameObject>();
 
@@ -27,7 +29,7 @@ public class OverWorldMenuNavagation : MonoBehaviour
     Vector3 knifeoffset = new Vector3(175, 0, 0); // offset for the knife in UI
     void Start()
     {
-        MenuChildren = SetUpListFromParent(this.gameObject);
+        MenuChildren = SetUpListFromParent(FirstMenuParent.gameObject);
         MainButtons = SetUpListFromParent(ButtonsParent);
         CurrentMenu = MainButtons;
     }
@@ -37,6 +39,7 @@ public class OverWorldMenuNavagation : MonoBehaviour
     {
         SelectionMovement();
         SetPlayerState(!ShowMenu);
+        SelectButton();
     }
     void SelectionMovement()
     {
@@ -77,8 +80,6 @@ public class OverWorldMenuNavagation : MonoBehaviour
         {
             CurrentMenu[posinlist].GetComponent<Button>().onClick.Invoke();
         }
-
-        
 
     }
     void SetPlayerState(bool State)
