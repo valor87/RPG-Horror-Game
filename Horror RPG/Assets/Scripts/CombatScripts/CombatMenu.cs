@@ -21,6 +21,8 @@ public class CombatMenu : MonoBehaviour
     public GameObject UiCreatureParents;
     [Tooltip("Parent that holds children of all the Hero Ui health sliders")]
     public GameObject UiHeroParents;
+    [Header("PreFab of the player to be changed by script")]
+    public GameObject PlayerPreFab;
     [Header("PreFab of the enemy to be changed by script")]
     public GameObject EnemyPreFab;
     [Header("For changing players values and gold")]
@@ -39,7 +41,7 @@ public class CombatMenu : MonoBehaviour
     public List<GameObject> HeroStatsUi;
     public List<GameObject> inichative = new List<GameObject>();
     public int posinlist = 0;
-
+    GameObject GameManager;
     [Space(5)]
     [Header("For selecting menu options")]
     public GameObject UiSelectionKnife;
@@ -59,7 +61,7 @@ public class CombatMenu : MonoBehaviour
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private void setUpEnemyFromEncounterList()
     {
-        enemyencounterlist = GameObject.Find("EncounterManager");
+        enemyencounterlist = GameObject.Find("DontDestroyGameManager");
         List<EnemyObjects> Encounters = enemyencounterlist.GetComponent<EncounterManager>().PotencialEnemy;
         int AmountofEnemies = UnityEngine.Random.RandomRange(1, Encounters.Count + 1);
         for (int i = 0; i < AmountofEnemies; i++)
@@ -74,8 +76,25 @@ public class CombatMenu : MonoBehaviour
         }
 
     }
+    private void setUpPlayersFromEncounterList()
+    {
+        enemyencounterlist = GameObject.Find("DontDestroyGameManager");
+        List<PlayerStats> Players = enemyencounterlist.GetComponent<CurrentHerosInParty>().HerosInScene;
+        int AmountofEnemies = enemyencounterlist.GetComponent<CurrentHerosInParty>().HerosInScene.Count;
+        for (int i = 0; i < AmountofEnemies; i++)
+        {
+            UiHeroParents.transform.GetChild(i).gameObject.SetActive(true);
+            Vector2 enemypos = new Vector2(-7.3f, 4);
+            enemypos.y = enemypos.y - (2 * i);
+            GameObject CurrentEnemy = Instantiate(PlayerPreFab, enemypos, Quaternion.identity, HerosCharactersParent.transform);
+            CurrentEnemy.GetComponent<EnemyStats>().PlayerStats = enemyencounterlist.GetComponent<CurrentHerosInParty>().HerosInScene[i];
+            print($"wanting {AmountofEnemies} Running {i} times");
+        }
+
+    }
     private void Awake()
     {
+        setUpPlayersFromEncounterList();
         setUpEnemyFromEncounterList();
 
         // setting lists based on the parents
