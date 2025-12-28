@@ -1823,6 +1823,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3808108783536819161, guid: 5bf4fed78ba4e1b499cc8a89c69d4fc8, type: 3}
+      propertyPath: ExpSlider
+      value: 
+      objectReference: {fileID: 1239558592}
+    - target: {fileID: 3808108783536819161, guid: 5bf4fed78ba4e1b499cc8a89c69d4fc8, type: 3}
       propertyPath: HeroStats
       value: 
       objectReference: {fileID: 11400000, guid: 7368eaa2bd6d86b4c8dc0ec35bfa523f, type: 2}
@@ -1843,6 +1847,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bf4fed78ba4e1b499cc8a89c69d4fc8, type: 3}
+--- !u!114 &1239558592 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8103784575441828763, guid: 5bf4fed78ba4e1b499cc8a89c69d4fc8, type: 3}
+  m_PrefabInstance: {fileID: 1239558591}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1243815605
 GameObject:
   m_ObjectHideFlags: 0
@@ -2309,6 +2324,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3808108783536819161, guid: 5bf4fed78ba4e1b499cc8a89c69d4fc8, type: 3}
+      propertyPath: ExpSlider
+      value: 
+      objectReference: {fileID: 1730175333}
+    - target: {fileID: 3808108783536819161, guid: 5bf4fed78ba4e1b499cc8a89c69d4fc8, type: 3}
       propertyPath: HeroStats
       value: 
       objectReference: {fileID: 11400000, guid: 7368eaa2bd6d86b4c8dc0ec35bfa523f, type: 2}
@@ -2329,6 +2348,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bf4fed78ba4e1b499cc8a89c69d4fc8, type: 3}
+--- !u!114 &1730175333 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8103784575441828763, guid: 5bf4fed78ba4e1b499cc8a89c69d4fc8, type: 3}
+  m_PrefabInstance: {fileID: 1730175332}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1736619788
 GameObject:
   m_ObjectHideFlags: 0
@@ -2538,6 +2568,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3808108783536819161, guid: 5bf4fed78ba4e1b499cc8a89c69d4fc8, type: 3}
+      propertyPath: ExpSlider
+      value: 
+      objectReference: {fileID: 2028197572}
+    - target: {fileID: 3808108783536819161, guid: 5bf4fed78ba4e1b499cc8a89c69d4fc8, type: 3}
       propertyPath: HeroStats
       value: 
       objectReference: {fileID: 11400000, guid: 7368eaa2bd6d86b4c8dc0ec35bfa523f, type: 2}
@@ -2558,6 +2592,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bf4fed78ba4e1b499cc8a89c69d4fc8, type: 3}
+--- !u!114 &2028197572 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8103784575441828763, guid: 5bf4fed78ba4e1b499cc8a89c69d4fc8, type: 3}
+  m_PrefabInstance: {fileID: 2028197571}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2139758502 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4319047084843257718, guid: 5bf4fed78ba4e1b499cc8a89c69d4fc8, type: 3}

@@ -53,7 +53,9 @@ public class OverWorldMenuNavagation : MonoBehaviour
                 ShowMenu = true;
                 return;
             }
+            SetChildrenActive(SetUpListFromParent(this.gameObject), false);
             SetChildrenActive(MenuChildren, false);
+            FirstMenuParent.SetActive(true);
             ShowMenu = false;
         }
         // menu movement

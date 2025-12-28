@@ -12,6 +12,7 @@ public class ShowingHeroStats : MonoBehaviour
     public TextMeshProUGUI SpeedValue;
     public TextMeshProUGUI DefenseValue;
     public Slider HpField;
+    public Slider ExpSlider;
     public Image PlayerImage;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,6 +23,7 @@ public class ShowingHeroStats : MonoBehaviour
         SpeedValue.text = HeroStats.Speedstat.ToString();
         HpField.maxValue = HeroStats.Healthstat;
         HpField.value = HeroStats.CurrentHealth;
+        ExpSlider.value = HeroStats.CurrentEXP;
         PlayerImage.sprite = HeroStats.Spriteimage;
     }
 
@@ -29,5 +31,6 @@ public class ShowingHeroStats : MonoBehaviour
     void Update()
     {
         HpField.value = HeroStats.CurrentHealth;
+        ExpSlider.value = HeroStats.CurrentEXP;
     }
 }

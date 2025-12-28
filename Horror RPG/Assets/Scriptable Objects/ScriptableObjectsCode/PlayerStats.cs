@@ -18,10 +18,9 @@ public class PlayerStats : ScriptableObject
     public float Defensestat = 5;
     [Tooltip("Speed Stat")]
     public float Speedstat = 5;
+    [Tooltip("To mesure the players current exp")]
+    public float CurrentEXP = 0;
     [Tooltip("Sprite")]
     public Sprite Spriteimage;
-    private void OnEnable()
-    {
-        //CurrentHealth = Healthstat;
-    }
+   
 }

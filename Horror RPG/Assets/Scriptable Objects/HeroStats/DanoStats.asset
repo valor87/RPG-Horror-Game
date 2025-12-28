@@ -18,4 +18,5 @@ MonoBehaviour:
   Attackstat: 6
   Defensestat: 5
   Speedstat: 3
+  CurrentEXP: 0
   Spriteimage: {fileID: 21300000, guid: a268d522881168b49be5844bef710866, type: 3}
