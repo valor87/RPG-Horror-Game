@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2601016558594309825}
   - component: {fileID: 2867206009382113493}
   m_Layer: 0
-  m_Name: CombayPlayer - PreFab
+  m_Name: CombatPlayer - PreFab
   m_TagString: Hero
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

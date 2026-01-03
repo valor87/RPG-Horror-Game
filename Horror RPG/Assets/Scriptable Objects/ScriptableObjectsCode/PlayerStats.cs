@@ -22,5 +22,12 @@ public class PlayerStats : ScriptableObject
     public float CurrentEXP = 0;
     [Tooltip("Sprite")]
     public Sprite Spriteimage;
-   
+
+    [Header("To be Changed during run time")]
+    public bool WantsToRun;
+
+    private void OnEnable()
+    {
+        WantsToRun = false;
+    }
 }

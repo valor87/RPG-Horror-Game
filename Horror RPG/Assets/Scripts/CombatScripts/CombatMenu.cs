@@ -47,7 +47,7 @@ public class CombatMenu : MonoBehaviour
     public GameObject UiSelectionKnife;
     public GameObject KnifeInGameScene;
     Vector3 knifeoffset = new Vector3(175, 0, 0); // offset for the knife in UI
-
+    bool PlayerRunAction;
     // Selecting Enemy
     GameObject Target;
     bool PlayerSelectingActions;
@@ -241,12 +241,22 @@ public class CombatMenu : MonoBehaviour
         PickTargets = false;
         posinlist = 0;
         CurrentMenu = MenuOptions[1];
+        // set menu to the first selection
         ChangeMenu(0);
     }
     public void ButtonAttack()
     {
         PickTargets = true;
+        // change the menu to the attack selection
         ChangeMenu(2);
+    }
+    public void ButtonRun()
+    {
+        /* Have the run button
+         * use up the action of that player
+         * and move onto the next hero
+         */
+        PlayerRunAction = true;
     }
     private void StoreActions(GameObject Attacker, GameObject Target, string AttackName)
     {
@@ -323,6 +333,7 @@ public class CombatMenu : MonoBehaviour
                 print("its dead");
                 continue;
             }
+           
             GameObject Attacker = _Inichative[i];
             GameObject RecevingDamage = _Inichative[i].GetComponent<EnemyStats>().TargetEnemy;
             bool needBreak = false;
@@ -332,6 +343,10 @@ public class CombatMenu : MonoBehaviour
 
             CanSelectActions = false;
             Vector3 AttackingPlacement = Vector3.zero;
+            if (Attacker.tag == "Hero")
+            {
+
+            }
 
             if (Attacker.tag == "Hero")
             {
@@ -365,8 +380,6 @@ public class CombatMenu : MonoBehaviour
                 Attacker.transform.position -= AttackingPlacement;
                 continue;
             }
-            print(RecevingDamage.name);
-
 
             EnemyHp = RecevingDamage.GetComponent<EnemyStats>().CurrentHealth;
 
@@ -442,6 +455,7 @@ public class CombatMenu : MonoBehaviour
 
             while (playerselectingActions)
             {
+                
                 SelectionMovement();
                 if (!PickTargets)
                 {
@@ -456,11 +470,25 @@ public class CombatMenu : MonoBehaviour
                     GameObject TargetToHit = Target;
                     StoreActions(Hero, TargetToHit, PlayerDesiredAction);
                 }
+                // have a condition for selecting the run action
 
+                if (PlayerRunAction)
+                {
+                    break;
+                }
                 yield return null;
             }
-            Hero.GetComponent<EnemyStats>().SetAttacksForPlayers(PlayerDesiredAction);
+            if (!PlayerRunAction)
+            {
+                Hero.GetComponent<EnemyStats>().SetAttacksForPlayers(PlayerDesiredAction);
+            }
+            else if (PlayerRunAction)
+            {
+                print("this hero wants to run");
+                Hero.GetComponent<EnemyStats>().PlayerStats.WantsToRun = true;
+            }
             Hero.transform.position += Vector3.left * 2;
+            PlayerRunAction = false;
         }
         PlayerSelectingActions = false;
         EnemyPickActionOptions(EnemiesInScene, HerosInScene);
