@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: f4e3cdd8e842024419ca4abd950e6f41
+guid: a862ade3e3bc2c544b590d798b8a9cd8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2816295329206371047
-    second: Test walk cycle_0
-  - first:
-      213: 4707239352181065202
-    second: Test walk cycle_1
-  - first:
-      213: -8978933650611451943
-    second: Test walk cycle_2
-  - first:
-      213: 7178013778437875057
-    second: Test walk cycle_3
-  - first:
-      213: -5961905797388019191
-    second: Test walk cycle_4
+      213: -638716398443655237
+    second: BackgroundAttackScene_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -58,12 +46,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -112,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Test walk cycle_0
+      name: BackgroundAttackScene_0
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 0
-        width: 11
-        height: 29
+        width: 480
+        height: 360
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,96 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 91dff08c1528ae8d0800000000000000
-      internalID: -2816295329206371047
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Test walk cycle_1
-      rect:
-        serializedVersion: 2
-        x: 18
-        y: 0
-        width: 12
-        height: 29
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2f50e733049735140800000000000000
-      internalID: 4707239352181065202
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Test walk cycle_2
-      rect:
-        serializedVersion: 2
-        x: 33
-        y: 0
-        width: 14
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9d7c08dca6b646380800000000000000
-      internalID: -8978933650611451943
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Test walk cycle_3
-      rect:
-        serializedVersion: 2
-        x: 50
-        y: 0
-        width: 12
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 17526a0308d6d9360800000000000000
-      internalID: 7178013778437875057
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Test walk cycle_4
-      rect:
-        serializedVersion: 2
-        x: 66
-        y: 0
-        width: 11
-        height: 29
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 90a585ac34e034da0800000000000000
-      internalID: -5961905797388019191
+      spriteID: bbf8c86d1d2d227f0800000000000000
+      internalID: -638716398443655237
       vertices: []
       indices: 
       edges: []
@@ -225,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -235,11 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Test walk cycle_0: -2816295329206371047
-      Test walk cycle_1: 4707239352181065202
-      Test walk cycle_2: -8978933650611451943
-      Test walk cycle_3: 7178013778437875057
-      Test walk cycle_4: -5961905797388019191
+      BackgroundAttackScene_0: -638716398443655237
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
