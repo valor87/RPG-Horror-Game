@@ -26,7 +26,7 @@ public class OverWorldMenuNavagation : MonoBehaviour
     [Space(5)]
     [Header("For selecting menu options")]
     public GameObject UiSelectionKnife;
-    Vector3 knifeoffset = new Vector3(175, 0, 0); // offset for the knife in UI
+    Vector3 knifeoffset = new Vector3(55, 0, 0); // offset for the knife in UI
     void Start()
     {
         MenuChildren = SetUpListFromParent(FirstMenuParent.gameObject);

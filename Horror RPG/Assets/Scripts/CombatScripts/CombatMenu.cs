@@ -46,7 +46,7 @@ public class CombatMenu : MonoBehaviour
     [Header("For selecting menu options")]
     public GameObject UiSelectionKnife;
     public GameObject KnifeInGameScene;
-    Vector3 knifeoffset = new Vector3(175, 0, 0); // offset for the knife in UI
+    Vector3 knifeoffset = new Vector3(55, 0, 0); // offset for the knife in UI
     bool PlayerRunAction;
     // Selecting Enemy
     GameObject Target;
@@ -67,7 +67,7 @@ public class CombatMenu : MonoBehaviour
         for (int i = 0; i < AmountofEnemies; i++)
         {
             UiCreatureParents.transform.GetChild(i).gameObject.SetActive(true);
-            Vector2 enemypos = new Vector2(7.3f, 4);
+            Vector2 enemypos = new Vector2(5.8f, 3.6f);
             enemypos.y = enemypos.y - (2 * i);
             int RandomEnemy = UnityEngine.Random.RandomRange(0, Encounters.Count);
             GameObject CurrentEnemy = Instantiate(EnemyPreFab, enemypos, Quaternion.identity,EnemyParent.transform);
@@ -84,7 +84,7 @@ public class CombatMenu : MonoBehaviour
         for (int i = 0; i < AmountofEnemies; i++)
         {
             UiHeroParents.transform.GetChild(i).gameObject.SetActive(true);
-            Vector2 enemypos = new Vector2(-7.3f, 4);
+            Vector2 enemypos = new Vector2(-5.8f, 4);
             enemypos.y = enemypos.y - (2 * i);
             GameObject CurrentEnemy = Instantiate(PlayerPreFab, enemypos, Quaternion.identity, HerosCharactersParent.transform);
             CurrentEnemy.GetComponent<EnemyStats>().PlayerStats = enemyencounterlist.GetComponent<CurrentHerosInParty>().HerosInScene[i];
@@ -349,11 +349,11 @@ public class CombatMenu : MonoBehaviour
             {
                 WantsToRun = Attacker.GetComponent<EnemyStats>().RunningAway;
                 print($"stellar running is {WantsToRun}");
-                AttackingPlacement += Vector3.right * 2;
+                AttackingPlacement += Vector3.right;
             }
             else
             {
-                AttackingPlacement += Vector3.left * 2;
+                AttackingPlacement += Vector3.left * 1.5f;
             }
             Attacker.transform.position += AttackingPlacement;
             if (Attacker.CompareTag("Hero") && WantsToRun)
@@ -454,7 +454,7 @@ public class CombatMenu : MonoBehaviour
             Hero.GetComponent<EnemyStats>().SetButtonActions(AttackActions, PlayerActionName);
             PlayerRunAction = false;
 
-            Hero.transform.position += Vector3.right * 2;
+            Hero.transform.position += Vector3.right * 1.5f;
             playerselectingActions = true;
 
             while (playerselectingActions)
