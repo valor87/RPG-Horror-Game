@@ -29,7 +29,7 @@ public class EnemyStats : MonoBehaviour
     public GameObject TargetEnemy;
     public List<CombatAttackActions> CAA;
     public string AttackAction;
-
+    public bool RunningAway;
     public List<GameObject> SetButtonActions(List<GameObject> HerosAttacks, List<string> ActionNames)
     {
         for (int i = 0; i < 3; i++)
@@ -78,7 +78,9 @@ public class EnemyStats : MonoBehaviour
     private void Update()
     {
         HpSlider.value = CurrentHealth;
-       
+        if (this.gameObject.CompareTag("Hero")) {
+            RunningAway = PlayerStats.WantsToRun;
+        }
     }
 
     public void SetAttacksForPlayers(string WantedAttack)

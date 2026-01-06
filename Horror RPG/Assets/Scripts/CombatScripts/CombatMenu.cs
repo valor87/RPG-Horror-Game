@@ -328,28 +328,27 @@ public class CombatMenu : MonoBehaviour
     {
         for (int i = 0; i < _Inichative.Count; i++)
         {
+            GameObject Attacker = _Inichative[i];
+            GameObject RecevingDamage = _Inichative[i].GetComponent<EnemyStats>().TargetEnemy;
+            bool needBreak = false;
+            bool WantsToRun = false;
+            float incomingdamage = Attacker.GetComponent<EnemyStats>().Attack;
+            float damage = incomingdamage;
+            float EnemyHp = RecevingDamage.GetComponent<EnemyStats>().CurrentHealth;
+
             if (_Inichative[i].GetComponent<EnemyStats>().TargetEnemy == null)
             {
                 print("its dead");
                 continue;
             }
-           
-            GameObject Attacker = _Inichative[i];
-            GameObject RecevingDamage = _Inichative[i].GetComponent<EnemyStats>().TargetEnemy;
-            bool needBreak = false;
-            float incomingdamage = Attacker.GetComponent<EnemyStats>().Attack;
-            float damage = incomingdamage;
-            float EnemyHp = RecevingDamage.GetComponent<EnemyStats>().CurrentHealth;
-
+            
             CanSelectActions = false;
             Vector3 AttackingPlacement = Vector3.zero;
-            if (Attacker.tag == "Hero")
-            {
 
-            }
-
-            if (Attacker.tag == "Hero")
+            if (Attacker.CompareTag("Hero"))
             {
+                WantsToRun = Attacker.GetComponent<EnemyStats>().RunningAway;
+                print($"stellar running is {WantsToRun}");
                 AttackingPlacement += Vector3.right * 2;
             }
             else
@@ -357,7 +356,11 @@ public class CombatMenu : MonoBehaviour
                 AttackingPlacement += Vector3.left * 2;
             }
             Attacker.transform.position += AttackingPlacement;
-
+            if (Attacker.CompareTag("Hero") && WantsToRun)
+            {
+                print("Trying to run");
+                SceneManager.LoadScene(1);
+            }
             while (0 < damage)
             {
                 if (RecevingDamage == null)
@@ -449,6 +452,7 @@ public class CombatMenu : MonoBehaviour
             string PlayerDesiredAction = "";
             List<string> PlayerActionName = new List<string>();
             Hero.GetComponent<EnemyStats>().SetButtonActions(AttackActions, PlayerActionName);
+            PlayerRunAction = false;
 
             Hero.transform.position += Vector3.right * 2;
             playerselectingActions = true;
@@ -474,6 +478,7 @@ public class CombatMenu : MonoBehaviour
 
                 if (PlayerRunAction)
                 {
+                    // set running as the heros action in store action function
                     break;
                 }
                 yield return null;
@@ -484,11 +489,9 @@ public class CombatMenu : MonoBehaviour
             }
             else if (PlayerRunAction)
             {
-                print("this hero wants to run");
                 Hero.GetComponent<EnemyStats>().PlayerStats.WantsToRun = true;
             }
             Hero.transform.position += Vector3.left * 2;
-            PlayerRunAction = false;
         }
         PlayerSelectingActions = false;
         EnemyPickActionOptions(EnemiesInScene, HerosInScene);
