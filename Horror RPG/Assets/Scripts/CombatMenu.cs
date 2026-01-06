@@ -280,13 +280,16 @@ public class CombatMenu : MonoBehaviour
                 print("its dead");
                 continue;
             }
+
             GameObject Attacker = _Inichative[i];
             GameObject RecevingDamage = _Inichative[i].GetComponent<EnemyStats>().TargetEnemy;
+            float RecevingDamageHp = RecevingDamage.GetComponent<EnemyStats>().Hp;
             bool needBreak = false;
             float incomingdamage = Attacker.GetComponent<EnemyStats>().Attack;
             float damage = incomingdamage;
-            
-            
+
+            print("Running for " + Attacker.name +" attacking "+ RecevingDamage.name + "");
+
             CanSelectActions = false;
             Vector3 AttackingPlacement = Vector3.zero;
 
@@ -305,6 +308,10 @@ public class CombatMenu : MonoBehaviour
                 if (RecevingDamage == null)
                 {
                     needBreak = true;
+                    break;
+                }
+                if (0 > RecevingDamageHp)
+                {
                     break;
                 }
                 float decreaseHealth = 0.1f;
