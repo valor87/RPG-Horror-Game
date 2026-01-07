@@ -334,20 +334,27 @@ public class CombatMenu : MonoBehaviour
     {
         for (int i = 0; i < _Inichative.Count; i++)
         {
+            bool WantsToRun = false;
             GameObject Attacker = _Inichative[i];
+            if (Attacker.CompareTag("Hero"))
+            {
+                WantsToRun = Attacker.GetComponent<EnemyStats>().RunningAway;
+            }
+            if (WantsToRun)
+            {
+                print("Trying to run");
+                SceneManager.LoadScene(1);
+                break;
+            }
+
             GameObject RecevingDamage = _Inichative[i].GetComponent<EnemyStats>().TargetEnemy;
             float RecevingDamageHp = RecevingDamage.GetComponent<EnemyStats>().Hp;
             bool needBreak = false;
-            bool WantsToRun = false;
             float incomingdamage = Attacker.GetComponent<EnemyStats>().Attack;
             float damage = incomingdamage;
             float EnemyHp = RecevingDamage.GetComponent<EnemyStats>().CurrentHealth;
             
-            if (Attacker.CompareTag("Hero") && WantsToRun)
-            {
-                print("Trying to run");
-                SceneManager.LoadScene(1);
-            }
+          
 
             if (_Inichative[i].GetComponent<EnemyStats>().TargetEnemy == null)
             {
