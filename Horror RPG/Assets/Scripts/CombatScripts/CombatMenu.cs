@@ -258,9 +258,15 @@ public class CombatMenu : MonoBehaviour
          */
         PlayerRunAction = true;
     }
-    private void StoreActions(GameObject Attacker, GameObject Target, string AttackName)
+    private void StoreActions(GameObject Attacker, GameObject Target, string AttackName, bool RunFromCombat, bool UseItem)
     {
         EnemyStats ES = Attacker.GetComponent<EnemyStats>();
+
+        if (RunFromCombat == true)
+        {
+            ES.TargetEnemy = null;
+            ES.RunningAway = true;
+        }
         ES.TargetEnemy = Target;
         ES.AttackAction = AttackName;
     }
@@ -336,6 +342,12 @@ public class CombatMenu : MonoBehaviour
             float incomingdamage = Attacker.GetComponent<EnemyStats>().Attack;
             float damage = incomingdamage;
             float EnemyHp = RecevingDamage.GetComponent<EnemyStats>().CurrentHealth;
+            
+            if (Attacker.CompareTag("Hero") && WantsToRun)
+            {
+                print("Trying to run");
+                SceneManager.LoadScene(1);
+            }
 
             if (_Inichative[i].GetComponent<EnemyStats>().TargetEnemy == null)
             {
@@ -348,8 +360,6 @@ public class CombatMenu : MonoBehaviour
 
             if (Attacker.CompareTag("Hero"))
             {
-                WantsToRun = Attacker.GetComponent<EnemyStats>().RunningAway;
-                print($"stellar running is {WantsToRun}");
                 AttackingPlacement += Vector3.right;
             }
             else
@@ -357,11 +367,7 @@ public class CombatMenu : MonoBehaviour
                 AttackingPlacement += Vector3.left * 1.5f;
             }
             Attacker.transform.position += AttackingPlacement;
-            if (Attacker.CompareTag("Hero") && WantsToRun)
-            {
-                print("Trying to run");
-                SceneManager.LoadScene(1);
-            }
+           
             while (0 < damage)
             {
                 if (RecevingDamage == null)
@@ -477,13 +483,13 @@ public class CombatMenu : MonoBehaviour
                     UiSelectionKnife.GetComponent<Animator>().speed = 0;
                     SelectTarget(Hero);
                     GameObject TargetToHit = Target;
-                    StoreActions(Hero, TargetToHit, PlayerDesiredAction);
+                    StoreActions(Hero, TargetToHit, PlayerDesiredAction, false, false);
                 }
                 // have a condition for selecting the run action
 
                 if (PlayerRunAction)
                 {
-                    // set running as the heros action in store action function
+                    StoreActions(Hero, null, null, true, false);
                     break;
                 }
                 yield return null;

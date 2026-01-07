@@ -15,7 +15,7 @@ public class OverWorldPlayerMovement : MonoBehaviour
     [Range(0,20)]
     [SerializeField] float MovementSpeed;
     Vector3 Movement;
-    public int EncounterRandomNum;
+    public float EncounterRandomNum;
     //Animation
     SpriteRenderer PlayerSprite;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -28,7 +28,7 @@ public class OverWorldPlayerMovement : MonoBehaviour
     }
     void Start()
     {
-        EncounterRandomNum = Random.RandomRange(800, 1000);
+        EncounterRandomNum = Random.RandomRange(5, 10);
 
         PlayerSprite = GetComponent<SpriteRenderer>();
     }
@@ -47,8 +47,8 @@ public class OverWorldPlayerMovement : MonoBehaviour
         transform.position += MovementAmount * Speed * Time.deltaTime;
         if (MovementAmount.x != 0)
         {
-            EncounterRandomNum -= 1;
-            if (EncounterRandomNum == 1)
+            EncounterRandomNum -= Time.deltaTime;
+            if (EncounterRandomNum <= 1)
             {
                 SceneManager.LoadScene(0);
             }
