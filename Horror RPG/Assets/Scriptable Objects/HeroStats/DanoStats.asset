@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: DanoStats
   m_EditorClassIdentifier: 
   HeroName: Dano
-  Healthstat: 5
-  CurrentHealth: -0.19999748
+  Healthstat: 1000
+  CurrentHealth: 944.0137
   Attackstat: 6
   Defensestat: 5
   Speedstat: 20
