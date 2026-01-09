@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 005285c9cbff24a5fa28d41e13d7995c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 270922
+  packageName: 'Essential Attributes [TexturePreview]'
+  packageVersion: 1.0
+  assetPath: Assets/FoxalFace/Editor/Common/Extensions/TypeExtensions.cs
+  uploadId: 773047

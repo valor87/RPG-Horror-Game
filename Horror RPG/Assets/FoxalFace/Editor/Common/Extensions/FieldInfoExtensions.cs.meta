@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: f850e1e69a9b840fa89fd4b9db32b76a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 270922
+  packageName: 'Essential Attributes [TexturePreview]'
+  packageVersion: 1.0
+  assetPath: Assets/FoxalFace/Editor/Common/Extensions/FieldInfoExtensions.cs
+  uploadId: 773047

@@ -1,0 +1,20 @@
+{
+    "name": "FoxalFace.Attributes.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:f678845fbbd1c414894e830d1ed0d90b",
+        "GUID:15d21541cb2d18ecdc4136e1eb256239",
+        "GUID:7b39b47b9f9654a9ba2c6c73b5110b37"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -39,7 +39,6 @@ public class OverWorldMenuNavagation : MonoBehaviour
     {
         SelectionMovement();
         SetPlayerState(!ShowMenu);
-        SelectButton();
     }
     void SelectionMovement()
     {
@@ -51,12 +50,17 @@ public class OverWorldMenuNavagation : MonoBehaviour
             {
                 SetChildrenActive(MenuChildren, true);
                 ShowMenu = true;
+                posinlist = 0;
                 return;
             }
             SetChildrenActive(SetUpListFromParent(this.gameObject), false);
             SetChildrenActive(MenuChildren, false);
             FirstMenuParent.SetActive(true);
             ShowMenu = false;
+        }
+        if (!ShowMenu)
+        {
+            return;
         }
         // menu movement
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -71,19 +75,16 @@ public class OverWorldMenuNavagation : MonoBehaviour
         {
             posinlist++;
         }
-        try
-        { UiSelectionKnife.transform.position = CurrentMenu[posinlist].transform.position - knifeoffset; }
-        catch (ArgumentOutOfRangeException ex) { posinlist = 0; }
-    }
-    void SelectButton()
-    {
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             CurrentMenu[posinlist].GetComponent<Button>().onClick.Invoke();
         }
-
+        try
+        { UiSelectionKnife.transform.position = CurrentMenu[posinlist].transform.position - knifeoffset; }
+        catch (ArgumentOutOfRangeException ex) { posinlist = 0; }
     }
+ 
+    
     void SetPlayerState(bool State)
     {
         InScenePlayerScript.enabled = State;

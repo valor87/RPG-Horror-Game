@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 63b6efc7d0c7945e681090c77d3a13ca
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 270922
+  packageName: 'Essential Attributes [TexturePreview]'
+  packageVersion: 1.0
+  assetPath: Assets/FoxalFace/Editor/Attributes/TexturePreview/Drawers/TexturePreviewDrawer.cs
+  uploadId: 773047

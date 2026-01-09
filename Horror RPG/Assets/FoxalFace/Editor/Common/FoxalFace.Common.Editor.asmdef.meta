@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 7b39b47b9f9654a9ba2c6c73b5110b37
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 270922
+  packageName: 'Essential Attributes [TexturePreview]'
+  packageVersion: 1.0
+  assetPath: Assets/FoxalFace/Editor/Common/FoxalFace.Common.Editor.asmdef
+  uploadId: 773047

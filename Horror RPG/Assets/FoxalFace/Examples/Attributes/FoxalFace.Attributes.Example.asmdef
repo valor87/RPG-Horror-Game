@@ -1,0 +1,16 @@
+{
+    "name": "FoxalFace.Attributes.Example",
+    "rootNamespace": "",
+    "references": [
+        "GUID:f678845fbbd1c414894e830d1ed0d90b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
