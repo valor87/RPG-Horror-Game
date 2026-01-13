@@ -734,6 +734,7 @@ MonoBehaviour:
   FirstMenuParent: {fileID: 1656422283}
   ButtonsParent: {fileID: 1736619788}
   HeroStatsParent: {fileID: 1927190641}
+  ItemListParent: {fileID: 1285560677}
   MainButtons: []
   UiSelectionKnife: {fileID: 1102420482}
 --- !u!95 &451475753
@@ -1155,7 +1156,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &881293764
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2387,7 +2388,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1285560678
 RectTransform:
   m_ObjectHideFlags: 0
