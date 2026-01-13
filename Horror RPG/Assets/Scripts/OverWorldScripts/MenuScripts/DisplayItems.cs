@@ -32,9 +32,10 @@ public class DisplayItems : MonoBehaviour
         {
             GameObject _Item = Instantiate(TextAsset, Vector2.zero, Quaternion.identity, Display.transform);
             _Item.GetComponent<TextMeshProUGUI>().text = Item.Name;
+            _Item.SetActive(true);
         }
     }
-    
+   
     void DisplayInfoItem(Image ImageOutput, TextMeshProUGUI TextOutPut, TextMeshProUGUI NameOutPut)
     {
         NameOutPut.GetComponent<TextMeshProUGUI>().text = TestItem.Name;

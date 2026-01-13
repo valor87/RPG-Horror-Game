@@ -13,6 +13,7 @@ public class OverWorldMenuNavagation : MonoBehaviour
     public GameObject FirstMenuParent;
     public GameObject ButtonsParent;
     public GameObject HeroStatsParent;
+    public GameObject ItemListParent;
     // Buttons list
     public List<GameObject> MainButtons = new List<GameObject>();
 
