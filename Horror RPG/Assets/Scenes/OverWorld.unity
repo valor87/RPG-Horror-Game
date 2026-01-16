@@ -1836,6 +1836,7 @@ GameObject:
   - component: {fileID: 1188347097}
   - component: {fileID: 1188347098}
   - component: {fileID: 1188347099}
+  - component: {fileID: 1188347100}
   m_Layer: 0
   m_Name: DontDestroyGameManager
   m_TagString: Untagged
@@ -1888,6 +1889,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HerosInScene:
   - {fileID: 11400000, guid: 72005a66843376d4f8fd5b8a1a5daf36, type: 2}
+--- !u!114 &1188347100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188347096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fae36b528e86f004d914bb2f0fd0920e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Items:
+  - {fileID: 11400000, guid: 31e0cdb7dacd13449927b9f02d2a9043, type: 2}
+  - {fileID: 11400000, guid: 8459c87edd9732a478bd0aa95ac1742d, type: 2}
+  - {fileID: 11400000, guid: 31e0cdb7dacd13449927b9f02d2a9043, type: 2}
 --- !u!1 &1215237226
 GameObject:
   m_ObjectHideFlags: 0

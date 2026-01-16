@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,10 +13,16 @@ public class DisplayItems : MonoBehaviour
     public TextMeshProUGUI TextDescription;
 
     public List<ItemsObjects> CurrentItems;
-   
+
+    GameObject GameManager;
+    Items Item;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        GameManager = GameObject.Find("DontDestroyGameManager");
+        Item = GameManager.GetComponent<CurrentItems>().items;
+        CurrentItems = Item.PlayersItems;
         DisplayMultiplyItems(CurrentItems, ItemList);
     }
 
