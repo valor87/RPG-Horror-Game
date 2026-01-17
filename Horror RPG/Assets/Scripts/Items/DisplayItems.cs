@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,23 +14,25 @@ public class DisplayItems : MonoBehaviour
     public TextMeshProUGUI TextDescription;
 
     public List<ItemsObjects> CurrentItems;
-
+    List<GameObject> TextAssets = new List<GameObject>();
     GameObject GameManager;
     Items Item;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void OnEnable()
     {
         GameManager = GameObject.Find("DontDestroyGameManager");
         Item = GameManager.GetComponent<CurrentItems>().items;
         CurrentItems = Item.PlayersItems;
         DisplayMultiplyItems(CurrentItems, ItemList);
     }
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+
+    }
 
     // Update is called once per frame
     void Update()
     {
-        DisplayInfoItem(Image, TextDescription, TextAsset.GetComponent<TextMeshProUGUI>());
     }
     private void DisplayMultiplyItems(List<ItemsObjects> AllItems, GameObject Display)
     {
@@ -37,14 +40,34 @@ public class DisplayItems : MonoBehaviour
         {
             GameObject _Item = Instantiate(TextAsset, Vector2.zero, Quaternion.identity, Display.transform);
             _Item.GetComponent<TextMeshProUGUI>().text = Item.Name;
+            _Item.GetComponent<ItemContainer>().ThisItems = Item;
             _Item.SetActive(true);
+            _Item.name = Item.Name;
+            TextAssets.Add(_Item);
         }
     }
-   
-    void DisplayInfoItem(Image ImageOutput, TextMeshProUGUI TextOutPut, TextMeshProUGUI NameOutPut)
+    public void UseItem(ItemsObjects Remove)
     {
-        NameOutPut.GetComponent<TextMeshProUGUI>().text = TestItem.Name;
-        ImageOutput.sprite = TestItem.ItemImage;
-        TextOutPut.text = TestItem.Description;
+        for (int i = 0; i < CurrentItems.Count; i++)
+        {
+            if (Remove == TextAssets[i].GetComponent<ItemContainer>().ThisItems)
+            {
+                TextAssets.Remove(TextAssets[i]);
+                //Destroy(TextAssets[i]);
+                Item.RemoveItem(Remove);
+                break;
+            }
+        }
+       
+    }
+    public void DisplayObject(ItemsObjects CurrentSelectedItem)
+    {
+        DisplayInfoItem(Image, TextDescription, TextAsset.GetComponent<TextMeshProUGUI>(), CurrentSelectedItem);
+    }
+    void DisplayInfoItem(Image ImageOutput, TextMeshProUGUI TextOutPut, TextMeshProUGUI NameOutPut, ItemsObjects Item)
+    {
+        NameOutPut.GetComponent<TextMeshProUGUI>().text = Item.Name;
+        ImageOutput.sprite = Item.ItemImage;
+        TextOutPut.text = Item.Description;
     }
 }

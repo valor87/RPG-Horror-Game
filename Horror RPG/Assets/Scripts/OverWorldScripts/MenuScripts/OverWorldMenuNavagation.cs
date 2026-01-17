@@ -14,20 +14,26 @@ public class OverWorldMenuNavagation : MonoBehaviour
     public GameObject ButtonsParent;
     public GameObject HeroStatsParent;
     public GameObject ItemListParent;
+    public GameObject ConfirmMenu;
     // Buttons list
     public List<GameObject> MainButtons = new List<GameObject>();
 
     // misc menu refs
     List<GameObject> MenuChildren = new List<GameObject>();
-    List<GameObject> CurrentMenu = new List<GameObject>();
-
+    public List<GameObject> CurrentMenu = new List<GameObject>();
+    public List<GameObject> ItemsMenu = new List<GameObject>();
+    List<GameObject> ConfirmMenuOptions = new List<GameObject>();
     // menu navagation
     bool ShowMenu;
     int posinlist;
     [Space(5)]
     [Header("For selecting menu options")]
     public GameObject UiSelectionKnife;
-    Vector3 knifeoffset = new Vector3(55, 0, 0); // offset for the knife in UI
+    public Vector3 knifeoffset = new Vector3(55, 0, 0); // offset for the knife in UI
+
+    // Display item Script
+    public DisplayItems DisplayItems;
+    ItemsObjects ItemToUse;
     void Start()
     {
         MenuChildren = SetUpListFromParent(FirstMenuParent.gameObject);
@@ -40,6 +46,15 @@ public class OverWorldMenuNavagation : MonoBehaviour
     {
         SelectionMovement();
         SetPlayerState(!ShowMenu);
+        
+    }
+    private void LateUpdate()
+    {
+        if (CurrentMenu == ItemsMenu)
+        {
+            ItemsMenu = SetUpListFromParent(ItemListParent);
+            CurrentMenu = ItemsMenu;
+        }
     }
     void SelectionMovement()
     {
@@ -76,16 +91,53 @@ public class OverWorldMenuNavagation : MonoBehaviour
         {
             posinlist++;
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Z))
         {
-            CurrentMenu[posinlist].GetComponent<Button>().onClick.Invoke();
+            if (CurrentMenu[posinlist] != null) {
+                CurrentMenu[posinlist].GetComponent<Button>().onClick.Invoke();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            CurrentMenu = MainButtons;
         }
         try
         { UiSelectionKnife.transform.position = CurrentMenu[posinlist].transform.position - knifeoffset; }
         catch (ArgumentOutOfRangeException ex) { posinlist = 0; }
     }
- 
-    
+
+    public void MoveToItemList()
+    {
+        knifeoffset = new Vector3(145, -36, 0);
+        posinlist = 0;
+        ItemsMenu = SetUpListFromParent(ItemListParent);
+        CurrentMenu = ItemsMenu;
+        if (ItemsMenu[posinlist] != null)
+        {
+            DisplayItems.DisplayObject(ItemsMenu[posinlist].GetComponent<ItemContainer>().ThisItems);
+        }
+    }
+    public void MoveToConfirmList()
+    {
+        ItemToUse = ItemsMenu[posinlist].GetComponent<ItemContainer>().ThisItems;
+        knifeoffset = new Vector3(75, -4, 0);
+        posinlist = 0;
+        ConfirmMenuOptions = SetUpListFromParent(ConfirmMenu);
+        CurrentMenu = ConfirmMenuOptions;
+    }
+    public void UseItem()
+    {
+        if (ItemToUse != null) {
+            DisplayItems.UseItem(ItemToUse);
+        }
+        ItemToUse = null;
+        
+        MoveToItemList();
+    }
+    /// <summary>
+    /// Stops the player form being able to move depending on the passed bool. False don't move, True move
+    /// </summary>
+    /// <param name="State"></param>
     void SetPlayerState(bool State)
     {
         InScenePlayerScript.enabled = State;
