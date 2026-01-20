@@ -46,7 +46,7 @@ public class CombatMenu : MonoBehaviour
     [Header("For selecting menu options")]
     public GameObject UiSelectionKnife;
     public GameObject KnifeInGameScene;
-    Vector3 knifeoffset = new Vector3(55, 0, 0); // offset for the knife in UI
+    public Vector3 knifeoffset = new Vector3(110, 0, 0); // offset for the knife in UI
     bool PlayerRunAction;
     // Selecting Enemy
     GameObject Target;

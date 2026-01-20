@@ -22,7 +22,11 @@ public class DisplayItems : MonoBehaviour
         GameManager = GameObject.Find("DontDestroyGameManager");
         Item = GameManager.GetComponent<CurrentItems>().items;
         CurrentItems = Item.PlayersItems;
+    }
+    public void SetUpItems()
+    {
         DisplayMultiplyItems(CurrentItems, ItemList);
+
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

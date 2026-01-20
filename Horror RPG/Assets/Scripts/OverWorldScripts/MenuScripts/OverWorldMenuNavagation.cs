@@ -34,8 +34,11 @@ public class OverWorldMenuNavagation : MonoBehaviour
     // Display item Script
     public DisplayItems DisplayItems;
     ItemsObjects ItemToUse;
+    GameObject usedItemText;
     void Start()
     {
+        DisplayItems.SetUpItems();
+        ItemsMenu = SetUpListFromParent(ItemListParent);
         MenuChildren = SetUpListFromParent(FirstMenuParent.gameObject);
         MainButtons = SetUpListFromParent(ButtonsParent);
         CurrentMenu = MainButtons;
@@ -108,9 +111,14 @@ public class OverWorldMenuNavagation : MonoBehaviour
 
     public void MoveToItemList()
     {
+        if (ItemsMenu.Count == 0)
+        {
+            print("Theres no items");
+            return;
+        }
+        ItemsMenu = SetUpListFromParent(ItemListParent);
         knifeoffset = new Vector3(145, -36, 0);
         posinlist = 0;
-        ItemsMenu = SetUpListFromParent(ItemListParent);
         CurrentMenu = ItemsMenu;
         if (ItemsMenu[posinlist] != null)
         {
@@ -119,6 +127,7 @@ public class OverWorldMenuNavagation : MonoBehaviour
     }
     public void MoveToConfirmList()
     {
+        usedItemText = ItemsMenu[posinlist];
         ItemToUse = ItemsMenu[posinlist].GetComponent<ItemContainer>().ThisItems;
         knifeoffset = new Vector3(75, -4, 0);
         posinlist = 0;
@@ -128,10 +137,21 @@ public class OverWorldMenuNavagation : MonoBehaviour
     public void UseItem()
     {
         if (ItemToUse != null) {
+            print($"{ItemToUse.name} was consoumed");
+            ItemsMenu.Remove(usedItemText);
+            Destroy(usedItemText);
             DisplayItems.UseItem(ItemToUse);
         }
         ItemToUse = null;
-        
+        if (ItemsMenu.Count == 0)
+        {
+            SetChildrenActive(SetUpListFromParent(this.gameObject), false);
+            SetChildrenActive(MenuChildren, false);
+            FirstMenuParent.SetActive(true);
+            ShowMenu = false;
+            CurrentMenu = MainButtons;
+            return;
+        }
         MoveToItemList();
     }
     /// <summary>
