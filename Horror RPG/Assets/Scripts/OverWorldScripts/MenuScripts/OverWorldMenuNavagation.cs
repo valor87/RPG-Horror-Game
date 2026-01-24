@@ -23,17 +23,19 @@ public class OverWorldMenuNavagation : MonoBehaviour
     public List<GameObject> CurrentMenu = new List<GameObject>();
     public List<GameObject> ItemsMenu = new List<GameObject>();
     List<GameObject> ConfirmMenuOptions = new List<GameObject>();
+    List<GameObject> HeroStatsMenu = new List<GameObject>();
     // menu navagation
     bool ShowMenu;
     int posinlist;
     [Space(5)]
     [Header("For selecting menu options")]
     public GameObject UiSelectionKnife;
-    public Vector3 knifeoffset = new Vector3(55, 0, 0); // offset for the knife in UI
+    public Vector3 knifeoffset = new Vector3(100, 0, 0); // offset for the knife in UI
 
     // Display item Script
     public DisplayItems DisplayItems;
     ItemsObjects ItemToUse;
+    PlayerStats PlayerToUse;
     GameObject usedItemText;
     void Start()
     {
@@ -41,6 +43,7 @@ public class OverWorldMenuNavagation : MonoBehaviour
         ItemsMenu = SetUpListFromParent(ItemListParent);
         MenuChildren = SetUpListFromParent(FirstMenuParent.gameObject);
         MainButtons = SetUpListFromParent(ButtonsParent);
+        HeroStatsMenu = SetUpListFromParent(HeroStatsParent);
         CurrentMenu = MainButtons;
     }
 
@@ -117,7 +120,7 @@ public class OverWorldMenuNavagation : MonoBehaviour
             return;
         }
         ItemsMenu = SetUpListFromParent(ItemListParent);
-        knifeoffset = new Vector3(145, -36, 0);
+        knifeoffset = new Vector3(330, -80, 0);
         posinlist = 0;
         CurrentMenu = ItemsMenu;
         if (ItemsMenu[posinlist] != null)
@@ -129,18 +132,28 @@ public class OverWorldMenuNavagation : MonoBehaviour
     {
         usedItemText = ItemsMenu[posinlist];
         ItemToUse = ItemsMenu[posinlist].GetComponent<ItemContainer>().ThisItems;
-        knifeoffset = new Vector3(75, -4, 0);
+        knifeoffset = new Vector3(150, -4, 0);
         posinlist = 0;
         ConfirmMenuOptions = SetUpListFromParent(ConfirmMenu);
         CurrentMenu = ConfirmMenuOptions;
     }
+    public void MoveToHeroSelection()
+    {
+
+        posinlist = 0;
+        CurrentMenu = HeroStatsMenu;
+    }
     public void UseItem()
     {
+        PlayerToUse = HeroStatsMenu[posinlist].GetComponent<ShowingHeroStats>().HeroStats;
+        knifeoffset = new Vector3(160, -170);
         if (ItemToUse != null) {
+            UseItemOnPlayer(PlayerToUse, ItemToUse);
             print($"{ItemToUse.name} was consoumed");
             ItemsMenu.Remove(usedItemText);
             Destroy(usedItemText);
             DisplayItems.UseItem(ItemToUse);
+            CurrentMenu = ItemsMenu;
         }
         ItemToUse = null;
         if (ItemsMenu.Count == 0)
@@ -177,5 +190,12 @@ public class OverWorldMenuNavagation : MonoBehaviour
             list.Add(Parent.transform.GetChild(i).gameObject);
         }
         return list;
+    }
+    void UseItemOnPlayer(PlayerStats PS, ItemsObjects IO)
+    {
+        PS.CurrentHealth += IO.HpChange;
+        PS.Speedstat += IO.SpeedChange;
+        PS.Attackstat += IO.AttackChange;
+        PS.Defensestat += IO.DefenseChange;
     }
 }
