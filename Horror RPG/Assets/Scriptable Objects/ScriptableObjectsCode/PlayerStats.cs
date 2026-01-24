@@ -20,6 +20,8 @@ public class PlayerStats : ScriptableObject
     public float Speedstat = 5;
     [Tooltip("To mesure the players current exp")]
     public float CurrentEXP = 0;
+    [Tooltip("Hero's Current Level")]
+    public int Level = 1;
     [Tooltip("Sprite")]
     public Sprite Spriteimage;
 
