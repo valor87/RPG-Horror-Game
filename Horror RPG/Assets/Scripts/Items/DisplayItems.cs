@@ -14,7 +14,9 @@ public class DisplayItems : MonoBehaviour
     public TextMeshProUGUI TextDescription;
 
     public List<ItemsObjects> CurrentItems;
+    public ItemsObjects ItemPickup;
     List<GameObject> TextAssets = new List<GameObject>();
+    EventCore eventcore;
     GameObject GameManager;
     Items Item;
     private void OnEnable()
@@ -23,7 +25,12 @@ public class DisplayItems : MonoBehaviour
         Item = GameManager.GetComponent<CurrentItems>().items;
         CurrentItems = Item.PlayersItems;
     }
-    public void SetUpItems()
+    void GotItem(ItemsObjects item)
+    {
+        CurrentItems.Add(item);
+        Item.PlayersItems = CurrentItems;
+    }
+    public void SetUpItems(ItemsObjects arg)
     {
         DisplayMultiplyItems(CurrentItems, ItemList);
 
@@ -31,15 +38,34 @@ public class DisplayItems : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        eventcore = GameManager.GetComponent<EventCore>();
+        eventcore.ItemPickUp.AddListener(GotItem);
+        eventcore.ItemPickUp.AddListener(SetUpItems);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            eventcore.ItemPickUp.Invoke(ItemPickup);
+        }
+    }
+    private void DestroyChildren(GameObject Parent)
+    {
+        if(Parent.transform.childCount == 0)
+        {
+            Debug.Log($"Object {this.gameObject.name} has no children to destroy: Script {this.name} line: 58");
+        }
+        for (int i = 0; i < Parent.transform.childCount; i++)
+        {
+            Destroy(Parent.transform.GetChild(i).gameObject);
+        }
     }
     private void DisplayMultiplyItems(List<ItemsObjects> AllItems, GameObject Display)
     {
+        DestroyChildren(Display);
+        TextAssets.Clear();
         foreach (ItemsObjects Item in AllItems)
         {
             GameObject _Item = Instantiate(TextAsset, Vector2.zero, Quaternion.identity, Display.transform);

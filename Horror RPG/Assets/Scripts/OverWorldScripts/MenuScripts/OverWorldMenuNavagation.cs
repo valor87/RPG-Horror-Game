@@ -37,7 +37,7 @@ public class OverWorldMenuNavagation : MonoBehaviour
     GameObject usedItemText;
     void Start()
     {
-        DisplayItems.SetUpItems();
+        DisplayItems.SetUpItems(null);
         ItemsMenu = SetUpListFromParent(ItemListParent);
         MenuChildren = SetUpListFromParent(FirstMenuParent.gameObject);
         MainButtons = SetUpListFromParent(ButtonsParent);
