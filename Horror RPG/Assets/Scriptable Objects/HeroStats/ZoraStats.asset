@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16afb89fd5603c740b6116a9043b9f8c, type: 3}
   m_Name: ZoraStats
   m_EditorClassIdentifier: 
-  HeroName: Zoro
+  HeroName: Zora
   Healthstat: 10
   CurrentHealth: 10
   Attackstat: 5
   Defensestat: 3
   Speedstat: 2
   CurrentEXP: 0
+  Level: 1
   Spriteimage: {fileID: -6368818269687301809, guid: 334bc402c04de4c4592ba7c703eac726, type: 3}
   WantsToRun: 0

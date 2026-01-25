@@ -68,6 +68,8 @@ public class OverWorldMenuNavagation : MonoBehaviour
         // close menu
         if (Input.GetKeyDown(KeyCode.Tab))
         {
+            CurrentMenu = MainButtons;
+            
             if (!ShowMenu)
             {
                 SetChildrenActive(MenuChildren, true);
@@ -78,6 +80,7 @@ public class OverWorldMenuNavagation : MonoBehaviour
             SetChildrenActive(SetUpListFromParent(this.gameObject), false);
             SetChildrenActive(MenuChildren, false);
             FirstMenuParent.SetActive(true);
+            ConfirmMenu.SetActive(false);
             ShowMenu = false;
         }
         if (!ShowMenu)
