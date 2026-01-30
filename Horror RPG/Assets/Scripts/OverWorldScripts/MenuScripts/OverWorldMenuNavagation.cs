@@ -52,7 +52,7 @@ public class OverWorldMenuNavagation : MonoBehaviour
     {
         SelectionMovement();
         SetPlayerState(!ShowMenu);
-        
+       
     }
     private void LateUpdate()
     {
@@ -64,6 +64,7 @@ public class OverWorldMenuNavagation : MonoBehaviour
     }
     void SelectionMovement()
     {
+
         UiSelectionKnife.transform.position = CurrentMenu[posinlist].transform.position - knifeoffset;
         // close menu
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -75,6 +76,7 @@ public class OverWorldMenuNavagation : MonoBehaviour
                 SetChildrenActive(MenuChildren, true);
                 ShowMenu = true;
                 posinlist = 0;
+                knifeoffset = new Vector3(100, 0, 0);
                 return;
             }
             SetChildrenActive(SetUpListFromParent(this.gameObject), false);
@@ -142,7 +144,7 @@ public class OverWorldMenuNavagation : MonoBehaviour
     }
     public void MoveToHeroSelection()
     {
-
+        knifeoffset = new Vector3(700, -170);
         posinlist = 0;
         CurrentMenu = HeroStatsMenu;
     }
@@ -176,6 +178,7 @@ public class OverWorldMenuNavagation : MonoBehaviour
     /// <param name="State"></param>
     void SetPlayerState(bool State)
     {
+        UiSelectionKnife.SetActive(!State);
         InScenePlayerScript.enabled = State;
     }
     void SetChildrenActive(List<GameObject> Children, bool State)
