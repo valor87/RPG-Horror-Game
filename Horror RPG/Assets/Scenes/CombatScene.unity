@@ -1321,7 +1321,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &338606073
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3046,6 +3046,7 @@ MonoBehaviour:
   posinlist: 0
   UiSelectionKnife: {fileID: 955979552}
   KnifeInGameScene: {fileID: 1078287445}
+  knifeoffset: {x: 110, y: 0, z: 0}
 --- !u!1 &813357398
 GameObject:
   m_ObjectHideFlags: 0

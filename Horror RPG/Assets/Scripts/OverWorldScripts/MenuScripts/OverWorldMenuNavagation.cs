@@ -130,7 +130,7 @@ public class OverWorldMenuNavagation : MonoBehaviour
         CurrentMenu = ItemsMenu;
         if (ItemsMenu[posinlist] != null)
         {
-            DisplayItems.DisplayObject(ItemsMenu[posinlist].GetComponent<ItemContainer>().ThisItems);
+            //DisplayItems.DisplayObject(ItemsMenu[posinlist].GetComponent<ItemContainer>().ThisItems);
         }
     }
     public void MoveToConfirmList()

@@ -46,6 +46,7 @@ public class DisplayItems : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        DisplayObject(TestItem);
         if (Input.GetKeyDown(KeyCode.P))
         {
             eventcore.ItemPickUp.Invoke(ItemPickup);

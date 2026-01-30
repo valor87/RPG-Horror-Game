@@ -1990,8 +1990,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HerosInScene:
   - {fileID: 11400000, guid: 30b5169d6b549c44a8ccf4799392f5ad, type: 2}
-  - {fileID: 11400000, guid: 30b5169d6b549c44a8ccf4799392f5ad, type: 2}
-  - {fileID: 11400000, guid: 30b5169d6b549c44a8ccf4799392f5ad, type: 2}
+  - {fileID: 11400000, guid: 0a0a5a46554c0104d84f1460b9ac5f9f, type: 2}
+  - {fileID: 11400000, guid: 72005a66843376d4f8fd5b8a1a5daf36, type: 2}
 --- !u!114 &1188347100
 MonoBehaviour:
   m_ObjectHideFlags: 0
