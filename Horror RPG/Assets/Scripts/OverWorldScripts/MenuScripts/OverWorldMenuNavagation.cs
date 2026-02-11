@@ -37,6 +37,7 @@ public class OverWorldMenuNavagation : MonoBehaviour
     ItemsObjects ItemToUse;
     PlayerStats PlayerToUse;
     GameObject usedItemText;
+    ItemsObjects DisplayItem;
     void Start()
     {
         DisplayItems.SetUpItems(null);
@@ -60,6 +61,8 @@ public class OverWorldMenuNavagation : MonoBehaviour
         {
             ItemsMenu = SetUpListFromParent(ItemListParent);
             CurrentMenu = ItemsMenu;
+            DisplayItems.TestItem = ItemsMenu[posinlist].gameObject.GetComponent<ItemContainer>().ThisItems;
+
         }
     }
     void SelectionMovement()
@@ -79,11 +82,7 @@ public class OverWorldMenuNavagation : MonoBehaviour
                 knifeoffset = new Vector3(100, 0, 0);
                 return;
             }
-            SetChildrenActive(SetUpListFromParent(this.gameObject), false);
-            SetChildrenActive(MenuChildren, false);
-            FirstMenuParent.SetActive(true);
-            ConfirmMenu.SetActive(false);
-            ShowMenu = false;
+            TurnMenuOff();
         }
         if (!ShowMenu)
         {
@@ -110,6 +109,11 @@ public class OverWorldMenuNavagation : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
+            TurnMenuOff();
+            SetChildrenActive(MenuChildren, true);
+            ShowMenu = true;
+            posinlist = 0;
+            knifeoffset = new Vector3(100, 0, 0);
             CurrentMenu = MainButtons;
         }
         try
@@ -128,6 +132,7 @@ public class OverWorldMenuNavagation : MonoBehaviour
         knifeoffset = new Vector3(330, -80, 0);
         posinlist = 0;
         CurrentMenu = ItemsMenu;
+        
         if (ItemsMenu[posinlist] != null)
         {
             //DisplayItems.DisplayObject(ItemsMenu[posinlist].GetComponent<ItemContainer>().ThisItems);
@@ -203,5 +208,14 @@ public class OverWorldMenuNavagation : MonoBehaviour
         PS.Speedstat += IO.SpeedChange;
         PS.Attackstat += IO.AttackChange;
         PS.Defensestat += IO.DefenseChange;
+    }
+
+    private void TurnMenuOff()
+    {
+        SetChildrenActive(SetUpListFromParent(this.gameObject), false);
+        SetChildrenActive(MenuChildren, false);
+        FirstMenuParent.SetActive(true);
+        ConfirmMenu.SetActive(false);
+        ShowMenu = false;
     }
 }
