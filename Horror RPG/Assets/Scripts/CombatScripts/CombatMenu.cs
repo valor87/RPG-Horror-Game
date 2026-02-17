@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -46,7 +48,7 @@ public class CombatMenu : MonoBehaviour
     [Header("For selecting menu options")]
     public GameObject UiSelectionKnife;
     public GameObject KnifeInGameScene;
-    Vector3 knifeoffset = new Vector3(55, 0, 0); // offset for the knife in UI
+    public Vector3 knifeoffset = new Vector3(110, 0, 0); // offset for the knife in UI
     bool PlayerRunAction;
     // Selecting Enemy
     GameObject Target;
@@ -84,9 +86,9 @@ public class CombatMenu : MonoBehaviour
         for (int i = 0; i < AmountofEnemies; i++)
         {
             UiHeroParents.transform.GetChild(i).gameObject.SetActive(true);
-            Vector2 enemypos = new Vector2(-5.8f, 4);
-            enemypos.y = enemypos.y - (2 * i);
-            GameObject CurrentEnemy = Instantiate(PlayerPreFab, enemypos, Quaternion.identity, HerosCharactersParent.transform);
+            Vector2 PlayerPos = new Vector2(-5.4f, 4);
+            PlayerPos.y = PlayerPos.y - (2 * i);
+            GameObject CurrentEnemy = Instantiate(PlayerPreFab, PlayerPos, Quaternion.identity, HerosCharactersParent.transform);
             CurrentEnemy.GetComponent<EnemyStats>().PlayerStats = enemyencounterlist.GetComponent<CurrentHerosInParty>().HerosInScene[i];
             print($"wanting {AmountofEnemies} Running {i} times");
         }
@@ -353,12 +355,12 @@ public class CombatMenu : MonoBehaviour
             float incomingdamage = Attacker.GetComponent<EnemyStats>().Attack;
             float damage = incomingdamage;
             float EnemyHp = RecevingDamage.GetComponent<EnemyStats>().CurrentHealth;
-            
-          
+            Vector3 IdleingPos = Attacker.transform.position;
 
             if (_Inichative[i].GetComponent<EnemyStats>().TargetEnemy == null)
             {
                 print("its dead");
+                Attacker.transform.position = IdleingPos;
                 continue;
             }
             
@@ -394,11 +396,12 @@ public class CombatMenu : MonoBehaviour
                 {
                     break;
                 }
-                yield return new WaitForSeconds(.01f);
+                yield return new WaitForSeconds(.06f);
             }
             if (needBreak)
             {
-                Attacker.transform.position -= AttackingPlacement;
+                Attacker.transform.position = IdleingPos;
+
                 continue;
             }
 
@@ -437,7 +440,8 @@ public class CombatMenu : MonoBehaviour
             }
 
             // send the attacker back
-            Attacker.transform.position -= AttackingPlacement;
+            Attacker.transform.position = IdleingPos;
+            Debug.LogError($"{Attacker.name} is done attacking");
         }
         CanSelectActions = true;
         playerselectingActions = false;
@@ -471,7 +475,7 @@ public class CombatMenu : MonoBehaviour
             List<string> PlayerActionName = new List<string>();
             Hero.GetComponent<EnemyStats>().SetButtonActions(AttackActions, PlayerActionName);
             PlayerRunAction = false;
-
+            Vector3 IdleingPos = Hero.transform.position;
             Hero.transform.position += Vector3.right * 1.5f;
             playerselectingActions = true;
 
@@ -509,7 +513,7 @@ public class CombatMenu : MonoBehaviour
             {
                 Hero.GetComponent<EnemyStats>().PlayerStats.WantsToRun = true;
             }
-            Hero.transform.position += Vector3.left * 2;
+            Hero.transform.position = IdleingPos;
         }
         PlayerSelectingActions = false;
         EnemyPickActionOptions(EnemiesInScene, HerosInScene);

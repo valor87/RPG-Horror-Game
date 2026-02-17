@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16afb89fd5603c740b6116a9043b9f8c, type: 3}
-  m_Name: StellarStats
+  m_Name: ZoraStats
   m_EditorClassIdentifier: 
-  HeroName: Stellar
-  Healthstat: 5
-  CurrentHealth: 5
+  HeroName: Zora
+  Healthstat: 10
+  CurrentHealth: 10
   Attackstat: 5
-  Defensestat: 5
-  Speedstat: 5
+  Defensestat: 3
+  Speedstat: 2
   CurrentEXP: 0
-  Spriteimage: {fileID: 21300000, guid: a268d522881168b49be5844bef710866, type: 3}
+  Level: 1
+  Spriteimage: {fileID: -6368818269687301809, guid: 334bc402c04de4c4592ba7c703eac726, type: 3}
   WantsToRun: 0

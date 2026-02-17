@@ -17,6 +17,7 @@ public class OverWorldPlayerMovement : MonoBehaviour
     Vector3 Movement;
     public float EncounterRandomNum;
     //Animation
+    GameObject GameManager;
     SpriteRenderer PlayerSprite;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -29,13 +30,14 @@ public class OverWorldPlayerMovement : MonoBehaviour
     void Start()
     {
         EncounterRandomNum = Random.RandomRange(5, 10);
-
+        GameManager = GameObject.Find("DontDestroyGameManager").gameObject;
         PlayerSprite = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        PlayerSprite.sprite = GameManager.GetComponent<CurrentHerosInParty>().HerosInScene[0].Spriteimage;
         // get player input and movement
         Movement.x = Input.GetAxisRaw("Horizontal");
         PlayerMovement(Movement, MovementSpeed);
