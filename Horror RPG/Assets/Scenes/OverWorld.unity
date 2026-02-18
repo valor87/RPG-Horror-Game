@@ -1973,8 +1973,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PotencialEnemy:
-  - {fileID: 11400000, guid: 0cdf675e6eea0c14e884dd83444aa0ed, type: 2}
-  - {fileID: 11400000, guid: 4d1a04f8f23be8a4c990990e484403ce, type: 2}
   - {fileID: 11400000, guid: 64a6cdf9fecc99a4a95311e345e38de4, type: 2}
 --- !u!114 &1188347099
 MonoBehaviour:
@@ -1989,9 +1987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HerosInScene:
-  - {fileID: 11400000, guid: 30b5169d6b549c44a8ccf4799392f5ad, type: 2}
-  - {fileID: 11400000, guid: 0a0a5a46554c0104d84f1460b9ac5f9f, type: 2}
-  - {fileID: 11400000, guid: 72005a66843376d4f8fd5b8a1a5daf36, type: 2}
+  - {fileID: 11400000, guid: 7368eaa2bd6d86b4c8dc0ec35bfa523f, type: 2}
 --- !u!114 &1188347100
 MonoBehaviour:
   m_ObjectHideFlags: 0

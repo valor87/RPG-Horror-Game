@@ -9,7 +9,7 @@ public class EnemyStats : MonoBehaviour
     public float Hp = 5;
     public float CurrentHealth;
     public float Attack = 2;
-    [SerializeField] float Defense = 2;
+    public float Defense = 2;
     public float speedStat = 2;
     public Slider HpSlider;
 
