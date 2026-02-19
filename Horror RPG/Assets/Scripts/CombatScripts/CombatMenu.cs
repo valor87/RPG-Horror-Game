@@ -355,7 +355,8 @@ public class CombatMenu : MonoBehaviour
             float RecevingDamageHp = RecevingDamage.GetComponent<EnemyStats>().Hp;
             bool needBreak = false;
             float incomingdamage = Attacker.GetComponent<EnemyStats>().Attack;
-            float damage = incomingdamage;
+            float TargetDefense = RecevingDamage.GetComponent<EnemyStats>().Defense;
+            float damage = incomingdamage+((incomingdamage/TargetDefense)/2)/2;
             float EnemyHp = RecevingDamage.GetComponent<EnemyStats>().CurrentHealth;
             Vector3 IdleingPos = Attacker.transform.position;
             GameObject AttackCloud = Instantiate(Puffcloud, RecevingDamage.transform.position, Quaternion.identity);

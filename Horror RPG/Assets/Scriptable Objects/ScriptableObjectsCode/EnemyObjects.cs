@@ -1,3 +1,4 @@
+using FoxalFace.Attributes;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EnemyObjects", menuName = "Scriptable Objects/EnemyObjects")]
@@ -13,6 +14,7 @@ public class EnemyObjects : ScriptableObject
     [Tooltip("Speed Stat")]
     public float Speedstat = 5;
     [Tooltip("Sprite")]
+    [TexturePreview]
     public Sprite Spriteimage;
     [Space(10)]
     [Tooltip("Rewarded for killing the enemy")]
