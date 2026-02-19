@@ -3038,6 +3038,7 @@ MonoBehaviour:
   EnemyPreFab: {fileID: 8588715982697806549, guid: 4424d23bb90988b459993a84f466078b, type: 3}
   PV: {fileID: 11400000, guid: 40c01c1c225217e40b0ff5680192c852, type: 2}
   HerosInScene: []
+  Puffcloud: {fileID: 8774564587205508746, guid: 510744f20be13e645bd957b9ba27149b, type: 3}
   enemyencounterlist: {fileID: 0}
   CurrentMenu: []
   EnemyStatsUi: []
