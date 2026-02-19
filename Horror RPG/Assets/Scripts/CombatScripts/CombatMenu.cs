@@ -35,7 +35,9 @@ public class CombatMenu : MonoBehaviour
     List<GameObject> CombatActions = new List<GameObject>();
     List<GameObject> AttackActions = new List<GameObject>();
     List<List<GameObject>> MenuOptions = new List<List<GameObject>>();
-
+    [Header("Puffcloud for showing who the target is")]
+    public GameObject Puffcloud;
+    [Space(10)]
     [Header("For Debuging")]
     public GameObject enemyencounterlist;
     public List<GameObject> CurrentMenu;
@@ -356,7 +358,7 @@ public class CombatMenu : MonoBehaviour
             float damage = incomingdamage;
             float EnemyHp = RecevingDamage.GetComponent<EnemyStats>().CurrentHealth;
             Vector3 IdleingPos = Attacker.transform.position;
-
+            GameObject AttackCloud = Instantiate(Puffcloud, RecevingDamage.transform.position, Quaternion.identity);
             if (_Inichative[i].GetComponent<EnemyStats>().TargetEnemy == null)
             {
                 print("its dead");
@@ -441,6 +443,7 @@ public class CombatMenu : MonoBehaviour
 
             // send the attacker back
             Attacker.transform.position = IdleingPos;
+            Destroy(AttackCloud);
             Debug.LogError($"{Attacker.name} is done attacking");
         }
         CanSelectActions = true;
