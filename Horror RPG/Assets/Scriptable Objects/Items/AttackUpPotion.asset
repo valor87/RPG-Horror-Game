@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf2e4fc5562f924cb82f88383a3ee5b, type: 3}
+  m_Name: AttackUpPotion
+  m_EditorClassIdentifier: 
+  Name: Attack Up Potion
+  Type: 2
+  HpChange: 0
+  AttackChange: 2
+  DefenseChange: 0
+  SpeedChange: 0
+  Cost: 5
+  Uses: 1
+  Description: Rasies Target Attack Stat
+  ItemImage: {fileID: 21300000, guid: 0339ad0288d42324a965fd727dd41e47, type: 3}

@@ -1,13 +1,21 @@
 using UnityEngine;
 using FoxalFace.Common.Editor;
 using FoxalFace.Attributes;
+public enum Type
+{
+    Potion,
+    Weapon,
+    Stat_Increase,
+    Key_Item,
+}
 [CreateAssetMenu(fileName = "ItemsObjects", menuName = "Scriptable Objects/ItemsObjects")]
+
 public class ItemsObjects : ScriptableObject
 {
     [Tooltip("Name of the item")]
     public string Name;
     [Tooltip("The type of the object")]
-    public string Type;
+    public Type Type;
     [Tooltip("The change amount to the hp")]
     public int HpChange;
     [Tooltip("The change amount to the attack")]
