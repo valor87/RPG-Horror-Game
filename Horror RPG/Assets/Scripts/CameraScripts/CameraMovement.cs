@@ -11,6 +11,7 @@ public class CameraMovement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        transform.position = new Vector2(PlayerTransform.position.x, transform.position.y);
     }
 
     // Update is called once per frame

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: StellarStats
   m_EditorClassIdentifier: 
   HeroName: Stellar
-  Healthstat: 6
-  CurrentHealth: 6
+  Healthstat: 111
+  CurrentHealth: 97.20021
   Attackstat: 3
   Defensestat: 2
   Speedstat: 3
