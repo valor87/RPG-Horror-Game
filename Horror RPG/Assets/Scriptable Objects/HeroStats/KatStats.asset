@@ -19,5 +19,7 @@ MonoBehaviour:
   Defensestat: 5
   Speedstat: 5
   CurrentEXP: 0
+  Level: 1
   Spriteimage: {fileID: -2688954151423579212, guid: 334bc402c04de4c4592ba7c703eac726, type: 3}
+  levelUpValues: 1e0000003c0000008c0000000e010000c2010000a8020000c00300000a0500008606000034080000140a0000
   WantsToRun: 0
