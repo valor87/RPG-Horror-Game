@@ -11,41 +11,54 @@ public class CombatMenu : MonoBehaviour
 {
     [Header("Lists of Objects in the combat scene")]
     [Tooltip("Parent that holds children of all enimies in the scene")]
-    
     public GameObject EnemyParent;
+
     [Tooltip("Parent that holds children of all heros characters in the scene")]
     public GameObject HerosCharactersParent;
+
     [Tooltip("Parent that holds all combat actions in the scene")]
     public GameObject CombatActionsParent;
+
     [Tooltip("Parent that holds Attack options in the scene || include a back option")]
     public GameObject AttackActionsParent;
+
     [Tooltip("Parent that holds children of all the Enemy Ui health sliders")]
     public GameObject UiCreatureParents;
+
     [Tooltip("Parent that holds children of all the Hero Ui health sliders")]
     public GameObject UiHeroParents;
+
     [Header("PreFab of the player to be changed by script")]
     public GameObject PlayerPreFab;
+
     [Header("PreFab of the enemy to be changed by script")]
     public GameObject EnemyPreFab;
+
     [Header("For changing players values and gold")]
     public PlayerValues PV;
+
+    // getting referances to all the lists so that that the player can interact with the
+    //children of the game objects
     List<GameObject> EnemiesInScene = new List<GameObject>();
     [Space(10)]
     public List<GameObject> HerosInScene = new List<GameObject>();
     List<GameObject> CombatActions = new List<GameObject>();
     List<GameObject> AttackActions = new List<GameObject>();
     List<List<GameObject>> MenuOptions = new List<List<GameObject>>();
+
     [Header("Puffcloud for showing who the target is")]
     public GameObject Puffcloud;
+
     [Space(10)]
     [Header("For Debuging")]
     public GameObject enemyencounterlist;
+    public int posinlist = 0;
     public List<GameObject> CurrentMenu;
     public List<GameObject> EnemyStatsUi;
     public List<GameObject> HeroStatsUi;
     public List<GameObject> inichative = new List<GameObject>();
-    public int posinlist = 0;
     GameObject GameManager;
+
     [Space(5)]
     [Header("For selecting menu options")]
     public GameObject UiSelectionKnife;
@@ -254,14 +267,19 @@ public class CombatMenu : MonoBehaviour
         // change the menu to the attack selection
         ChangeMenu(2);
     }
+
+    public void ButtonItem()
+    {
+        /*show the items to the player and allow them to pick one
+         * After that allow them to choose who to use it on
+         * make sure to update the slider in the game view
+         */
+    }
     public void ButtonRun()
     {
-        /* Have the run button
-         * use up the action of that player
-         * and move onto the next hero
-         */
         PlayerRunAction = true;
     }
+
     private void StoreActions(GameObject Attacker, GameObject Target, string AttackName, bool RunFromCombat, bool UseItem)
     {
         EnemyStats ES = Attacker.GetComponent<EnemyStats>();
@@ -352,14 +370,18 @@ public class CombatMenu : MonoBehaviour
             }
 
             GameObject RecevingDamage = _Inichative[i].GetComponent<EnemyStats>().TargetEnemy;
+            GameObject AttackCloud = Instantiate(Puffcloud, RecevingDamage.transform.position, Quaternion.identity);
+
+            Vector3 IdleingPos = Attacker.transform.position;
+
             float RecevingDamageHp = RecevingDamage.GetComponent<EnemyStats>().Hp;
-            bool needBreak = false;
             float incomingdamage = Attacker.GetComponent<EnemyStats>().Attack;
             float TargetDefense = RecevingDamage.GetComponent<EnemyStats>().Defense;
             float damage = incomingdamage+((incomingdamage/TargetDefense)/2)/2;
             float EnemyHp = RecevingDamage.GetComponent<EnemyStats>().CurrentHealth;
-            Vector3 IdleingPos = Attacker.transform.position;
-            GameObject AttackCloud = Instantiate(Puffcloud, RecevingDamage.transform.position, Quaternion.identity);
+
+            bool needBreak = false;
+
             if (_Inichative[i].GetComponent<EnemyStats>().TargetEnemy == null)
             {
                 print("its dead");
