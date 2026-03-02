@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PlayerValues
   m_EditorClassIdentifier: 
   Gold: 0
-  PerviousSceneNum: 1
-  PerviousScenePos: {x: 6.886654, y: -0.034621432}
+  PerviousSceneNum: 0
+  PerviousScenePos: {x: -5, y: -2}

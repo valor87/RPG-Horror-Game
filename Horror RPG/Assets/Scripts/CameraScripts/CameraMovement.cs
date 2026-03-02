@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
@@ -31,17 +32,16 @@ public class CameraMovement : MonoBehaviour
         Vector3 PlayerInScreenSpace;
 
         PlayerInScreenSpace = Camera.main.WorldToScreenPoint(PlayerTransform.position);
-
-
+        
         if (PlayerInScreenSpace.x < CameraLeftSideBuffer)
         {
-            transform.position -= new Vector3(CamSpeed,0,0) * Time.deltaTime;
-            print("Left most side of the screen");
+            transform.position -= new Vector3(CamSpeed, 0, 0) * Time.deltaTime;
+            return;
         }
         if (PlayerInScreenSpace.x > CameraRightSideBuffer)
         {
             transform.position += new Vector3(CamSpeed, 0, 0) * Time.deltaTime;
-            print("Right most side of the screen");
+            return;
         }
     }
 }

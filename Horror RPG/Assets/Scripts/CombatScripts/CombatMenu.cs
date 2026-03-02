@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -21,6 +19,9 @@ public class CombatMenu : MonoBehaviour
 
     [Tooltip("Parent that holds Attack options in the scene || include a back option")]
     public GameObject AttackActionsParent;
+
+    [Tooltip("Parent that holds item options in the scene")]
+    public GameObject ItemsParent;
 
     [Tooltip("Parent that holds children of all the Enemy Ui health sliders")]
     public GameObject UiCreatureParents;
@@ -377,7 +378,7 @@ public class CombatMenu : MonoBehaviour
             float RecevingDamageHp = RecevingDamage.GetComponent<EnemyStats>().Hp;
             float incomingdamage = Attacker.GetComponent<EnemyStats>().Attack;
             float TargetDefense = RecevingDamage.GetComponent<EnemyStats>().Defense;
-            float damage = incomingdamage+((incomingdamage/TargetDefense)/2)/2;
+            float damage = incomingdamage+((incomingdamage/TargetDefense)/2) - TargetDefense/2;
             float EnemyHp = RecevingDamage.GetComponent<EnemyStats>().CurrentHealth;
 
             bool needBreak = false;
@@ -475,7 +476,7 @@ public class CombatMenu : MonoBehaviour
 
         if (CheckIfEnemiesAreDead(EnemiesInScene))
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene("OverWorld");
         }
     }
     private void EnemyPickActionOptions(List<GameObject> Enemies, List<GameObject> Targets)

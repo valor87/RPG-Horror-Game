@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Enemy-SkinedDog
   m_EditorClassIdentifier: 
   EnemyName: Skined Dog
-  Healthstat: 12
+  Healthstat: 3
   Attackstat: 2
-  Defensestat: 6
+  Defensestat: 4
   Speedstat: 3
   Spriteimage: {fileID: 21300000, guid: 378d57a3df74ca54480a5c07984ffce2, type: 3}
   GoldToBeRewarded: 3

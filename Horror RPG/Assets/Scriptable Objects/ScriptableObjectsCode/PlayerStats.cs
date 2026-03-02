@@ -1,4 +1,3 @@
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerStats", menuName = "Scriptable Objects/PlayerStats")]
@@ -45,6 +44,8 @@ public class PlayerStats : ScriptableObject
         Defensestat = tempStatArray[2];
         Speedstat = tempStatArray[3];
     }
+
+    
     private void OnEnable()
     {
         WantsToRun = false;

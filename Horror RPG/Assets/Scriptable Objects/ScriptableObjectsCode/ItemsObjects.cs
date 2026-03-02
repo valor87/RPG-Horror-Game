@@ -1,5 +1,4 @@
 using UnityEngine;
-using FoxalFace.Common.Editor;
 using FoxalFace.Attributes;
 public enum Type
 {

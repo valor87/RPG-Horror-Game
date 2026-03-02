@@ -1,4 +1,3 @@
-using UnityEditor.SearchService;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerValues", menuName = "Scriptable Objects/PlayerValues")]

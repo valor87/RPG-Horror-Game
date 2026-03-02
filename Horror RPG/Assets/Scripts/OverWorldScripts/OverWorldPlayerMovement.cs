@@ -1,10 +1,11 @@
-using Unity.VisualScripting;
-using UnityEditor.SearchService;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class OverWorldPlayerMovement : MonoBehaviour
 {
+    public KeyCode TurnEncountersOff;
+    public bool encounterState;
     [Header("Player Values")]
     public Vector2 playerPos;
     public int PlayerGold;
@@ -37,6 +38,10 @@ public class OverWorldPlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(TurnEncountersOff))
+        {
+            encounterState = !encounterState;
+        }
         PlayerSprite.sprite = GameManager.GetComponent<CurrentHerosInParty>().HerosInScene[0].Spriteimage;
         // get player input and movement
         Movement.x = Input.GetAxisRaw("Horizontal");
@@ -47,12 +52,12 @@ public class OverWorldPlayerMovement : MonoBehaviour
     private void PlayerMovement(Vector3 MovementAmount, float Speed)
     {
         transform.position += MovementAmount * Speed * Time.deltaTime;
-        if (MovementAmount.x != 0)
+        if (MovementAmount.x != 0 && encounterState)
         {
             EncounterRandomNum -= Time.deltaTime;
             if (EncounterRandomNum <= 1)
             {
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene("CombatScene");
             }
         }
     }
