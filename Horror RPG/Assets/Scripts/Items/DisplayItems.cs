@@ -21,9 +21,7 @@ public class DisplayItems : MonoBehaviour
     Items Item;
     private void OnEnable()
     {
-        GameManager = GameObject.Find("DontDestroyGameManager");
-        Item = GameManager.GetComponent<CurrentItems>().items;
-        CurrentItems = Item.PlayersItems;
+        
     }
     void GotItem(ItemsObjects item)
     {
@@ -33,11 +31,14 @@ public class DisplayItems : MonoBehaviour
     public void SetUpItems(ItemsObjects arg)
     {
         DisplayMultiplyItems(CurrentItems, ItemList);
-
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        GameManager = GameObject.Find("DontDestroyGameManager");
+        Item = GameManager.GetComponent<CurrentItems>().items;
+        CurrentItems = Item.PlayersItems;
+
         eventcore = GameManager.GetComponent<EventCore>();
         eventcore.ItemPickUp.AddListener(GotItem);
         eventcore.ItemPickUp.AddListener(SetUpItems);
