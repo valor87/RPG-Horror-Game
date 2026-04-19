@@ -8,12 +8,21 @@ using UnityEngine.UI;
 
 public class callChildButtons : MonoBehaviour
 {
+    public bool mainMenu = false;
+    public itemMenuEventCore itemMenuEventCore;
     public KeyCode upKey = KeyCode.UpArrow;
     public KeyCode downKey = KeyCode.DownArrow;
     public KeyCode invokeButton = KeyCode.Space;
     public RectTransform selectionKnife;
     public Vector3 knifeOffset;
     int childIndex;
+
+    private void Start()
+    {
+        if(mainMenu)
+            itemMenuEventCore.EV_closedMenu.AddListener(enableThis);
+    }
+
     void Update()
     {
         getKeyInput();
@@ -32,9 +41,10 @@ public class callChildButtons : MonoBehaviour
         if (invokeButtonGameObject != null)
         {
             invokeButtonGameObject.GetComponent<Button>().onClick.Invoke();
+            this.enabled = false;
         }
 
-        // visualy changing the knifes location
+        // visually changing the knifes location
         childIndex = Mathf.Clamp(childIndex, 0, transform.childCount - 1);
         RectTransform currentButtonTransform = transform.GetChild(childIndex).gameObject.GetComponent<RectTransform>();
         selectionKnifeLocation(currentButtonTransform);
@@ -42,5 +52,10 @@ public class callChildButtons : MonoBehaviour
     void selectionKnifeLocation(RectTransform currentButton)
     {
         selectionKnife.position = currentButton.position + knifeOffset;
+    }
+
+    private void enableThis()
+    {
+        this.enabled = true;
     }
 }
