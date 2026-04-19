@@ -823,8 +823,8 @@ GameObject:
   - component: {fileID: 451475750}
   - component: {fileID: 451475749}
   - component: {fileID: 451475748}
-  - component: {fileID: 451475752}
   - component: {fileID: 451475753}
+  - component: {fileID: 451475754}
   m_Layer: 5
   m_Name: OverworldMenu
   m_TagString: Untagged
@@ -919,31 +919,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &451475752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 451475747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ed37496db27de04b8d616011763f12f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InScenePlayerScript: {fileID: 1341890901}
-  FirstMenuParent: {fileID: 1656422283}
-  ButtonsParent: {fileID: 1736619788}
-  HeroStatsParent: {fileID: 1539377044}
-  ItemListParent: {fileID: 1285560677}
-  ConfirmMenu: {fileID: 881293763}
-  MainButtons: []
-  CurrentMenu: []
-  ItemsMenu: []
-  posinlist: 0
-  UiSelectionKnife: {fileID: 1102420482}
-  knifeoffset: {x: 100, y: 0, z: 0}
-  DisplayItems: {fileID: 1424516884}
 --- !u!95 &451475753
 Animator:
   serializedVersion: 7
@@ -966,6 +941,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &451475754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451475747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a934b3427982dc74695ccc8143900632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::overWorldMenu
+  openMenu: 9
 --- !u!1 &531711421
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,7 +1513,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 451475752}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: OverWorldMenuNavagation, Assembly-CSharp
         m_MethodName: MoveToItemList
         m_Mode: 1
@@ -1557,6 +1545,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 925653489}
   m_CullTransparentMesh: 1
+--- !u!1 &934558440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 934558442}
+  - component: {fileID: 934558441}
+  m_Layer: 0
+  m_Name: EventCore
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &934558441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934558440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b15d044d9041455498bb87b9ae93cf44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EventCore
+  EV_OpenCloseMenu:
+    m_PersistentCalls:
+      m_Calls: []
+  EV_ItemPickUp:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!4 &934558442
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934558440}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 739.13275, y: 484.28952, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1016667434
 GameObject:
   m_ObjectHideFlags: 0
@@ -1851,7 +1889,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1424516884}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DisplayItems, Assembly-CSharp
         m_MethodName: changeItemPage
         m_Mode: 3
@@ -2475,11 +2513,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1243815605}
   m_CullTransparentMesh: 1
---- !u!1 &1285560677 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3851179637584519683, guid: 7b0c15e1dc5d8cf4bbfdb58d30322322, type: 3}
-  m_PrefabInstance: {fileID: 8907326573136326278}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1338729344
 GameObject:
   m_ObjectHideFlags: 0
@@ -2921,17 +2954,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 926550601005572063, guid: 7b0c15e1dc5d8cf4bbfdb58d30322322, type: 3}
   m_PrefabInstance: {fileID: 8907326573136326278}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1424516884 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2188409073683525301, guid: 7b0c15e1dc5d8cf4bbfdb58d30322322, type: 3}
-  m_PrefabInstance: {fileID: 8907326573136326278}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1424516882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7b8aa675ffff4246b5efd8c1bb17635, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1539377044
 GameObject:
   m_ObjectHideFlags: 0
@@ -2979,13 +3001,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1656422284}
+  - component: {fileID: 1656422285}
   m_Layer: 5
   m_Name: FirstMenuParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1656422284
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3007,6 +3030,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 884.25}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1656422285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656422283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 706e35005de27e64f8cf6581fa7599f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::menuDisplay
 --- !u!1 &1662658773 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4319047084843257718, guid: 5bf4fed78ba4e1b499cc8a89c69d4fc8, type: 3}
@@ -3061,7 +3096,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 451475752}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: OverWorldMenuNavagation, Assembly-CSharp
         m_MethodName: UseItem
         m_Mode: 1
@@ -3233,6 +3268,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1736619789}
+  - component: {fileID: 1736619791}
+  - component: {fileID: 1736619790}
   m_Layer: 5
   m_Name: Buttons
   m_TagString: Untagged
@@ -3264,6 +3301,36 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1736619790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736619788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57c9e3f1ae411444d96194642a43220d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::callChildButtons
+  upKey: 273
+  downKey: 274
+  invokeButton: 32
+--- !u!114 &1736619791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736619788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57c9e3f1ae411444d96194642a43220d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::callChildButtons
+  upKey: 273
+  downKey: 274
+  invokeButton: 32
 --- !u!1 &1823618479
 GameObject:
   m_ObjectHideFlags: 0
@@ -3459,7 +3526,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 451475752}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: OverWorldMenuNavagation, Assembly-CSharp
         m_MethodName: MoveToConfirmList
         m_Mode: 1
@@ -3660,7 +3727,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1424516884}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DisplayItems, Assembly-CSharp
         m_MethodName: changeItemPage
         m_Mode: 3
@@ -4582,7 +4649,7 @@ PrefabInstance:
     - target: {fileID: 8070792061646047785, guid: 5bf4fed78ba4e1b499cc8a89c69d4fc8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 451475752}
+      objectReference: {fileID: 0}
     - target: {fileID: 8070792061646047785, guid: 5bf4fed78ba4e1b499cc8a89c69d4fc8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -5100,7 +5167,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 451475752}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: OverWorldMenuNavagation, Assembly-CSharp
         m_MethodName: UseItem
         m_Mode: 1
@@ -5196,7 +5263,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: DontDestroyGameManager
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2419081663943902310, guid: e13587a0e28c6bc43b73c00586cf4545, type: 3}
+    - {fileID: 6042642428744910318, guid: e13587a0e28c6bc43b73c00586cf4545, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -5304,16 +5373,17 @@ PrefabInstance:
     - target: {fileID: 2410743469280745976, guid: 7b0c15e1dc5d8cf4bbfdb58d30322322, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 451475752}
+      objectReference: {fileID: 0}
     - target: {fileID: 3327634446756549847, guid: 7b0c15e1dc5d8cf4bbfdb58d30322322, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 451475752}
+      objectReference: {fileID: 0}
     - target: {fileID: 3327634446756549847, guid: 7b0c15e1dc5d8cf4bbfdb58d30322322, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 1927190641}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2188409073683525301, guid: 7b0c15e1dc5d8cf4bbfdb58d30322322, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 926550601005572063, guid: 7b0c15e1dc5d8cf4bbfdb58d30322322, type: 3}
@@ -5335,3 +5405,4 @@ SceneRoots:
   - {fileID: 451475751}
   - {fileID: 2131508083}
   - {fileID: 1075940877}
+  - {fileID: 934558442}

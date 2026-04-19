@@ -40,8 +40,6 @@ public class DisplayItems : MonoBehaviour
         CurrentItems = GameManager.GetComponent<CurrentItems>().Items;
 
         eventcore = GameManager.GetComponent<EventCore>();
-        eventcore.ItemPickUp.AddListener(GotItem);
-        eventcore.ItemPickUp.AddListener(SetUpItems);
     }
     public void SetUpItems(ItemsObjects arg)
     {
@@ -52,10 +50,6 @@ public class DisplayItems : MonoBehaviour
     void Update()
     {
         DisplayObject(TestItem);
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            eventcore.ItemPickUp.Invoke(ItemPickup);
-        }
     }
     private void DestroyChildren(GameObject Parent)
     {
