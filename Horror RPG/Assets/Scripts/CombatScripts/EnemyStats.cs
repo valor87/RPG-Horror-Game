@@ -98,7 +98,6 @@ public class EnemyStats : MonoBehaviour
 
         if (Isplayer)
         {
-            print($"{CurrentHealth} is {this.gameObject.name} health");
             PlayerStats.CurrentHealth = CurrentHealth;
         }
     }

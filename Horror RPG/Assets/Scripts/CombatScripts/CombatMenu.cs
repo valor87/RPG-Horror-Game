@@ -468,7 +468,6 @@ public class CombatMenu : MonoBehaviour
             // send the attacker back
             Attacker.transform.position = IdleingPos;
             Destroy(AttackCloud);
-            Debug.LogError($"{Attacker.name} is done attacking");
         }
         CanSelectActions = true;
         playerselectingActions = false;

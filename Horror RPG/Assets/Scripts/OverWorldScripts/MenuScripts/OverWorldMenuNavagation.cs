@@ -26,7 +26,7 @@ public class OverWorldMenuNavagation : MonoBehaviour
     List<GameObject> HeroStatsMenu = new List<GameObject>();
     // menu navagation
     bool ShowMenu;
-    int posinlist;
+    public int posinlist;
     [Space(5)]
     [Header("For selecting menu options")]
     public GameObject UiSelectionKnife;
@@ -67,8 +67,8 @@ public class OverWorldMenuNavagation : MonoBehaviour
     }
     void SelectionMovement()
     {
-
-        UiSelectionKnife.transform.position = CurrentMenu[posinlist].transform.position - knifeoffset;
+        if(CurrentMenu.Count > 0)
+            UiSelectionKnife.transform.position = CurrentMenu[posinlist].transform.position - knifeoffset;
         // close menu
         if (Input.GetKeyDown(KeyCode.Tab))
         {
