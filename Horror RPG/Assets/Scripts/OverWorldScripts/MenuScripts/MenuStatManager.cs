@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Rendering;
 public class MenuStatManager : MonoBehaviour
 {
+    public itemMenuEventCore itemMenuEventCore;
     public List<GameObject> MenuPositions;
     public CurrentHerosInParty HerosInParty;
     public GameObject StatImagePrefab;
@@ -20,4 +22,10 @@ public class MenuStatManager : MonoBehaviour
     {
         
     }
+
+    private void OnDisable()
+    {
+        itemMenuEventCore.EV_closedMenu.Invoke();
+    }
+
 }
