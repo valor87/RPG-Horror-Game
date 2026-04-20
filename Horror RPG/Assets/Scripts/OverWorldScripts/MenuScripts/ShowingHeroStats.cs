@@ -15,7 +15,9 @@ public class ShowingHeroStats : MonoBehaviour
     public Slider HpField;
     public Slider ExpSlider;
     public Image PlayerImage;
-   
+
+
+    public itemMenuEventCore itemEvents;
     private void SetValues()
     {
         NameTextField.text = HeroStats.HeroName;
@@ -34,5 +36,10 @@ public class ShowingHeroStats : MonoBehaviour
         SetValues();
         HpField.value = HeroStats.CurrentHealth;
         ExpSlider.value = HeroStats.CurrentEXP;
+    }
+
+    public void useItemOnThisHero()
+    {
+        itemEvents.EV_useItemOnHero.Invoke(HeroStats);
     }
 }

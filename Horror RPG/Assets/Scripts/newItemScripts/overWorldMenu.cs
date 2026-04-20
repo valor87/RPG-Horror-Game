@@ -24,6 +24,11 @@ public class overWorldMenu : MonoBehaviour
         if (Input.GetKeyDown(openMenu)){
             menustate = !menustate;
             eventCore.EV_OpenCloseMenu.Invoke(menustate);
+
+            if (menustate == false)
+            {
+                GetComponent<itemMenuEventCore>().EV_closedMenu.Invoke();
+            }
         }
 
     }

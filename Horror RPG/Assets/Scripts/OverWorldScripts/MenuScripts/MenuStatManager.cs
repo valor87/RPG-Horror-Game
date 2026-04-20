@@ -15,6 +15,8 @@ public class MenuStatManager : MonoBehaviour
             MenuPositions[i].SetActive(true);
             MenuPositions[i].GetComponent<ShowingHeroStats>().HeroStats = HerosInParty.HerosInScene[i];
         }
+
+        itemMenuEventCore.EV_closedMenu.AddListener(disableThisMenu);
     }
 
     // Update is called once per frame
@@ -28,4 +30,8 @@ public class MenuStatManager : MonoBehaviour
         itemMenuEventCore.EV_closedMenu.Invoke();
     }
 
+    void disableThisMenu()
+    {
+        gameObject.SetActive(false);
+    }
 }
