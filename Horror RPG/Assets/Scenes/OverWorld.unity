@@ -3338,6 +3338,8 @@ MonoBehaviour:
   Items:
   - {fileID: 11400000, guid: 9f11507a2ffddc443ac1b62356b2c547, type: 2}
   - {fileID: 11400000, guid: 31e0cdb7dacd13449927b9f02d2a9043, type: 2}
+  - {fileID: 11400000, guid: 31e0cdb7dacd13449927b9f02d2a9043, type: 2}
+  - {fileID: 11400000, guid: 31e0cdb7dacd13449927b9f02d2a9043, type: 2}
 --- !u!1 &1389114356
 GameObject:
   m_ObjectHideFlags: 0
@@ -3541,6 +3543,9 @@ MonoBehaviour:
   downKey: 274
   invokeButton: 32
   knifeOffset: {x: -380, y: 8, z: 0}
+  itemDescriptions:
+    itemImage: {fileID: 1646922527120111470}
+    itemText: {fileID: 8140180519634982247}
   itemToUse: {fileID: 0}
 --- !u!1 &1455181769
 GameObject:
