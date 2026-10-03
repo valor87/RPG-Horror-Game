@@ -27,14 +27,14 @@ public class itemMenu : MonoBehaviour
     public int childIndex; // the currently selected child
     public ItemsObjects itemToUse; // the item that the player wants to use
 
-    int itemsForShowing = 0;
-    int itemPage;
+    public int itemsForShowing = 0;
+    public int itemPage;
     private void OnEnable()
     {
         // opens the items menu right off the top for some reason
         itemEventCore.EV_openItemMenu.Invoke();
         itemsForShowing = 0;
-        instanciateItemList(0);
+        instanciateItemList();
     }
     private void Awake()
     {
@@ -76,7 +76,7 @@ public class itemMenu : MonoBehaviour
         if (invokeButtonGameObject != null)
         {
             invokeButtonGameObject.GetComponent<Button>().onClick.Invoke();
-            itemToUse = playerItems.Items[itemsForShowing + childIndex];
+            itemToUse = playerItems.Items[itemPage + childIndex];
         }
 
         // visually changing the knifes location
@@ -160,5 +160,10 @@ public class itemMenu : MonoBehaviour
     void disableThisMenu()
     {
         gameObject.SetActive(false);
+    }
+
+    void enableScript()
+    {
+        this.enabled = true;
     }
 }

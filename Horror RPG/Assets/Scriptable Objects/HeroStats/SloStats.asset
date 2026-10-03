@@ -16,9 +16,10 @@ MonoBehaviour:
   Healthstat: 5
   CurrentHealth: 5
   Attackstat: 5
-  Defensestat: 5
+  Defensestat: 9
   Speedstat: 5
   CurrentEXP: 0
   Level: 20
   Spriteimage: {fileID: -7447137533857689761, guid: 334bc402c04de4c4592ba7c703eac726, type: 3}
+  levelUpValues: 1e0000003c0000008c0000000e010000c2010000a8020000c00300000a0500008606000034080000140a0000
   WantsToRun: 0

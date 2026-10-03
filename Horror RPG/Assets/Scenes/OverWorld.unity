@@ -3612,8 +3612,8 @@ MonoBehaviour:
   textToInstantiate: {fileID: 568370764}
   playerItems: {fileID: 1358773830}
   selectionKnife: {fileID: 1455181770}
-  nextArrow: {fileID: 0}
-  prevArrow: {fileID: 0}
+  nextArrow: {fileID: 1972444752}
+  prevArrow: {fileID: 1091049340}
   upKey: 273
   downKey: 274
   invokeButton: 32
@@ -3623,6 +3623,8 @@ MonoBehaviour:
     itemText: {fileID: 8140180519634982247}
   childIndex: 0
   itemToUse: {fileID: 0}
+  itemsForShowing: 0
+  itemPage: 0
 --- !u!1 &1455181769
 GameObject:
   m_ObjectHideFlags: 0
@@ -6081,6 +6083,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 1736619791}
+    - target: {fileID: 5751767224087473374, guid: 5bf4fed78ba4e1b499cc8a89c69d4fc8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: stopKeyboardMovement
+      objectReference: {fileID: 0}
     - target: {fileID: 6949704837534694603, guid: 5bf4fed78ba4e1b499cc8a89c69d4fc8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1

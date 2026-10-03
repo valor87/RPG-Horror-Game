@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: StellarStats
   m_EditorClassIdentifier: 
   HeroName: Stellar
-  Healthstat: 6
-  CurrentHealth: 6
+  Healthstat: 16
+  CurrentHealth: 2
   Attackstat: 3
-  Defensestat: 2
+  Defensestat: 4
   Speedstat: 3
   CurrentEXP: 0
   Level: 1
