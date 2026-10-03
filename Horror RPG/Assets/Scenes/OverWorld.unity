@@ -3409,6 +3409,10 @@ MonoBehaviour:
   Items:
   - {fileID: 11400000, guid: 9f11507a2ffddc443ac1b62356b2c547, type: 2}
   - {fileID: 11400000, guid: 31e0cdb7dacd13449927b9f02d2a9043, type: 2}
+  - {fileID: 11400000, guid: 31e0cdb7dacd13449927b9f02d2a9043, type: 2}
+  - {fileID: 11400000, guid: 31e0cdb7dacd13449927b9f02d2a9043, type: 2}
+  - {fileID: 11400000, guid: 31e0cdb7dacd13449927b9f02d2a9043, type: 2}
+  - {fileID: 11400000, guid: 31e0cdb7dacd13449927b9f02d2a9043, type: 2}
 --- !u!1 &1389114356
 GameObject:
   m_ObjectHideFlags: 0
@@ -3608,10 +3612,15 @@ MonoBehaviour:
   textToInstantiate: {fileID: 568370764}
   playerItems: {fileID: 1358773830}
   selectionKnife: {fileID: 1455181770}
+  nextArrow: {fileID: 0}
+  prevArrow: {fileID: 0}
   upKey: 273
   downKey: 274
   invokeButton: 32
   knifeOffset: {x: -380, y: 8, z: 0}
+  itemDescriptions:
+    itemImage: {fileID: 1646922527120111470}
+    itemText: {fileID: 8140180519634982247}
   childIndex: 0
   itemToUse: {fileID: 0}
 --- !u!1 &1455181769
@@ -4539,9 +4548,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DisplayItems, Assembly-CSharp
-        m_MethodName: changeItemPage
+      - m_Target: {fileID: 1424516884}
+        m_TargetAssemblyTypeName: itemMenu, Assembly-CSharp
+        m_MethodName: instanciateItemList
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
