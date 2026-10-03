@@ -6524,6 +6524,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 31e0cdb7dacd13449927b9f02d2a9043, type: 2}
   - {fileID: 11400000, guid: 31e0cdb7dacd13449927b9f02d2a9043, type: 2}
   ItemPickup: {fileID: 0}
+  changePage: 0
 --- !u!114 &2410743469313703379
 MonoBehaviour:
   m_ObjectHideFlags: 0

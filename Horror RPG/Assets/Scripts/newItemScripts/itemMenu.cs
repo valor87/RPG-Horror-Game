@@ -5,19 +5,26 @@ using UnityEngine.Rendering;
 using UnityEngine.UI;
 public class itemMenu : MonoBehaviour
 {
+    //IDK what any of this is for 
     public itemMenuEventCore itemEventCore;
     public GameObject itemHolder;
     public GameObject textToInstantiate;
     public CurrentItems playerItems;
     public RectTransform selectionKnife;
+    // controls for the menu
     public KeyCode upKey = KeyCode.UpArrow;
     public KeyCode downKey = KeyCode.DownArrow;
     public KeyCode invokeButton = KeyCode.Space;
+    // displaying the cursor knife properly
     public Vector3 knifeOffset;
-    int childIndex;
+    // for moving the knife through the list
+    public int childIndex;
+    // the item that the player wants to use
+    // dont think this needs to be a public varible
     public ItemsObjects itemToUse;
     private void OnEnable()
     {
+        // opens the items menu right off the top for some reason
         itemEventCore.EV_openItemMenu.Invoke();
         Debug.Log("The item menu is open");
     }
@@ -29,6 +36,7 @@ public class itemMenu : MonoBehaviour
     {
         itemEventCore.EV_useItemOnHero.AddListener(useItemOnHero);
         itemEventCore.EV_closedMenu.AddListener(disableThisMenu);
+        itemEventCore.EV_closedMenu.AddListener(enableScript);
     }
 
     void Update()
@@ -86,6 +94,9 @@ public class itemMenu : MonoBehaviour
         itemToUse = null;
         Destroy(itemHolder.transform.GetChild(childIndex).gameObject);
     }
+    /// <summary>
+    /// displays all the varibles when the items menu gets open
+    /// </summary>
     private void instanciateItemList()
     {
         Debug.Log(playerItems.Items[0]);
@@ -100,7 +111,10 @@ public class itemMenu : MonoBehaviour
         }
     }
 
-
+    void enableScript()
+    {
+        this.enabled = true;
+    }
     void disableThisMenu()
     {
         gameObject.SetActive(false);

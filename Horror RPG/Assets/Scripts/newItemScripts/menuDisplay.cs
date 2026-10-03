@@ -13,7 +13,7 @@ public class menuDisplay : MonoBehaviour
     {
         eventCore = GameObject.Find("EventCore").GetComponent<EventCore>();
         eventCore.EV_OpenCloseMenu.AddListener(showMenu);
-        itemEventCore.EV_closedMenu.AddListener(disableThisMenu);
+        //itemEventCore.EV_closedMenu.AddListener(disableThisMenu);
     }
 
     private void Update()
@@ -46,4 +46,6 @@ public class menuDisplay : MonoBehaviour
             transform.GetChild(i).gameObject.SetActive(false);
         }
     }
+    
+    
 }
