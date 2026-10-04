@@ -530,7 +530,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!222 &212163723
 CanvasRenderer:
@@ -644,7 +644,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!222 &327583774
 CanvasRenderer:
@@ -837,7 +837,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!222 &362005928
 CanvasRenderer:
@@ -1492,7 +1492,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!222 &721739652
 CanvasRenderer:
@@ -2393,7 +2393,7 @@ GameObject:
   - component: {fileID: 1091049343}
   m_Layer: 5
   m_Name: previousPage
-  m_TagString: Untagged
+  m_TagString: arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2499,14 +2499,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DisplayItems, Assembly-CSharp
-        m_MethodName: changeItemPage
+      - m_Target: {fileID: 1424516884}
+        m_TargetAssemblyTypeName: itemMenu, Assembly-CSharp
+        m_MethodName: decreaseItemPage
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: -1
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3413,6 +3413,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 31e0cdb7dacd13449927b9f02d2a9043, type: 2}
   - {fileID: 11400000, guid: 31e0cdb7dacd13449927b9f02d2a9043, type: 2}
   - {fileID: 11400000, guid: 31e0cdb7dacd13449927b9f02d2a9043, type: 2}
+  - {fileID: 11400000, guid: 8459c87edd9732a478bd0aa95ac1742d, type: 2}
 --- !u!1 &1389114356
 GameObject:
   m_ObjectHideFlags: 0
@@ -3623,8 +3624,6 @@ MonoBehaviour:
     itemText: {fileID: 8140180519634982247}
   childIndex: 0
   itemToUse: {fileID: 0}
-  itemsForShowing: 0
-  itemPage: 0
 --- !u!1 &1455181769
 GameObject:
   m_ObjectHideFlags: 0
@@ -4444,7 +4443,7 @@ GameObject:
   - component: {fileID: 1972444755}
   m_Layer: 5
   m_Name: nextPage
-  m_TagString: Untagged
+  m_TagString: arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4552,7 +4551,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1424516884}
         m_TargetAssemblyTypeName: itemMenu, Assembly-CSharp
-        m_MethodName: instanciateItemList
+        m_MethodName: increaseItemPage
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6857,7 +6856,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 0339ad0288d42324a965fd727dd41e47, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8039,9 +8038,9 @@ RectTransform:
   - {fileID: 3579662292356775123}
   - {fileID: 9177777901628176284}
   - {fileID: 4490624184272464951}
+  - {fileID: 1455181770}
   - {fileID: 1972444752}
   - {fileID: 1091049340}
-  - {fileID: 1455181770}
   - {fileID: 568370765}
   - {fileID: 1052712479}
   - {fileID: 2810059352154387580}

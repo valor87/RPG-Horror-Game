@@ -1,10 +1,11 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 [Serializable]
 // makes a dropdown for the item that the player is hovering over
- public class itemDiscriptions
+public class itemDiscriptions
 {
     public Image itemImage;
     public TextMeshProUGUI itemText;
@@ -27,8 +28,10 @@ public class itemMenu : MonoBehaviour
     public int childIndex; // the currently selected child
     public ItemsObjects itemToUse; // the item that the player wants to use
 
-    public int itemsForShowing = 0;
-    public int itemPage;
+    int itemsForShowing = 0;
+    int itemPage;
+
+    Vector3 knifeOffsetForNextArrows = new(-80, -3.7f, 0);
     private void OnEnable()
     {
         // opens the items menu right off the top for some reason
@@ -60,8 +63,28 @@ public class itemMenu : MonoBehaviour
     }
     private void changeItemMessages()
     {
-        this.itemDescriptions.itemImage.sprite = playerItems.Items[itemPage + childIndex].ItemImage;
-        this.itemDescriptions.itemText.text = playerItems.Items[itemPage + childIndex].Description;
+        
+        // theres a bug where if the player is looking at the arrows then thes a range error
+        try
+        {
+            this.itemDescriptions.itemImage.sprite = playerItems.Items[(itemPage * 5) + childIndex].ItemImage;
+        }
+        catch (ArgumentOutOfRangeException ex)
+        {
+            this.itemDescriptions.itemImage.sprite = null;
+            this.itemDescriptions.itemText.text = "No item selected";
+            return;
+        }
+        // change the image if the player is looking at the arrows
+        if (itemHolder.transform.GetChild(childIndex).CompareTag("arrow"))
+        {
+            this.itemDescriptions.itemImage.sprite = null;
+            this.itemDescriptions.itemText.text = "No item selected";
+            return;
+        }
+        // set the image and the text to the item that the player is looking at
+        this.itemDescriptions.itemImage.sprite = playerItems.Items[(itemPage * 5) + childIndex].ItemImage;
+        this.itemDescriptions.itemText.text = playerItems.Items[(itemPage * 5) + childIndex].Description;
     }
     private void getKeyInput()
     {
@@ -76,6 +99,8 @@ public class itemMenu : MonoBehaviour
         if (invokeButtonGameObject != null)
         {
             invokeButtonGameObject.GetComponent<Button>().onClick.Invoke();
+            if (invokeButtonGameObject.CompareTag("arrow"))
+                return;
             itemToUse = playerItems.Items[itemPage + childIndex];
         }
 
@@ -86,6 +111,12 @@ public class itemMenu : MonoBehaviour
     }
     void selectionKnifeLocation(RectTransform currentButton)
     {
+        if (currentButton.gameObject.CompareTag("arrow"))
+        {
+            selectionKnife.position = currentButton.position + knifeOffsetForNextArrows;
+            return;
+        }
+
         selectionKnife.position = currentButton.position + knifeOffset;
     }
     private void closeThisMenu()
@@ -136,20 +167,14 @@ public class itemMenu : MonoBehaviour
             yOffset++;
         }
 
-        // leaving this here incase above doesnt work
-        //foreach (ItemsObjects var in playerItems.Items)
-        //{
-        //    if (yOffset == 4)
-        //        break;
-
-        //    GameObject tempText = Instantiate(textToInstantiate, itemHolder.transform);
-        //    tempText.transform.position += new Vector3(0, -100 * yOffset,0);
-        //    tempText.name = var.Name;
-        //    tempText.GetComponent<TextMeshProUGUI>().text = var.Name;
-        //    yOffset++;
-        //}
+        cloneNextArrows();
+        
     }
-
+    void cloneNextArrows()
+    {
+        GameObject leftArrowClone = Instantiate(nextArrow.gameObject, itemHolder.transform);
+        GameObject rightArrowClone = Instantiate(prevArrow.gameObject, itemHolder.transform);
+    }
     void clearItemChilds(Transform parent)
     {
         for (int child = 0; child < parent.childCount; child++)
@@ -157,9 +182,27 @@ public class itemMenu : MonoBehaviour
             Destroy(parent.GetChild(child).gameObject);
         }
     }
+    public void increaseItemPage(int changeAmount)
+    {
+        Debug.Log(((itemPage + changeAmount) * 4) - 3);
+        if ((((itemPage + changeAmount) * 4)) > playerItems.items.PlayersItems.Count)
+            return;
+
+        itemPage += changeAmount;
+        instanciateItemList();
+    }
+    public void decreaseItemPage(int changeAmount)
+    {
+        if (itemPage - changeAmount < 0)
+            return;
+
+        itemPage -= changeAmount;
+        instanciateItemList();
+    }
     void disableThisMenu()
     {
         gameObject.SetActive(false);
+        instanciateItemList();
     }
 
     void enableScript()
