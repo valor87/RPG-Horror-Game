@@ -68,9 +68,15 @@ public class DisplayItems : MonoBehaviour
         TextAssets.Clear();
         int displayCount = 6;
         int previousItem = changePage * 6;
+        
+        // to catch if the player has less than 6 items
+        if (CurrentItems.Count < 6)
+        {
+            displayCount = CurrentItems.Count -1;
+        }
+
         for (int i = previousItem; i <= displayCount + previousItem; i++)
         {
-            Debug.Log(i + " position in " + AllItems[i].Name);
 
             ItemsObjects Item = AllItems[i];
             GameObject _Item = Instantiate(TextAsset, Vector2.zero, Quaternion.identity, Display.transform);

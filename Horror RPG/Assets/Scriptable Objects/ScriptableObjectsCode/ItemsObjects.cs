@@ -16,6 +16,8 @@ public class ItemsObjects : ScriptableObject
     [Tooltip("The type of the object")]
     public Type Type;
     [Tooltip("The change amount to the hp")]
+    public int CurrentHpChange;
+    [Tooltip("The change amount to the max hp")]
     public int HpChange;
     [Tooltip("The change amount to the attack")]
     public int AttackChange;

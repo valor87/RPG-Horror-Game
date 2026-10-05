@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
   Name: Health Potion
-  Type: potion
-  HpChange: 2
+  Type: 0
+  CurrentHpChange: 5
+  HpChange: 0
   AttackChange: 0
   DefenseChange: 0
   SpeedChange: 0

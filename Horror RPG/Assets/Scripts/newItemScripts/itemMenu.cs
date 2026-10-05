@@ -130,11 +130,12 @@ public class itemMenu : MonoBehaviour
         int defenseIncrease = 0 + itemToUse.DefenseChange;
         int speedIncrese = 0 + itemToUse.SpeedChange;
         int healthIncrease = 0 + itemToUse.HpChange;
-
+        int currentHealthIncrease = 0 + itemToUse.CurrentHpChange;
         heroStats.Attackstat += attackIncrease;
         heroStats.Defensestat += defenseIncrease;
         heroStats.Speedstat += speedIncrese;
         heroStats.Healthstat += healthIncrease;
+        heroStats.CurrentHealth += currentHealthIncrease;
 
         playerItems.Items.Remove(itemToUse);
         itemToUse = null;

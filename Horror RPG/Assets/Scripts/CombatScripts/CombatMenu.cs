@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -38,6 +39,10 @@ public class CombatMenu : MonoBehaviour
     [Header("For changing players values and gold")]
     public PlayerValues PV;
 
+    [Header("For player using items")]
+    public itemMenu _itemMenu;
+    public itemMenuEventCore _itemMenuEvent;
+    public callChildButtons _callChildButtons;
     // getting referances to all the lists so that that the player can interact with the
     //children of the game objects
     List<GameObject> EnemiesInScene = new List<GameObject>();
@@ -66,6 +71,7 @@ public class CombatMenu : MonoBehaviour
     public GameObject KnifeInGameScene;
     public Vector3 knifeoffset = new Vector3(110, 0, 0); // offset for the knife in UI
     bool PlayerRunAction;
+    bool PlayerItemAction;
     // Selecting Enemy
     GameObject Target;
     bool PlayerSelectingActions;
@@ -218,7 +224,7 @@ public class CombatMenu : MonoBehaviour
     }
     private void RunAttackSequence(List<GameObject> Inichative)
     {
-        StartCoroutine(DealDamageSlowly(Inichative));
+        StartCoroutine(PreformAllCharacterActions(Inichative));
     }
     void GetAllHeroActions(List<GameObject> CurrentHeros)
     {
@@ -268,13 +274,13 @@ public class CombatMenu : MonoBehaviour
         // change the menu to the attack selection
         ChangeMenu(2);
     }
-
+    /// <summary>
+    /// called after the player has selected the item they want to use
+    /// called when they select who to use it on
+    /// </summary>
     public void ButtonItem()
     {
-        /*show the items to the player and allow them to pick one
-         * After that allow them to choose who to use it on
-         * make sure to update the slider in the game view
-         */
+        PlayerItemAction = true;
     }
     public void ButtonRun()
     {
@@ -353,15 +359,22 @@ public class CombatMenu : MonoBehaviour
         return true;
     }
 
-    IEnumerator DealDamageSlowly(List<GameObject> _Inichative)
+    IEnumerator PreformAllCharacterActions(List<GameObject> _Inichative)
     {
+        // does the actions of all the characters in combat
         for (int i = 0; i < _Inichative.Count; i++)
         {
+            // if the player wanted to run
             bool WantsToRun = false;
+            ItemsObjects itemToUse = null;
+            // simple refferance to whos turn it is
             GameObject Attacker = _Inichative[i];
+            // always run if they try to (Change later?)
             if (Attacker.CompareTag("Hero"))
             {
                 WantsToRun = Attacker.GetComponent<EnemyStats>().RunningAway;
+                itemToUse = _itemMenu.itemToUse;
+
             }
             if (WantsToRun)
             {
@@ -369,12 +382,26 @@ public class CombatMenu : MonoBehaviour
                 SceneManager.LoadScene(1);
                 break;
             }
+            //if they player is using an item
+            if (itemToUse != null)
+            {
+                PlayerStats itemTarget;
+                _itemMenu.itemToUse = itemToUse;
+                itemTarget = HerosInScene[Attacker.GetComponent<EnemyStats>().healHeroIndex].GetComponent<EnemyStats>().PlayerStats;
+                Debug.Log($"Using item {itemToUse} on the target {itemTarget}");
+               _itemMenuEvent.EV_useItemOnHero.Invoke(itemTarget);
 
+                HerosInScene[Attacker.GetComponent<EnemyStats>().healHeroIndex].GetComponent<EnemyStats>().SetupPlayerStats(itemTarget);
+                yield return new WaitForSeconds(.25f);
+                break;
+            }
+            // target of the attackter
             GameObject RecevingDamage = _Inichative[i].GetComponent<EnemyStats>().TargetEnemy;
             GameObject AttackCloud = Instantiate(Puffcloud, RecevingDamage.transform.position, Quaternion.identity);
 
             Vector3 IdleingPos = Attacker.transform.position;
 
+            // for dealing damage
             float RecevingDamageHp = RecevingDamage.GetComponent<EnemyStats>().Hp;
             float incomingdamage = Attacker.GetComponent<EnemyStats>().Attack;
             float TargetDefense = RecevingDamage.GetComponent<EnemyStats>().Defense;
@@ -382,38 +409,43 @@ public class CombatMenu : MonoBehaviour
             float EnemyHp = RecevingDamage.GetComponent<EnemyStats>().CurrentHealth;
 
             bool needBreak = false;
-
+            // if the target is dead then the play wastes their turn
             if (_Inichative[i].GetComponent<EnemyStats>().TargetEnemy == null)
             {
                 print("its dead");
                 Attacker.transform.position = IdleingPos;
                 continue;
             }
-            
+            // ??
             CanSelectActions = false;
             Vector3 AttackingPlacement = Vector3.zero;
-
+            // adjusting the players location when attacking
             if (Attacker.CompareTag("Hero"))
             {
                 AttackingPlacement += Vector3.right;
             }
             else
             {
+                // adjusting the enemies location
                 AttackingPlacement += Vector3.left * 1.5f;
             }
+            // apply the adjustment
             Attacker.transform.position += AttackingPlacement;
            
             while (0 < damage)
             {
+                //??
                 if (RecevingDamage == null)
                 {
                     needBreak = true;
                     break;
                 }
+                //??
                 if (0 > RecevingDamageHp)
                 {
                     break;
                 }
+
                 float decreaseHealth = 0.1f;
                 EnemyHp = RecevingDamage.GetComponent<EnemyStats>().CurrentHealth;
                 damage -= decreaseHealth;
@@ -500,14 +532,16 @@ public class CombatMenu : MonoBehaviour
             string PlayerDesiredAction = "";
             List<string> PlayerActionName = new List<string>();
             Hero.GetComponent<EnemyStats>().SetButtonActions(AttackActions, PlayerActionName);
-            PlayerRunAction = false;
+           
             Vector3 IdleingPos = Hero.transform.position;
             Hero.transform.position += Vector3.right * 1.5f;
+
             playerselectingActions = true;
+            PlayerRunAction = false;
+            PlayerItemAction = false;
 
             while (playerselectingActions)
             {
-                
                 SelectionMovement();
                 if (!PickTargets)
                 {
@@ -522,8 +556,17 @@ public class CombatMenu : MonoBehaviour
                     GameObject TargetToHit = Target;
                     StoreActions(Hero, TargetToHit, PlayerDesiredAction, false, false);
                 }
+                
+                //player using an item
+                if (PlayerItemAction)
+                {
+                    Hero.GetComponent<EnemyStats>().healHeroIndex = _callChildButtons.childIndex;
+                    StoreActions(Hero, null, null, false, true);
+                    _itemMenu.gameObject.SetActive(false);
+                    break;
+                }
+                
                 // have a condition for selecting the run action
-
                 if (PlayerRunAction)
                 {
                     StoreActions(Hero, null, null, true, false);

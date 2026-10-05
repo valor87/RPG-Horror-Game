@@ -16,12 +16,20 @@ public class callChildButtons : MonoBehaviour
     public KeyCode invokeButton = KeyCode.Space;
     public RectTransform selectionKnife;
     public Vector3 knifeOffset;
-    int childIndex;
+    public int childIndex;
     public bool notCurrentMenu;
+    int activeHeros;
     private void Start()
     {
         EventCore.EV_OpenCloseMenu.AddListener(enableThis);
         itemMenuEventCore.EV_closedMenu.AddListener(turnOnKeyboardInput);
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            if (transform.GetChild(i).gameObject.activeSelf)
+            {
+                activeHeros++;
+            }
+        }
     }
 
     void Update()
@@ -45,6 +53,7 @@ public class callChildButtons : MonoBehaviour
         {
             invokeButtonGameObject.GetComponent<Button>().onClick.Invoke();
         }
+        childIndex = Mathf.Clamp(childIndex, 0, activeHeros - 1);
 
         // visually changing the knifes location
         childIndex = Mathf.Clamp(childIndex, 0, transform.childCount - 1);

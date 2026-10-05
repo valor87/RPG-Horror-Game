@@ -20,7 +20,9 @@ public class EnemyStats : MonoBehaviour
     public List<GameObject> AttackButtons;
     [Tooltip("Is the script on a playable character // runs player actions")]
     public bool Isplayer;
-
+    // the index of the hero that we want to heal(comabtMenu.cs) 
+    public int healHeroIndex;
+    [Header("For Enemy Characters")]
     //for enemys only
     public int GoldForPlayer;
     // for debuging
@@ -41,7 +43,7 @@ public class EnemyStats : MonoBehaviour
         return HerosAttacks;
     }
 
-    void SetupPlayerStats(PlayerStats PS)
+    public void SetupPlayerStats(PlayerStats PS)
     {
         Hp = PS.Healthstat;
         CurrentHealth = PS.CurrentHealth;

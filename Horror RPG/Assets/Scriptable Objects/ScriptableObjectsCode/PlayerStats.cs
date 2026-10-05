@@ -29,6 +29,7 @@ public class PlayerStats : ScriptableObject
     int[] levelUpValues = new int[] {30,60,140,270,450,680,960,1290,1670,2100,2580};
     [Header("To be Changed during run time")]
     public bool WantsToRun;
+    public ItemsObjects itemToUseInCombat;
     [ContextMenu("Level up character")]
     void processLevelUp()
     {
@@ -49,5 +50,6 @@ public class PlayerStats : ScriptableObject
     private void OnEnable()
     {
         WantsToRun = false;
+        itemToUseInCombat = null;
     }
 }
