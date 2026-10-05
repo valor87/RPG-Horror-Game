@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -27,11 +28,20 @@ public class itemMenu : MonoBehaviour
     public itemDiscriptions itemDescriptions; // the item image and the description ui
     public int childIndex; // the currently selected child
     public ItemsObjects itemToUse; // the item that the player wants to use
-
+    bool endCombatWait;
     int itemsForShowing = 0;
     int itemPage;
-
     Vector3 knifeOffsetForNextArrows = new(-80, -3.7f, 0);
+
+    public IEnumerator pauseCombatScene()
+    {
+        endCombatWait = true;
+        while (endCombatWait)
+        {
+            yield return null;
+        }
+    }
+
     private void OnEnable()
     {
         // opens the items menu right off the top for some reason
@@ -94,8 +104,9 @@ public class itemMenu : MonoBehaviour
         if (Input.GetKeyDown(downKey))
             childIndex++;
         if (Input.GetKeyDown(invokeButton))
+        {
             invokeButtonGameObject = itemHolder.transform.GetChild(childIndex).gameObject;
-
+        }
         if (invokeButtonGameObject != null)
         {
             invokeButtonGameObject.GetComponent<Button>().onClick.Invoke();
@@ -202,6 +213,7 @@ public class itemMenu : MonoBehaviour
     }
     void disableThisMenu()
     {
+        endCombatWait = false;
         gameObject.SetActive(false);
         instanciateItemList();
     }

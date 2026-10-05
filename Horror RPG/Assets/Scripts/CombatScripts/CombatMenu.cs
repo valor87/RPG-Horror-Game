@@ -72,6 +72,7 @@ public class CombatMenu : MonoBehaviour
     public Vector3 knifeoffset = new Vector3(110, 0, 0); // offset for the knife in UI
     bool PlayerRunAction;
     bool PlayerItemAction;
+    bool itemMenuOpen;
     // Selecting Enemy
     GameObject Target;
     bool PlayerSelectingActions;
@@ -273,6 +274,11 @@ public class CombatMenu : MonoBehaviour
         PickTargets = true;
         // change the menu to the attack selection
         ChangeMenu(2);
+    }
+
+    public void openItemMenu()
+    {
+        itemMenuOpen = true;
     }
     /// <summary>
     /// called after the player has selected the item they want to use
@@ -542,6 +548,8 @@ public class CombatMenu : MonoBehaviour
 
             while (playerselectingActions)
             {
+                itemMenuOpen = false;
+
                 SelectionMovement();
                 if (!PickTargets)
                 {
@@ -556,7 +564,12 @@ public class CombatMenu : MonoBehaviour
                     GameObject TargetToHit = Target;
                     StoreActions(Hero, TargetToHit, PlayerDesiredAction, false, false);
                 }
-                
+
+                if (itemMenuOpen)
+                {
+                    yield return _itemMenu.pauseCombatScene();
+                }
+
                 //player using an item
                 if (PlayerItemAction)
                 {
