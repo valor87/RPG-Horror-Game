@@ -20,8 +20,7 @@ public class OverWorldPlayerMovement : MonoBehaviour
     //Animation
     GameObject GameManager;
     SpriteRenderer PlayerSprite;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
+    EventCore EventCore;
     private void OnEnable()
     {
        // SceneManager.LoadScene(PV.PerviousSceneNum);
@@ -33,6 +32,7 @@ public class OverWorldPlayerMovement : MonoBehaviour
         EncounterRandomNum = Random.RandomRange(5, 10);
         GameManager = GameObject.Find("DontDestroyGameManager").gameObject;
         PlayerSprite = GetComponent<SpriteRenderer>();
+        EventCore = GameObject.Find("EventCore").GetComponent<EventCore>();
     }
 
     // Update is called once per frame
@@ -47,6 +47,7 @@ public class OverWorldPlayerMovement : MonoBehaviour
         Movement.x = Input.GetAxisRaw("Horizontal");
         PlayerMovement(Movement, MovementSpeed);
         PlayerAnimation(Movement);
+        PlayerObjectInteraction();
     }
 
     private void PlayerMovement(Vector3 MovementAmount, float Speed)
@@ -61,6 +62,15 @@ public class OverWorldPlayerMovement : MonoBehaviour
             }
         }
     }
+
+    private void PlayerObjectInteraction()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            EventCore.EV_ObjectInteract.Invoke(transform.position);
+        }
+    }
+
     private void PlayerAnimation(Vector3 MovementAmount)
     {
         if (MovementAmount.x < 0)
