@@ -3,6 +3,7 @@ using UnityEngine;
 interface IInteractable
 {
     public bool toggleState {get; set;}
+    public float interactionDistance { get; set;}
     public EventCore EventCore {get; set;}
     public void setupEventCore()
     {
@@ -11,7 +12,7 @@ interface IInteractable
 
     public bool IsThePlayerInteraction(Vector3 objectPosition, Vector3 HeroTransform)
     {
-        if (Vector2.Distance(HeroTransform, objectPosition) < 0.5f) 
+        if (Vector2.Distance(HeroTransform, objectPosition) < interactionDistance) 
         {
             return true;
         }

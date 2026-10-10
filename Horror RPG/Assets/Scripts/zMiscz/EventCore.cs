@@ -7,6 +7,9 @@ public class EventCore : MonoBehaviour
     public UnityEvent<bool> EV_OpenCloseMenu; 
     // for when a item is picked up by the player
     public UnityEvent<ItemsObjects> EV_ItemPickUp;
+    // showing text
+    public UnityEvent<textDisplayManager> EV_DisplayText;
+
     /* for when the player hits the action button
      * All listeners will check if they are the one that the player is 
      * trying to interact with

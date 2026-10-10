@@ -9,7 +9,7 @@ public class openigDoorScript : MonoBehaviour, IInteractable
     public Sprite openedDoorSprite;
     public EventCore EventCore { get; set;}
     public bool toggleState { get; set;}
-
+    public float interactionDistance { get; set;}
 
     IInteractable _IInteractable;
     private void Start()
@@ -18,6 +18,7 @@ public class openigDoorScript : MonoBehaviour, IInteractable
         _IInteractable.setupEventCore();
         Debug.Log(EventCore.gameObject.name);
         EventCore.EV_ObjectInteract.AddListener(StartInteraction);
+        interactionDistance = distanceToOpen;
     }
    
     void StartInteraction(Vector3 heroTransform)
