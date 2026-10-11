@@ -1633,6 +1633,10 @@ PrefabInstance:
       propertyPath: sceneIndex
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8563182668304202192, guid: f5c3a2e1d100f93438296e8310dc6bee, type: 3}
+      propertyPath: thisScenePosition
+      value: 
+      objectReference: {fileID: 11400000, guid: 190e74f16e4eca5488cb650288ea0cdb, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1922,6 +1926,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   EV_ItemPickUp:
+    m_PersistentCalls:
+      m_Calls: []
+  EV_DisplayText:
+    m_PersistentCalls:
+      m_Calls: []
+  EV_ObjectInteract:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &934558442
@@ -2659,6 +2669,7 @@ GameObject:
   - component: {fileID: 1341890903}
   - component: {fileID: 1341890902}
   - component: {fileID: 1341890901}
+  - component: {fileID: 1341890904}
   m_Layer: 0
   m_Name: Player-Stellar
   m_TagString: Hero
@@ -2685,7 +2696,10 @@ MonoBehaviour:
   SceneNum: 0
   PlayerValues: {fileID: 11400000, guid: 40c01c1c225217e40b0ff5680192c852, type: 2}
   MovementSpeed: 2
+  heightIncreaseValue: 0
+  Movement: {x: 0, y: 0, z: 0}
   EncounterRandomNum: 0
+  onStars: 0
 --- !u!212 &1341890902
 SpriteRenderer:
   serializedVersion: 2
@@ -2754,12 +2768,34 @@ Transform:
   m_GameObject: {fileID: 1341890900}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.985979, y: -2.0346215, z: 0}
+  m_LocalPosition: {x: -1.75, y: -1.99, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1341890904
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341890900}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88b4b3b5886b814786d08f991011118, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1358773827 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6505093746920992879, guid: e13587a0e28c6bc43b73c00586cf4545, type: 3}

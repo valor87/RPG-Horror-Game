@@ -8,10 +8,20 @@ public class sceneChange : MonoBehaviour
     private string sceneName;
     [SerializeField]
     private int sceneIndex;
+    [Tooltip("The position of the player when they ENTER this door")]
+    [SerializeField]
+    private SceneChangePosition thisScenePosition;
     [HideInInspector]
     public lastSceneOccupied _lastSceneOccupied = new lastSceneOccupied();
 
-   public void loadScene(string _sceneName = "", int _sceneIndex = 0)
+    private void Start()
+    {
+        Debug.Log("new Scene");
+        GameObject hero = GameObject.FindGameObjectWithTag("Hero");
+        hero.transform.position = thisScenePosition.position;
+    }
+
+    public void loadScene(string _sceneName = "", int _sceneIndex = 0)
     {
         _lastSceneOccupied.indexOfLastScene = SceneManager.GetActiveScene().buildIndex;
 

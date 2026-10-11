@@ -6182,6 +6182,10 @@ PrefabInstance:
       propertyPath: distanceToOpen
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8563182668304202192, guid: f5c3a2e1d100f93438296e8310dc6bee, type: 3}
+      propertyPath: thisScenePosition
+      value: 
+      objectReference: {fileID: 11400000, guid: 06573450526e7a549ba5233f6967742b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
