@@ -52,7 +52,7 @@ public class OpenItemBox : MonoBehaviour, IInteractable
 
         textDialogue[] texts = new textDialogue[1];
         
-        textDialogue.Dialague = "You have gained a " + itemToGive.name + " it has been added to your pack";
+        textDialogue.Dialague = "You have gained a " + itemToGive.Name + " it has been added to your pack";
         texts[0] = textDialogue;
         textManager.textDialogues = texts;
         EventCore.EV_DisplayText.Invoke(textManager);

@@ -15,8 +15,11 @@ public class OverWorldPlayerMovement : MonoBehaviour
     [Header("Player Movement")]
     [Range(0,20)]
     [SerializeField] float MovementSpeed;
-    Vector3 Movement;
+    [SerializeField] private float heightIncreaseValue;
+    [HideInInspector] public Vector3 Movement;
     public float EncounterRandomNum;
+    [HideInInspector]
+    public bool onStars;
     //Animation
     GameObject GameManager;
     SpriteRenderer PlayerSprite;
@@ -45,11 +48,28 @@ public class OverWorldPlayerMovement : MonoBehaviour
         PlayerSprite.sprite = GameManager.GetComponent<CurrentHerosInParty>().HerosInScene[0].Spriteimage;
         // get player input and movement
         Movement.x = Input.GetAxisRaw("Horizontal");
+        starcaseMovement();
         PlayerMovement(Movement, MovementSpeed);
         PlayerAnimation(Movement);
         PlayerObjectInteraction();
     }
+    private void starcaseMovement()
+    {
+        if (!onStars || Movement.x == 0)
+        {
+            Movement.y = 0;
+            return;
+        }
 
+        if (Movement.x > 0)
+        {
+            Movement.y = heightIncreaseValue;
+        }
+        else if (Movement.x < 0)
+        {
+            Movement.y = -heightIncreaseValue;
+        }
+    }
     private void PlayerMovement(Vector3 MovementAmount, float Speed)
     {
         transform.position += MovementAmount * Speed * Time.deltaTime;
